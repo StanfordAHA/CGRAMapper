@@ -40,5 +40,7 @@ int main(int argc, char *argv[]){
   saveModule(mapped,argv[2],&err);
   if (err) c->die();
 
+  deleteContext(c);
+
   return 0;
 }
