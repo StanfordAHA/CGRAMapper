@@ -45,18 +45,18 @@ Module* mapper(Context* c, Module* m, bool* err) {
     Instance* inst = instmap.second;
     string node = inst->getInstRef()->getName();
     if (node=="add2_16") {
-      Args* config = c->args({{"op",c->string2Arg("add")},{"constvalue",c->int2Arg(0)}});
+      Args config = Args({{"op",c->str2Arg("add")},{"constvalue",c->int2Arg(0)}});
       Instance* i = mappedDef->addInstance(inst);
       i->replace(pe,config);
     }
     else if (node=="mult2_16") {
-      Args* config = c->args({{"op",c->string2Arg("mult")},{"constvalue",c->int2Arg(0)}});
+      Args config = Args({{"op",c->str2Arg("mult")},{"constvalue",c->int2Arg(0)}});
       Instance* i = mappedDef->addInstance(inst);
       i->replace(pe,config);
     }
     else if (node=="const_16") {
-      Arg* constarg = (*(inst->getConfig()))["value"];
-      Args* config = c->args({{"op",c->string2Arg("const")},{"constvalue",constarg}});
+      Arg* constarg = inst->getConfigValue("value");
+      Args config = Args({{"op",c->str2Arg("const")},{"constvalue",constarg}});
       Instance* i = mappedDef->addInstance(inst);
       i->replace(pe,config);
     }
