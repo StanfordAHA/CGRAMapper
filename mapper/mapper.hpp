@@ -10,13 +10,24 @@ using namespace std;
 using namespace CoreIR;
 
 WirePath toIOPath(WirePath wp) {
+  if (wp.first=="const") {
+    vector<string> sels = wp.second;
+    sels.insert(sels.begin(),"out");
+    return {wp.first,sels};
+  }
   if (!(wp.first=="self")) return wp;
+  
   vector<string> sels = wp.second;
   string iname;
-  if (sels[0] == "in") iname = "ioin";
-  else if (sels[0] == "out") iname = "ioout";
+  if (sels[0] == "in") {
+    iname = "ioin";
+    sels[0] = "out";
+  }
+  else if (sels[0] == "out") {
+    iname = "ioout";
+    sels[0] = "in0";
+  }
   else assert(false);
-  sels.erase(sels.begin());
   return {iname,sels};
 }
 

@@ -17,8 +17,8 @@ Namespace* getcgralib(Context* c) {
   });
 
   cgralib->newModuleDecl("PE_16",PEType,{{"op",ASTRING},{"constvalue",AINT}});
-  cgralib->newModuleDecl("IOIn_16",array16);
-  cgralib->newModuleDecl("IOOut_16",c->Flip(array16));
+  cgralib->newModuleDecl("IOIn_16",c->Record({{"out",array16}}));
+  cgralib->newModuleDecl("IOOut_16",c->Record({{"in0",c->Flip(array16)}}));
   return cgralib;
 }
 
