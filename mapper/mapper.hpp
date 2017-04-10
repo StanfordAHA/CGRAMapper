@@ -10,11 +10,6 @@ using namespace std;
 using namespace CoreIR;
 
 WirePath toIOPath(WirePath wp) {
-  if (wp.first=="const") {
-    vector<string> sels = wp.second;
-    sels.insert(sels.begin(),"out");
-    return {wp.first,sels};
-  }
   if (!(wp.first=="self")) return wp;
   
   vector<string> sels = wp.second;
