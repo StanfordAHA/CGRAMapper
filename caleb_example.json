@@ -2,26 +2,16 @@
   "namespaces": {
     "_G": {
       "modules": {
-        "DesignTop": {
+        "addmult": {
           "def": {
             "connections": [
               [
                 [
-                  "mult_373_374",
+                  "const3",
                   "out"
                 ],
                 [
-                  "self",
-                  "out"
-                ]
-              ],
-              [
-                [
-                  "const",
-                  "out"
-                ],
-                [
-                  "mult_373_374",
+                  "addinst",
                   "in1"
                 ]
               ],
@@ -31,22 +21,48 @@
                   "in"
                 ],
                 [
-                  "mult_373_374",
+                  "addinst",
                   "in0"
+                ]
+              ],
+              [
+                [
+                  "const3",
+                  "out"
+                ],
+                [
+                  "multinst",
+                  "in0"
+                ]
+              ],
+              [
+                [
+                  "addinst",
+                  "out"
+                ],
+                [
+                  "multinst",
+                  "in1"
                 ]
               ]
             ],
             "instances": {
-              "const": {
+              "addinst": {
+                "instref": [
+                  "stdlib",
+                  "add2_16"
+                ]
+              },
+              "const3": {
                 "config": {
-                  "value": 2
+                  "value": 3
                 },
                 "instref": [
                   "stdlib",
                   "const_16"
                 ]
               },
-              "mult_373_374": {
+              "multinst": {
                 "instref": [
                   "stdlib",
                   "mult2_16"
@@ -84,22 +100,41 @@
           "genparams": {
             "width": "int"
           },
-          "typegen": "NYI"
+          "typegen": [
+            "stdlib",
+            "binop"
+          ]
         }
       },
       "modules": {
         "GPI_16": {
           "type": [
-            "Array",
-            16,
-            "BitOut"
+            "Record",
+            [
+              [
+                "out",
+                [
+                  "Array",
+                  16,
+                  "BitOut"
+                ]
+              ]
+            ]
           ]
         },
         "GPO_16": {
           "type": [
-            "Array",
-            16,
-            "BitIn"
+            "Record",
+            [
+              [
+                "in",
+                [
+                  "Array",
+                  16,
+                  "BitIn"
+                ]
+              ]
+            ]
           ]
         },
         "add2_16": {
@@ -138,9 +173,17 @@
             "value": "int"
           },
           "type": [
-            "Array",
-            16,
-            "BitOut"
+            "Record",
+            [
+              [
+                "out",
+                [
+                  "Array",
+                  16,
+                  "BitOut"
+                ]
+              ]
+            ]
           ]
         },
         "mult2_16": {
@@ -174,11 +217,19 @@
             ]
           ]
         }
-      }
+      },
+      "namedtypegens": [
+        {
+          "genparams": {
+            "width": "int"
+          },
+          "name": "binop"
+        }
+      ]
     }
   },
   "top": [
     "_G",
-    "DesignTop"
+    "addmult"
   ]
 }

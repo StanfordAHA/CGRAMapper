@@ -22,7 +22,10 @@ WirePath toIOPath(WirePath wp) {
     iname = "ioout";
     sels[0] = "in0";
   }
-  else assert(false);
+  else {
+    cout << "Cannot map first select: " << wp.first<<"."<<sels[0]<<endl;
+    assert(false);
+  }
   return {iname,sels};
 }
 
