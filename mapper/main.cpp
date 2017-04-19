@@ -42,5 +42,9 @@ int main(int argc, char *argv[]){
 
   deleteContext(c);
 
+  c = newContext();
+  m = loadModule(c,argv[2],&err);
+  if (err) c->die();
+  m->print();
   return 0;
 }
