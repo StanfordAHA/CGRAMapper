@@ -1,11 +1,11 @@
 #ifndef CGRALIB_HPP_
 #define CGRALIB_HPP_
 
-#include "context.hpp"
+#include "coreir.h"
 
 using namespace CoreIR;
 
-Namespace* getcgralib(Context* c) {
+Namespace* CoreIRLoadLibrary_cgra(Context* c) {
   
   Namespace* cgralib = c->newNamespace("cgra");
     
