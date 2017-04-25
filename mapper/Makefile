@@ -14,5 +14,4 @@ clean:
 	rm -rf ../build/*
 
 ../build/main: main.cpp
-	make -C ../../coreir/src
 	$(CXX) $(CXXFLAGS) $(INCS) -o $@ $< ../../coreir/build/coreir.a
