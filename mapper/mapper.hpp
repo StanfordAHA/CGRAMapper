@@ -76,7 +76,7 @@ Module* mapper(Context* c, Module* m, bool* err) {
     WirePath pathB = toIOPath(con.second->getPath());
     mappedDef->wire(pathA,pathB);
   }
-  mapped->addDef(mappedDef);
+  mapped->setDef(mappedDef);
   return mapped;
 }
 

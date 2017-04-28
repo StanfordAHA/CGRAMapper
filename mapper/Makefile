@@ -1,6 +1,6 @@
 INCS = -I$(COREIRHOME)/include
 LPATH = -L$(COREIRHOME)/bin
-LIBS = -lcoreir -lcoreir-stdlib -lcoreir-passes
+LIBS = -Wl,-rpath,$(COREIRHOME)/bin -lcoreir-stdlib -lcoreir-passes -lcoreir
 CXX ?= g++
 CXXFLAGS = -std=c++11  -Wall  -fPIC 
 
@@ -11,4 +11,4 @@ clean:
 	rm -rf ../build/*
 
 ../build/main: main.cpp
-	$(CXX) $(CXXFLAGS) $(INCS) $(LPATH) -o $@ $< $(LIBS)
+	$(CXX) $(CXXFLAGS) $(INCS) -o $@ $< $(LPATH) $(LIBS)

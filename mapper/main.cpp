@@ -3,7 +3,7 @@
 
 #include "mapper.hpp"
 #include "cgralib.hpp"
-#include "coreir-lib/stdlib.hpp"
+#include "coreir-lib/stdlib.h"
 
 using namespace CoreIR;
 
