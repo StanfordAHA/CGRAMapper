@@ -1,17 +1,20 @@
-#include "context.hpp"
-#include "passes.hpp"
+#include "coreir.h"
+#include "coreir-pass/passes.hpp"
 
 #include "mapper.hpp"
 #include "cgralib.hpp"
-#include "stdlib.hpp"
+#include "coreir-lib/stdlib.h"
 
 using namespace CoreIR;
+
+
+
 
 int main(int argc, char *argv[]){
   Context* c = newContext();
   
-  getcgralib(c);
-  getStdlib(c);
+  CoreIRLoadLibrary_cgra(c);
+  CoreIRLoadLibrary_stdlib(c);
 
   if(argc!=3){
     cout << "usage: mapper premapped.json mapped.json" << endl;

@@ -1,8 +1,7 @@
-#ifndef MAPPER_CPP_
-#define MAPPER_CPP_
+#ifndef MAPPER_HPP_
+#define MAPPER_HPP_
 
-#include "context.hpp"
-#include "common.hpp"
+#include "coreir.h"
 #include  <unordered_set>
 
 using namespace std;
@@ -77,11 +76,11 @@ Module* mapper(Context* c, Module* m, bool* err) {
     WirePath pathB = toIOPath(con.second->getPath());
     mappedDef->wire(pathA,pathB);
   }
-  mapped->addDef(mappedDef);
+  mapped->setDef(mappedDef);
   return mapped;
 }
 
 
 
 
-#endif //MAPPER_CPP_
+#endif //MAPPER_HPP_

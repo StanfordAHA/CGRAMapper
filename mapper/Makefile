@@ -1,9 +1,6 @@
-SRCDIR = ../../coreir/src
-LIBSDIR = ../../coreir/libs
-
-INCS = -I$(SRCDIR) -I$(LIBSDIR)
-LIBS = -L$(SRCDIR) -L$(LIBSDIR)
-
+INCS = -I$(COREIRHOME)/include
+LPATH = -L$(COREIRHOME)/bin
+LIBS = -Wl,-rpath,$(COREIRHOME)/bin -lcoreir-stdlib -lcoreir-passes -lcoreir
 CXX ?= g++
 CXXFLAGS = -std=c++11  -Wall  -fPIC 
 
@@ -14,5 +11,4 @@ clean:
 	rm -rf ../build/*
 
 ../build/main: main.cpp
-	make -C ../../coreir/src
-	$(CXX) $(CXXFLAGS) $(INCS) -o $@ $< ../../coreir/build/coreir.a
+	$(CXX) $(CXXFLAGS) $(INCS) -o $@ $< $(LPATH) $(LIBS)
