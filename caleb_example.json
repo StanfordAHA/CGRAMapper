@@ -44,6 +44,16 @@
                   "multinst",
                   "in1"
                 ]
+              ],
+              [
+                [
+                  "multinst",
+                  "out"
+                ],
+                [
+                  "self",
+                  "out"
+                ]
               ]
             ],
             "instances": {
