@@ -7,64 +7,53 @@
             "connections": [
               [
                 [
-                  "r3",
-                  "out"
-                ],
-                [
-                  "r4",
-                  "in"
-                ]
-              ],
-              [
-                [
-                  "r2",
-                  "out"
-                ],
-                [
-                  "r3",
-                  "in"
-                ]
-              ],
-              [
-                [
-                  "r1",
-                  "out"
-                ],
-                [
-                  "r2",
-                  "in"
-                ]
-              ],
-              [
-                [
-                  "p0",
-                  "data",
-                  "out"
-                ],
-                [
-                  "r1",
-                  "in"
-                ]
-              ],
-              [
-                [
-                  "r0",
-                  "out"
-                ],
-                [
-                  "p0",
-                  "data",
-                  "in",
-                  "1"
-                ]
-              ],
-              [
-                [
                   "r4",
                   "out"
                 ],
                 [
                   "io1",
+                  "in"
+                ]
+              ],
+              [
+                [
+                  "r2",
+                  "out"
+                ],
+                [
+                  "r3",
+                  "in"
+                ]
+              ],
+              [
+                [
+                  "r1",
+                  "out"
+                ],
+                [
+                  "r2",
+                  "in"
+                ]
+              ],
+              [
+                [
+                  "p0",
+                  "data",
+                  "in",
+                  "1"
+                ],
+                [
+                  "r0",
+                  "out"
+                ]
+              ],
+              [
+                [
+                  "io0",
+                  "out"
+                ],
+                [
+                  "r0",
                   "in"
                 ]
               ],
@@ -82,11 +71,22 @@
               ],
               [
                 [
-                  "io0",
+                  "r3",
                   "out"
                 ],
                 [
-                  "r0",
+                  "r4",
+                  "in"
+                ]
+              ],
+              [
+                [
+                  "p0",
+                  "data",
+                  "out"
+                ],
+                [
+                  "r1",
                   "in"
                 ]
               ]
@@ -251,137 +251,6 @@
           "typegen": [
             "cgra",
             "UnaryType"
-          ]
-        }
-      },
-      "modules": {
-        "Const2": {
-          "configparams": {
-            "value": "int"
-          },
-          "type": [
-            "Record",
-            [
-              [
-                "out",
-                [
-                  "Array",
-                  16,
-                  "Bit"
-                ]
-              ]
-            ]
-          ]
-        },
-        "IO0": {
-          "configparams": {
-            "mode": "string"
-          },
-          "type": [
-            "Record",
-            [
-              [
-                "in",
-                [
-                  "Array",
-                  16,
-                  "BitIn"
-                ]
-              ],
-              [
-                "out",
-                [
-                  "Array",
-                  16,
-                  "Bit"
-                ]
-              ]
-            ]
-          ]
-        },
-        "PE3": {
-          "configparams": {
-            "op": "string"
-          },
-          "type": [
-            "Record",
-            [
-              [
-                "data",
-                [
-                  "Record",
-                  [
-                    [
-                      "in",
-                      [
-                        "Array",
-                        2,
-                        [
-                          "Array",
-                          16,
-                          "BitIn"
-                        ]
-                      ]
-                    ],
-                    [
-                      "out",
-                      [
-                        "Array",
-                        16,
-                        "Bit"
-                      ]
-                    ]
-                  ]
-                ]
-              ],
-              [
-                "bit",
-                [
-                  "Record",
-                  [
-                    [
-                      "in",
-                      [
-                        "Array",
-                        2,
-                        "BitIn"
-                      ]
-                    ],
-                    [
-                      "out",
-                      [
-                        "Array",
-                        16,
-                        "Bit"
-                      ]
-                    ]
-                  ]
-                ]
-              ]
-            ]
-          ]
-        },
-        "Reg1": {
-          "type": [
-            "Record",
-            [
-              [
-                "in",
-                [
-                  "Array",
-                  16,
-                  "BitIn"
-                ]
-              ],
-              [
-                "out",
-                [
-                  "Array",
-                  16,
-                  "Bit"
-                ]
-              ]
-            ]
           ]
         }
       },

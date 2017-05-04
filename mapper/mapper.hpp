@@ -39,9 +39,11 @@ Module* mapper(Context* c, Module* m, bool* err) {
   //Create new module that has no ports
   Module* mapped = c->getGlobal()->newModuleDecl(m->getName() + "_mapped",c->Any());
 
-  Module* pe = c->getNamespace("cgra")->getModule("PE_16");
-  Module* IOin = c->getNamespace("cgra")->getModule("IOIn_16");
-  Module* IOout = c->getNamespace("cgra")->getModule("IOOut_16");
+  Generator* PE = c->getNamespace("cgra")->getGenerator("PE");
+  Generator* IO = c->getNamespace("cgra")->getGenerator("IO");
+  Generator* Reg = c->getNamespace("cgra")->getGenerator("Reg");
+  Generator* Const = c->getNamespace("cgra")->getGenerator("Const");
+  Generator* Mem = c->getNamespace("cgra")->getGenerator("Mem");
 
   ModuleDef* mappedDef = mapped->newModuleDef();
   mappedDef->addInstance("ioin",IOin);

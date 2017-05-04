@@ -2,12 +2,10 @@
 #include "coreir-pass/passes.hpp"
 
 #include "mapper.hpp"
-#include "cgralib.hpp"
+#include "coreir-lib/cgralib.h"
 #include "coreir-lib/stdlib.h"
 
 using namespace CoreIR;
-
-
 
 
 int main(int argc, char *argv[]){
