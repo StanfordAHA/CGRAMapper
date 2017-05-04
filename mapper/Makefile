@@ -4,7 +4,7 @@ LIBS = -Wl,-rpath,$(COREIRHOME)/bin -lcoreir-stdlib -lcoreir-passes -lcoreir
 CXX ?= g++
 CXXFLAGS = -std=c++11  -Wall  -fPIC -g
 
-all: ../build/main ../build/regexample
+all: ../build/main ../build/regexample ../build/memexample
 
 clean:
 	rm -rf ../build/*

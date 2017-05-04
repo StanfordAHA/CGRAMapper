@@ -1,0 +1,456 @@
+{
+  "namespaces": {
+    "_G": {
+      "modules": {
+        "Top": {
+          "def": {
+            "connections": [
+              [
+                [
+                  "m0",
+                  "read",
+                  "empty"
+                ],
+                [
+                  "p1",
+                  "bit",
+                  "in",
+                  "0"
+                ]
+              ],
+              [
+                [
+                  "p1",
+                  "data",
+                  "out"
+                ],
+                [
+                  "m0",
+                  "read",
+                  "addr"
+                ]
+              ],
+              [
+                [
+                  "p1",
+                  "bit",
+                  "out"
+                ],
+                [
+                  "m0",
+                  "read",
+                  "en"
+                ]
+              ],
+              [
+                [
+                  "m0",
+                  "read",
+                  "data"
+                ],
+                [
+                  "io1",
+                  "in"
+                ]
+              ],
+              [
+                [
+                  "m0",
+                  "write",
+                  "full"
+                ],
+                [
+                  "p0",
+                  "bit",
+                  "in",
+                  "0"
+                ]
+              ],
+              [
+                [
+                  "p0",
+                  "bit",
+                  "out"
+                ],
+                [
+                  "m0",
+                  "write",
+                  "en"
+                ]
+              ],
+              [
+                [
+                  "p0",
+                  "data",
+                  "out"
+                ],
+                [
+                  "m0",
+                  "write",
+                  "addr"
+                ]
+              ],
+              [
+                [
+                  "io0",
+                  "out"
+                ],
+                [
+                  "m0",
+                  "write",
+                  "data"
+                ]
+              ],
+              [
+                [
+                  "p1",
+                  "data",
+                  "in",
+                  "0"
+                ],
+                [
+                  "m0",
+                  "read",
+                  "data"
+                ]
+              ],
+              [
+                [
+                  "io0",
+                  "out"
+                ],
+                [
+                  "p0",
+                  "data",
+                  "in",
+                  "0"
+                ]
+              ]
+            ],
+            "instances": {
+              "io0": {
+                "config": {
+                  "mode": "i"
+                },
+                "genargs": {
+                  "width": 16
+                },
+                "generatorref": [
+                  "cgra",
+                  "IO"
+                ]
+              },
+              "io1": {
+                "config": {
+                  "mode": "o"
+                },
+                "genargs": {
+                  "width": 16
+                },
+                "generatorref": [
+                  "cgra",
+                  "IO"
+                ]
+              },
+              "m0": {
+                "config": {
+                  "mode": "o"
+                },
+                "genargs": {
+                  "depth": 512,
+                  "width": 16
+                },
+                "generatorref": [
+                  "cgra",
+                  "Mem"
+                ]
+              },
+              "p0": {
+                "config": {
+                  "op": "add"
+                },
+                "genargs": {
+                  "numin": 2,
+                  "width": 16
+                },
+                "generatorref": [
+                  "cgra",
+                  "PE"
+                ]
+              },
+              "p1": {
+                "config": {
+                  "op": "mult"
+                },
+                "genargs": {
+                  "numin": 2,
+                  "width": 16
+                },
+                "generatorref": [
+                  "cgra",
+                  "PE"
+                ]
+              }
+            }
+          },
+          "type": "Any"
+        }
+      }
+    },
+    "cgra": {
+      "generators": {
+        "Const": {
+          "configparams": {
+            "value": "int"
+          },
+          "genparams": {
+            "width": "int"
+          },
+          "typegen": [
+            "cgra",
+            "SrcType"
+          ]
+        },
+        "IO": {
+          "configparams": {
+            "mode": "string"
+          },
+          "genparams": {
+            "width": "int"
+          },
+          "typegen": [
+            "cgra",
+            "UnaryType"
+          ]
+        },
+        "Mem": {
+          "configparams": {
+            "mode": "string"
+          },
+          "genparams": {
+            "depth": "int",
+            "width": "int"
+          },
+          "typegen": [
+            "cgra",
+            "MemType"
+          ]
+        },
+        "PE": {
+          "configparams": {
+            "op": "string"
+          },
+          "genparams": {
+            "numin": "int",
+            "width": "int"
+          },
+          "typegen": [
+            "cgra",
+            "PEType"
+          ]
+        },
+        "Reg": {
+          "genparams": {
+            "width": "int"
+          },
+          "typegen": [
+            "cgra",
+            "UnaryType"
+          ]
+        }
+      },
+      "modules": {
+        "IO0": {
+          "configparams": {
+            "mode": "string"
+          },
+          "type": [
+            "Record",
+            [
+              [
+                "in",
+                [
+                  "Array",
+                  16,
+                  "BitIn"
+                ]
+              ],
+              [
+                "out",
+                [
+                  "Array",
+                  16,
+                  "Bit"
+                ]
+              ]
+            ]
+          ]
+        },
+        "Mem2": {
+          "configparams": {
+            "mode": "string"
+          },
+          "type": [
+            "Record",
+            [
+              [
+                "read",
+                [
+                  "Record",
+                  [
+                    [
+                      "data",
+                      [
+                        "Array",
+                        16,
+                        "Bit"
+                      ]
+                    ],
+                    [
+                      "addr",
+                      [
+                        "Array",
+                        16,
+                        "BitIn"
+                      ]
+                    ],
+                    [
+                      "en",
+                      "BitIn"
+                    ],
+                    [
+                      "empty",
+                      "Bit"
+                    ]
+                  ]
+                ]
+              ],
+              [
+                "write",
+                [
+                  "Record",
+                  [
+                    [
+                      "data",
+                      [
+                        "Array",
+                        16,
+                        "BitIn"
+                      ]
+                    ],
+                    [
+                      "addr",
+                      [
+                        "Array",
+                        16,
+                        "BitIn"
+                      ]
+                    ],
+                    [
+                      "en",
+                      "BitIn"
+                    ],
+                    [
+                      "full",
+                      "Bit"
+                    ]
+                  ]
+                ]
+              ]
+            ]
+          ]
+        },
+        "PE1": {
+          "configparams": {
+            "op": "string"
+          },
+          "type": [
+            "Record",
+            [
+              [
+                "data",
+                [
+                  "Record",
+                  [
+                    [
+                      "in",
+                      [
+                        "Array",
+                        2,
+                        [
+                          "Array",
+                          16,
+                          "BitIn"
+                        ]
+                      ]
+                    ],
+                    [
+                      "out",
+                      [
+                        "Array",
+                        16,
+                        "Bit"
+                      ]
+                    ]
+                  ]
+                ]
+              ],
+              [
+                "bit",
+                [
+                  "Record",
+                  [
+                    [
+                      "in",
+                      [
+                        "Array",
+                        2,
+                        "BitIn"
+                      ]
+                    ],
+                    [
+                      "out",
+                      "Bit"
+                    ]
+                  ]
+                ]
+              ]
+            ]
+          ]
+        }
+      },
+      "namedtypegens": [
+        {
+          "genparams": {
+            "depth": "int",
+            "width": "int"
+          },
+          "name": "MemType"
+        },
+        {
+          "genparams": {
+            "numin": "int",
+            "width": "int"
+          },
+          "name": "PEType"
+        },
+        {
+          "genparams": {
+            "width": "int"
+          },
+          "name": "SrcType"
+        },
+        {
+          "genparams": {
+            "width": "int"
+          },
+          "name": "UnaryType"
+        }
+      ]
+    }
+  },
+  "top": [
+    "_G",
+    "Top"
+  ]
+}

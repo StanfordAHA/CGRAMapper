@@ -32,7 +32,7 @@ Namespace* CoreIRLoadLibrary_cgra(Context* c) {
       })},
       {"bit",c->Record({
         {"in",c->BitIn()->Arr(numin)},
-        {"out",c->Bit()->Arr(width)}
+        {"out",c->Bit()}
       })}
     });
   });
