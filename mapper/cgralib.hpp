@@ -8,17 +8,75 @@ using namespace CoreIR;
 Namespace* CoreIRLoadLibrary_cgra(Context* c) {
   
   Namespace* cgralib = c->newNamespace("cgra");
-    
-  Type* array16 = c->Array(16,c->BitOut());
-  Type* PEType = c->Record({
-    {"in0",c->Flip(array16)},
-    {"in1",c->Flip(array16)},
-    {"out",array16}
+  
+  //Unary op declaration
+  Params widthParams = {{"width",AINT}};
+  cgralib->newTypeGen("UnaryType",widthParams,[](Context* c, Args args) {
+    uint width = args.at("width")->get<ArgInt>();
+    return c->Record({
+      {"in",c->BitIn()->Arr(width)},
+      {"out",c->Bit()->Arr(width)},
+    });
   });
 
-  cgralib->newModuleDecl("PE_16",PEType,{{"op",ASTRING},{"constvalue",AINT}});
-  cgralib->newModuleDecl("IOIn_16",c->Record({{"out",array16}}));
-  cgralib->newModuleDecl("IOOut_16",c->Record({{"in0",c->Flip(array16)}}));
+  //PE declaration
+  Params PEGenParams = {{"width",AINT},{"numin",AINT}};
+  Params opParams = {{"op",ASTRING}};
+  cgralib->newTypeGen("PEType",PEGenParams,[](Context* c, Args args) {
+    uint width = args.at("width")->get<ArgInt>();
+    uint numin = args.at("numin")->get<ArgInt>();
+    return c->Record({
+      {"data",c->Record({
+        {"in",c->BitIn()->Arr(width)->Arr(numin)},
+        {"out",c->Bit()->Arr(width)}
+      })},
+      {"bit",c->Record({
+        {"in",c->BitIn()->Arr(numin)},
+        {"out",c->Bit()->Arr(width)}
+      })}
+    });
+  });
+  cgralib->newGeneratorDecl("PE",cgralib->getTypeGen("PEType"),PEGenParams,opParams);
+
+  //Const Declaration
+  Params valueParams = {{"value",AINT}};
+  cgralib->newTypeGen("SrcType",widthParams,[](Context* c, Args args) {
+    uint width = args.at("width")->get<ArgInt>();
+    return c->Record({
+      {"out",c->Bit()->Arr(width)}
+    });
+  });
+  cgralib->newGeneratorDecl("Const",cgralib->getTypeGen("SrcType"),widthParams,valueParams);
+
+  //Reg declaration
+  cgralib->newGeneratorDecl("Reg",cgralib->getTypeGen("UnaryType"),widthParams);
+
+  //IO Declaration
+  Params modeParams = {{"mode",ASTRING}};
+  cgralib->newGeneratorDecl("IO",cgralib->getTypeGen("UnaryType"),widthParams,modeParams);
+
+  //Mem declaration
+  Params MemGenParams = {{"width",AINT},{"depth",AINT}};
+  cgralib->newTypeGen("MemType",MemGenParams,[](Context* c, Args args) {
+    uint width = args.at("width")->get<ArgInt>();
+    //TODO for simplicity just make the address width 16 as well
+    return c->Record({
+      {"read",c->Record({
+        {"data",c->Bit()->Arr(width)},
+        {"addr",c->BitIn()->Arr(width)},
+        {"en",c->BitIn()},
+        {"empty",c->Bit()}
+      })},
+      {"write",c->Record({
+        {"data",c->BitIn()->Arr(width)},
+        {"addr",c->BitIn()->Arr(width)},
+        {"en",c->BitIn()},
+        {"full",c->Bit()}
+      })}
+    });
+  });
+  cgralib->newGeneratorDecl("Mem",cgralib->getTypeGen("MemType"),MemGenParams,modeParams);
+
   return cgralib;
 }
 

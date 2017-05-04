@@ -8,24 +8,23 @@ using namespace std;
 
 using namespace CoreIR;
 
-WirePath toIOPath(WirePath wp) {
-  if (!(wp.first=="self")) return wp;
+SelectPath toIOPath(SelectPath sels) {
+  if (!(sels[0]=="self")) return sels;
   
-  vector<string> sels = wp.second;
   string iname;
-  if (sels[0] == "in") {
-    iname = "ioin";
-    sels[0] = "out";
+  if (sels[1] == "in") {
+    sels[0] = "ioin";
+    sels[1] = "out";
   }
-  else if (sels[0] == "out") {
-    iname = "ioout";
-    sels[0] = "in0";
+  else if (sels[1] == "out") {
+    sels[0] = "ioout";
+    sels[1] = "in0";
   }
   else {
-    cout << "Cannot map first select: " << wp.first<<"."<<sels[0]<<endl;
+    cout << "Cannot map first select: " << sels[0] <<"."<<sels[1]<<endl;
     assert(false);
   }
-  return {iname,sels};
+  return sels;
 }
 
 
@@ -51,29 +50,29 @@ Module* mapper(Context* c, Module* m, bool* err) {
   ModuleDef* mdef = m->getDef();
   for (auto instmap : mdef->getInstances()) {
     Instance* inst = instmap.second;
-    string node = inst->getInstRef()->getName();
+    string node = inst->getModuleRef()->getName();
     if (node=="add2_16") {
-      Args config = Args({{"op",c->str2Arg("add")},{"constvalue",c->int2Arg(0)}});
+      Args configargs = Args({{"op",c->argString("add")},{"constvalue",c->argInt(0)}});
       Instance* i = mappedDef->addInstance(inst);
-      i->replace(pe,config);
+      i->replace(pe,configargs);
     }
     else if (node=="mult2_16") {
-      Args config = Args({{"op",c->str2Arg("mult")},{"constvalue",c->int2Arg(0)}});
+      Args configargs = Args({{"op",c->argString("mult")},{"constvalue",c->argInt(0)}});
       Instance* i = mappedDef->addInstance(inst);
-      i->replace(pe,config);
+      i->replace(pe,configargs);
     }
     else if (node=="const_16") {
-      Arg* constarg = inst->getConfigValue("value");
-      Args config = Args({{"op",c->str2Arg("const")},{"constvalue",constarg}});
+      Arg* constarg = inst->getConfigArg("value");
+      Args configargs = Args({{"op",c->argString("const")},{"constvalue",constarg}});
       Instance* i = mappedDef->addInstance(inst);
-      i->replace(pe,config);
+      i->replace(pe,configargs);
     }
     else { c->die(); }
   }
 
   for (auto con : mdef->getConnections() ) {
-    WirePath pathA = toIOPath(con.first->getPath());
-    WirePath pathB = toIOPath(con.second->getPath());
+    SelectPath pathA = toIOPath(con.first->getSelectPath());
+    SelectPath pathB = toIOPath(con.second->getSelectPath());
     mappedDef->wire(pathA,pathB);
   }
   mapped->setDef(mappedDef);
