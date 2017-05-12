@@ -1,10 +1,10 @@
 INCS = -I$(COREIR)/include
-LPATH = -L$(COREIR)/bin
-LIBS = -Wl,-rpath,$(COREIR)/bin -lcoreir-cgralib -lcoreir-stdlib -lcoreir-passes -lcoreir
+LPATH = -L$(COREIR)/lib
+LIBS = -Wl,-rpath,$(COREIR)/lib -lcoreir-cgralib -lcoreir-stdlib -lcoreir-passes -lcoreir
 CXX ?= g++
 CXXFLAGS = -std=c++11  -Wall  -fPIC -g
 
-all: ../build/main ../build/regexample ../build/memexample
+all: ../build/map
 
 clean:
 	rm -rf ../build/*

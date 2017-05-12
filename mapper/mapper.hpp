@@ -2,6 +2,7 @@
 #define MAPPER_HPP_
 
 #include "coreir.h"
+#include "coreir-lib/stdlib.h"
 #include  <unordered_set>
 
 using namespace std;
@@ -9,23 +10,36 @@ using namespace std;
 using namespace CoreIR;
 
 SelectPath toIOPath(SelectPath sels) {
-  if (!(sels[0]=="self")) return sels;
-  
-  string iname;
-  if (sels[1] == "in") {
-    sels[0] = "ioin";
-    sels[1] = "out";
-  }
-  else if (sels[1] == "out") {
-    sels[0] = "ioout";
-    sels[1] = "in0";
+  if (sels[0]=="self") {
+    string iname;
+    if (sels[1] == "in") {
+      sels[0] = "ioin";
+      sels[1] = "out";
+    }
+    else if (sels[1] == "out") {
+      sels[0] = "ioout";
+      sels[1] = "in";
+    }
+    else {
+      cout << "Cannot map first select: " << sels[0] <<"."<<sels[1]<<endl;
+      assert(false);
+    }
   }
   else {
-    cout << "Cannot map first select: " << sels[0] <<"."<<sels[1]<<endl;
-    assert(false);
+    sels.insert(sels.begin()+1,"data");
   }
   return sels;
 }
+
+//Add
+//in.0
+//out
+
+//PE:
+//data.in.0
+//data.out
+
+
 
 
 Module* mapper(Context* c, Module* m, bool* err) {
@@ -36,40 +50,49 @@ Module* mapper(Context* c, Module* m, bool* err) {
     c->error(e);
   } 
 
+  Namespace* stdlib = c->getNamespace("stdlib");
+
   //Create new module that has no ports
   Module* mapped = c->getGlobal()->newModuleDecl(m->getName() + "_mapped",c->Any());
 
-  Generator* PE = c->getNamespace("cgra")->getGenerator("PE");
-  Generator* IO = c->getNamespace("cgra")->getGenerator("IO");
-  Generator* Reg = c->getNamespace("cgra")->getGenerator("Reg");
-  Generator* Const = c->getNamespace("cgra")->getGenerator("Const");
-  Generator* Mem = c->getNamespace("cgra")->getGenerator("Mem");
+  Generator* PE = c->getNamespace("cgralib")->getGenerator("PE");
+  Generator* IO = c->getNamespace("cgralib")->getGenerator("IO");
+  //Generator* Reg = c->getNamespace("cgralib")->getGenerator("Reg");
+  Generator* Const = c->getNamespace("cgralib")->getGenerator("Const");
+  //Generator* Mem = c->getNamespace("cgralib")->getGenerator("Mem");
 
+  Args aWidth({{"width",c->argInt(16)}});
   ModuleDef* mappedDef = mapped->newModuleDef();
-  mappedDef->addInstance("ioin",IOin);
-  mappedDef->addInstance("ioout",IOout);
+  
+  mappedDef->addInstance("ioin",IO,aWidth,{{"mode",c->argString("i")}});
+  mappedDef->addInstance("ioout",IO,aWidth,{{"mode",c->argString("o")}});
 
   ModuleDef* mdef = m->getDef();
   for (auto instmap : mdef->getInstances()) {
     Instance* inst = instmap.second;
-    string node = inst->getModuleRef()->getName();
-    if (node=="add2_16") {
-      Args configargs = Args({{"op",c->argString("add")},{"constvalue",c->argInt(0)}});
+    Generator* node = inst->getGeneratorRef();
+    if (node == stdlib->getGenerator("add")) {
+      Args configargs = Args({{"op",c->argString("add")}});
+      Args genargs = Args({{"width",c->argInt(16)},{"numin",c->argInt(2)}});
       Instance* i = mappedDef->addInstance(inst);
-      i->replace(pe,configargs);
+      i->replace(PE,genargs,configargs);
     }
-    else if (node=="mult2_16") {
-      Args configargs = Args({{"op",c->argString("mult")},{"constvalue",c->argInt(0)}});
+    else if (node == stdlib->getGenerator("mul")) {
+      Args configargs = Args({{"op",c->argString("add")}});
+      Args genargs = Args({{"width",c->argInt(16)},{"numin",c->argInt(2)}});
       Instance* i = mappedDef->addInstance(inst);
-      i->replace(pe,configargs);
+      i->replace(PE,genargs,configargs);
     }
-    else if (node=="const_16") {
-      Arg* constarg = inst->getConfigArg("value");
-      Args configargs = Args({{"op",c->argString("const")},{"constvalue",constarg}});
+    else if (node == stdlib->getGenerator("const")) {
+      Args configargs = inst->getConfigArgs();
+      Args genargs = Args({{"width",c->argInt(16)}});
       Instance* i = mappedDef->addInstance(inst);
-      i->replace(pe,configargs);
+      i->replace(Const,genargs,configargs);
     }
-    else { c->die(); }
+    else { 
+      cout << "NYI for " << node->getNamespace()->getName() << "." << node->getName();
+      c->die(); 
+    }
   }
 
   for (auto con : mdef->getConnections() ) {
