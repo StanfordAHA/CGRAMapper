@@ -10,6 +10,7 @@ using namespace std;
 using namespace CoreIR;
 
 SelectPath toIOPath(SelectPath sels) {
+  cout << "mapping path: " << SelectPath2Str(sels) << endl;
   if (sels[0]=="self") {
     string iname;
     if (sels[1] == "in") {
@@ -25,9 +26,13 @@ SelectPath toIOPath(SelectPath sels) {
       assert(false);
     }
   }
+  else if (sels[0]=="ci") { //Hack
+    ;
+  }
   else {
     sels.insert(sels.begin()+1,"data");
   }
+  cout << "mapped path: " << SelectPath2Str(sels) << endl;
   return sels;
 }
 
@@ -76,9 +81,11 @@ Module* mapper(Context* c, Module* m, bool* err) {
       Args genargs = Args({{"width",c->argInt(16)},{"numin",c->argInt(2)}});
       Instance* i = mappedDef->addInstance(inst);
       i->replace(PE,genargs,configargs);
+      cout << i->toString() << endl;
+      cout << i->getModuleRef()->getName() << endl;
     }
     else if (node == stdlib->getGenerator("mul")) {
-      Args configargs = Args({{"op",c->argString("add")}});
+      Args configargs = Args({{"op",c->argString("mul")}});
       Args genargs = Args({{"width",c->argInt(16)},{"numin",c->argInt(2)}});
       Instance* i = mappedDef->addInstance(inst);
       i->replace(PE,genargs,configargs);
@@ -98,7 +105,8 @@ Module* mapper(Context* c, Module* m, bool* err) {
   for (auto con : mdef->getConnections() ) {
     SelectPath pathA = toIOPath(con.first->getSelectPath());
     SelectPath pathB = toIOPath(con.second->getSelectPath());
-    mappedDef->wire(pathA,pathB);
+    cout << "connecting: " << SelectPath2Str(pathA) << " to " << SelectPath2Str(pathB) << endl;
+    mappedDef->connect(pathA,pathB);
   }
   mapped->setDef(mappedDef);
   return mapped;

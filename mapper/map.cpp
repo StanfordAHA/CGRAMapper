@@ -1,5 +1,5 @@
 #include "coreir.h"
-#include "coreir-pass/passes.hpp"
+#include "coreir-pass/passes.h"
 
 #include "mapper.hpp"
 #include "coreir-lib/cgralib.h"
