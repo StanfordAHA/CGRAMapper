@@ -4,10 +4,11 @@ LIBS = -Wl,-rpath,$(COREIR)/lib -lcoreir-cgralib -lcoreir-stdlib -lcoreir-passes
 CXX ?= g++
 CXXFLAGS = -std=c++11  -Wall  -fPIC -g
 
-all: ../build/map
+all: build/map
+	cp build/map ../bin/.
 
 clean:
-	rm -rf ../build/*
+	rm -rf build/*
 
-../build/%: %.cpp
+build/%: %.cpp
 	$(CXX) $(CXXFLAGS) $(INCS) -o $@ $< $(LPATH) $(LIBS)

@@ -71,7 +71,7 @@
                 ]
               },
               "ci": {
-                "config": {
+                "configargs": {
                   "value": 140
                 },
                 "genargs": {
