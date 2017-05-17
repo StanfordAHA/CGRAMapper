@@ -8,7 +8,6 @@
               [
                 [
                   "m0",
-                  "read",
                   "empty"
                 ],
                 [
@@ -21,33 +20,18 @@
               [
                 [
                   "p1",
-                  "data",
+                  "bit",
                   "out"
                 ],
                 [
                   "m0",
-                  "read",
-                  "addr"
+                  "ren"
                 ]
               ],
               [
                 [
                   "m0",
-                  "read",
-                  "data"
-                ],
-                [
-                  "p1",
-                  "data",
-                  "in",
-                  "0"
-                ]
-              ],
-              [
-                [
-                  "m0",
-                  "read",
-                  "data"
+                  "rdata"
                 ],
                 [
                   "io1",
@@ -57,7 +41,6 @@
               [
                 [
                   "m0",
-                  "write",
                   "full"
                 ],
                 [
@@ -70,48 +53,45 @@
               [
                 [
                   "p0",
-                  "bit",
-                  "out"
-                ],
-                [
-                  "m0",
-                  "write",
-                  "en"
-                ]
-              ],
-              [
-                [
-                  "p0",
                   "data",
                   "out"
                 ],
                 [
                   "m0",
-                  "write",
                   "addr"
                 ]
               ],
               [
                 [
+                  "m0",
+                  "rdata"
+                ],
+                [
                   "p1",
+                  "data",
+                  "in",
+                  "0"
+                ]
+              ],
+              [
+                [
+                  "p0",
                   "bit",
                   "out"
                 ],
                 [
                   "m0",
-                  "read",
-                  "en"
+                  "wen"
                 ]
               ],
               [
                 [
-                  "m0",
-                  "write",
-                  "data"
-                ],
-                [
                   "io0",
                   "out"
+                ],
+                [
+                  "m0",
+                  "wdata"
                 ]
               ],
               [
@@ -129,31 +109,31 @@
             ],
             "instances": {
               "io0": {
-                "config": {
+                "configargs": {
                   "mode": "i"
                 },
                 "genargs": {
                   "width": 16
                 },
                 "generatorref": [
-                  "cgra",
+                  "cgralib",
                   "IO"
                 ]
               },
               "io1": {
-                "config": {
+                "configargs": {
                   "mode": "o"
                 },
                 "genargs": {
                   "width": 16
                 },
                 "generatorref": [
-                  "cgra",
+                  "cgralib",
                   "IO"
                 ]
               },
               "m0": {
-                "config": {
+                "configargs": {
                   "mode": "o"
                 },
                 "genargs": {
@@ -161,12 +141,12 @@
                   "width": 16
                 },
                 "generatorref": [
-                  "cgra",
+                  "cgralib",
                   "Mem"
                 ]
               },
               "p0": {
-                "config": {
+                "configargs": {
                   "op": "add"
                 },
                 "genargs": {
@@ -174,12 +154,12 @@
                   "width": 16
                 },
                 "generatorref": [
-                  "cgra",
+                  "cgralib",
                   "PE"
                 ]
               },
               "p1": {
-                "config": {
+                "configargs": {
                   "op": "mult"
                 },
                 "genargs": {
@@ -187,7 +167,7 @@
                   "width": 16
                 },
                 "generatorref": [
-                  "cgra",
+                  "cgralib",
                   "PE"
                 ]
               }
@@ -196,97 +176,6 @@
           "type": "Any"
         }
       }
-    },
-    "cgra": {
-      "generators": {
-        "Const": {
-          "configparams": {
-            "value": "int"
-          },
-          "genparams": {
-            "width": "int"
-          },
-          "typegen": [
-            "cgra",
-            "SrcType"
-          ]
-        },
-        "IO": {
-          "configparams": {
-            "mode": "string"
-          },
-          "genparams": {
-            "width": "int"
-          },
-          "typegen": [
-            "cgra",
-            "UnaryType"
-          ]
-        },
-        "Mem": {
-          "configparams": {
-            "mode": "string"
-          },
-          "genparams": {
-            "depth": "int",
-            "width": "int"
-          },
-          "typegen": [
-            "cgra",
-            "MemType"
-          ]
-        },
-        "PE": {
-          "configparams": {
-            "op": "string"
-          },
-          "genparams": {
-            "numin": "int",
-            "width": "int"
-          },
-          "typegen": [
-            "cgra",
-            "PEType"
-          ]
-        },
-        "Reg": {
-          "genparams": {
-            "width": "int"
-          },
-          "typegen": [
-            "cgra",
-            "UnaryType"
-          ]
-        }
-      },
-      "namedtypegens": [
-        {
-          "genparams": {
-            "depth": "int",
-            "width": "int"
-          },
-          "name": "MemType"
-        },
-        {
-          "genparams": {
-            "numin": "int",
-            "width": "int"
-          },
-          "name": "PEType"
-        },
-        {
-          "genparams": {
-            "width": "int"
-          },
-          "name": "SrcType"
-        },
-        {
-          "genparams": {
-            "width": "int"
-          },
-          "name": "UnaryType"
-        }
-      ]
     }
   },
   "top": [
