@@ -1,0 +1,125 @@
+{
+  "namespaces": {
+    "_G": {
+      "modules": {
+        "addmult": {
+          "def": {
+            "connections": [
+              [
+                [
+                  "mi",
+                  "out"
+                ],
+                [
+                  "self",
+                  "out"
+                ]
+              ],
+              [
+                [
+                  "ci",
+                  "out"
+                ],
+                [
+                  "ai",
+                  "in",
+                  "1"
+                ]
+              ],
+              [
+                [
+                  "ai",
+                  "out"
+                ],
+                [
+                  "mi",
+                  "in",
+                  "1"
+                ]
+              ],
+              [
+                [
+                  "ci",
+                  "out"
+                ],
+                [
+                  "mi",
+                  "in",
+                  "0"
+                ]
+              ],
+              [
+                [
+                  "self",
+                  "in"
+                ],
+                [
+                  "ai",
+                  "in",
+                  "0"
+                ]
+              ]
+            ],
+            "instances": {
+              "ai": {
+                "genargs": {
+                  "width": 16
+                },
+                "generatorref": [
+                  "stdlib",
+                  "add"
+                ]
+              },
+              "ci": {
+                "configargs": {
+                  "value": 140
+                },
+                "genargs": {
+                  "width": 16
+                },
+                "generatorref": [
+                  "stdlib",
+                  "const"
+                ]
+              },
+              "mi": {
+                "genargs": {
+                  "width": 16
+                },
+                "generatorref": [
+                  "stdlib",
+                  "mul"
+                ]
+              }
+            }
+          },
+          "type": [
+            "Record",
+            [
+              [
+                "in",
+                [
+                  "Array",
+                  16,
+                  "BitIn"
+                ]
+              ],
+              [
+                "out",
+                [
+                  "Array",
+                  16,
+                  "Bit"
+                ]
+              ]
+            ]
+          ]
+        }
+      }
+    }
+  },
+  "top": [
+    "_G",
+    "addmult"
+  ]
+}

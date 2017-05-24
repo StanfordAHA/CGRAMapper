@@ -1,20 +1,18 @@
 #include "coreir.h"
-#include "coreir-pass/passes.hpp"
+#include "coreir-pass/passes.h"
 
 #include "mapper.hpp"
-#include "cgralib.hpp"
+#include "coreir-lib/cgralib.h"
 #include "coreir-lib/stdlib.h"
 
 using namespace CoreIR;
 
 
-
-
 int main(int argc, char *argv[]){
   Context* c = newContext();
   
-  CoreIRLoadLibrary_cgra(c);
   CoreIRLoadLibrary_stdlib(c);
+  CoreIRLoadLibrary_cgralib(c);
 
   if(argc!=3){
     cout << "usage: mapper premapped.json mapped.json" << endl;
@@ -34,10 +32,6 @@ int main(int argc, char *argv[]){
     c->die();
   }
   mapped->print();
-  
-  cout << "Typechecking" << endl;
-  typecheck(c,mapped,&err);
-  if(err){c->die();}
 
   cout << "Trying to save" << endl;
   saveModule(mapped,argv[2],&err);
@@ -45,7 +39,10 @@ int main(int argc, char *argv[]){
 
   deleteContext(c);
 
+  cout << "Trying to Load" << endl;
   c = newContext();
+  CoreIRLoadLibrary_stdlib(c);
+  CoreIRLoadLibrary_cgralib(c);
   m = loadModule(c,argv[2],&err);
   if (err) c->die();
   m->print();
