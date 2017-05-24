@@ -1,5 +1,4 @@
 all:
-	$(MAKE) clean
 	$(MAKE) install
 	$(MAKE) test
 

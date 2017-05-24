@@ -9,7 +9,7 @@ using namespace std;
 
 using namespace CoreIR;
 
-SelectPath toIOPath(SelectPath sels) {
+SelectPath toIOPath(SelectPath sels,unordered_set<string> consts) {
   cout << "mapping path: " << SelectPath2Str(sels) << endl;
   if (sels[0]=="self") {
     string iname;
@@ -26,7 +26,7 @@ SelectPath toIOPath(SelectPath sels) {
       assert(false);
     }
   }
-  else if (sels[0]=="ci") { //Hack
+  else if (consts.count(sels[0])>0) { 
     ;
   }
   else {
@@ -73,6 +73,10 @@ Module* mapper(Context* c, Module* m, bool* err) {
   mappedDef->addInstance("ioout",IO,aWidth,{{"mode",c->argString("o")}});
 
   ModuleDef* mdef = m->getDef();
+  
+  //Set to hold const inst names for now
+  unordered_set<string> consts;
+  
   for (auto instmap : mdef->getInstances()) {
     Instance* inst = instmap.second;
     Generator* node = inst->getGeneratorRef();
@@ -95,6 +99,7 @@ Module* mapper(Context* c, Module* m, bool* err) {
       Args genargs = Args({{"width",c->argInt(16)}});
       Instance* i = mappedDef->addInstance(inst);
       i->replace(Const,genargs,configargs);
+      consts.insert(instmap.first)
     }
     else { 
       cout << "NYI for " << node->getNamespace()->getName() << "." << node->getName();
@@ -103,8 +108,8 @@ Module* mapper(Context* c, Module* m, bool* err) {
   }
 
   for (auto con : mdef->getConnections() ) {
-    SelectPath pathA = toIOPath(con.first->getSelectPath());
-    SelectPath pathB = toIOPath(con.second->getSelectPath());
+    SelectPath pathA = toIOPath(con.first->getSelectPath(),consts);
+    SelectPath pathB = toIOPath(con.second->getSelectPath(),consts);
     cout << "connecting: " << SelectPath2Str(pathA) << " to " << SelectPath2Str(pathB) << endl;
     mappedDef->connect(pathA,pathB);
   }
