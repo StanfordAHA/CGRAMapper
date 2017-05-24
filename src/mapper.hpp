@@ -99,7 +99,7 @@ Module* mapper(Context* c, Module* m, bool* err) {
       Args genargs = Args({{"width",c->argInt(16)}});
       Instance* i = mappedDef->addInstance(inst);
       i->replace(Const,genargs,configargs);
-      consts.insert(instmap.first)
+      consts.insert(instmap.first);
     }
     else { 
       cout << "NYI for " << node->getNamespace()->getName() << "." << node->getName();
