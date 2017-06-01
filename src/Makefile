@@ -1,8 +1,14 @@
+CXX ?= g++
+ifeq ($(COREIRCONFIG),g++-4.9)
+CXX = g++-4.9
+endif
+CXXFLAGS = -std=c++11  -Wall  -fPIC -g
+
+
+
 INCS = -I$(COREIR)/include
 LPATH = -L$(COREIR)/lib
 LIBS = -Wl,-rpath,$(COREIR)/lib -lcoreir-cgralib -lcoreir-stdlib -lcoreir-passes -lcoreir
-CXX ?= g++
-CXXFLAGS = -std=c++11  -Wall  -fPIC -g
 
 all: build/map
 	cp build/map ../bin/.
