@@ -9,45 +9,39 @@ using namespace std;
 
 using namespace CoreIR;
 
-SelectPath toIOPath(SelectPath sels,unordered_set<string> consts) {
-  cout << "mapping path: " << SelectPath2Str(sels) << endl;
-  if (sels[0]=="self") {
-    string iname;
-    if (sels[1] == "in") {
-      sels[0] = "ioin";
-      sels[1] = "out";
+typedef struct {
+  vector<SelectPath> IO16;
+  vector<SelectPath> IO16in;
+  vector<SelectPath> IO1;
+  vector<SelectPath> IO1in;
+} IOpaths;
+
+void getAllIOPaths(Wireable* w, IOpaths* paths) {
+  Type* t = w->getType();
+  if (auto at = dyn_cast<ArrayType>(t)) {
+    if (at->getLen()==16 && isa<BitType>(at->getElemType())) {
+      paths->IO16.push_back(w->getSelectPath());
     }
-    else if (sels[1] == "out") {
-      sels[0] = "ioout";
-      sels[1] = "in";
+    else if (at->getLen() == 16 && isa<BitInType>(at->getElemType())) {
+      paths->IO16in.push_back(w->getSelectPath());
     }
     else {
-      cout << "Cannot map first select: " << sels[0] <<"."<<sels[1]<<endl;
-      assert(false);
+      for (auto sw : w->getSelects()) {
+        getAllIOPaths(sw.second,paths);
+      }
     }
   }
-  else if (consts.count(sels[0])>0) { 
-    ;
-  }
   else {
-    sels.insert(sels.begin()+1,"data");
+    for (auto sw : w->getSelects()) {
+      getAllIOPaths(sw.second,paths);
+    }
   }
-  cout << "mapped path: " << SelectPath2Str(sels) << endl;
-  return sels;
+
+
 }
 
-//Add
-//in.0
-//out
-
-//PE:
-//data.in.0
-//data.out
-
-
-
-
-Module* mapper(Context* c, Module* m, bool* err) {
+//This will edit the module
+void mapper(Context* c, Module* m, bool* err) {
   if (!m->hasDef()) {
     Error e;
     e.message("Module " + m->getName() + " has no definition to map!");
@@ -57,64 +51,105 @@ Module* mapper(Context* c, Module* m, bool* err) {
 
   Namespace* stdlib = c->getNamespace("stdlib");
 
-  //Create new module that has no ports
-  Module* mapped = c->getGlobal()->newModuleDecl(m->getName() + "_mapped",c->Any());
 
   Generator* PE = c->getNamespace("cgralib")->getGenerator("PE");
   Generator* IO = c->getNamespace("cgralib")->getGenerator("IO");
-  //Generator* Reg = c->getNamespace("cgralib")->getGenerator("Reg");
+  Generator* Reg = c->getNamespace("cgralib")->getGenerator("Reg");
   Generator* Const = c->getNamespace("cgralib")->getGenerator("Const");
   //Generator* Mem = c->getNamespace("cgralib")->getGenerator("Mem");
+  
+  //PE replacement module:
+  Module* PE16 = PE->getModule({{"width",c->argInt(16)},{"numin",c->argInt(2)}});
+  Module* Const16 = Const->getModule({{"width",c->argInt(16)}});
+  Module* Reg16 = Reg->getModule({{"width",c->argInt(16)}});
+
+  c->getGlobal()->addModule(PE16);
+  c->getGlobal()->addModule(Const16);
+
+  //Create all the search and replace patterns. 
+  Namespace* patns = c->newNamespace("mapperpatterns");
+  
+   unordered_map<string,vector<string>> opmap({
+    {"unary",{"not","neg"}},
+    {"unaryReduce",{"andr","orr","xorr"}},
+    {"binary",{
+      "and","or","xor",
+      "dshl","dlshr","dashr",
+      "add","sub","mul",
+      "udiv","urem",
+      "sdiv","srem","smod"
+    }},
+    {"binaryReduce",{"eq",
+      "slt","sgt","sle","sge",
+      "ult","ugt","ule","uge"
+    }},
+    {"ternary",{"mux"}},
+  });
+ 
+
+  for (auto op : opmap["binary"]) {
+    Module* patternOp = patns->newModuleDecl(op,PE16->getType());
+    ModuleDef* pdef = patternOp->newModuleDef();
+      pdef->addInstance("inst",stdlib->getGenerator(op),{{"width",c->argInt(16)}});
+      pdef->connect("self.data.in","inst.in");
+      pdef->connect("self.data.out","inst.out");
+    patternOp->setDef(pdef);
+  }
+  
+  
+  //Search pattern for Const TODO probably could do this usng a simpler method
+  Module* patternConst = patns->newModuleDecl("const",Const16->getType());
+  ModuleDef* pdef = patternConst->newModuleDef();
+    pdef->addInstance("inst",stdlib->getGenerator("const"),{{"width",c->argInt(16)}},{{"value",c->argInt(13)}});
+    pdef->connect("self","inst"); //These are the same
+  patternConst->setDef(pdef);
+
+  //Search pattern for Reg TODO probably could do this usng a simpler method
+  Module* patternReg = patns->newModuleDecl("reg",Reg16->getType());
+  pdef = patternReg->newModuleDef();
+    Args regArgs({
+      {"width",c->argInt(16)},
+      {"en",c->argBool(false)},
+      {"clr",c->argBool(false)},
+      {"rst",c->argBool(false)}
+    });
+    pdef->addInstance("inst",stdlib->getGenerator("reg"),regArgs,{{"init",c->argInt(0)}});
+    pdef->connect("self","inst"); //These are the same
+  patternReg->setDef(pdef);
 
   Args aWidth({{"width",c->argInt(16)}});
-  ModuleDef* mappedDef = mapped->newModuleDef();
-  
-  mappedDef->addInstance("ioin",IO,aWidth,{{"mode",c->argString("i")}});
-  mappedDef->addInstance("ioout",IO,aWidth,{{"mode",c->argString("o")}});
-
   ModuleDef* mdef = m->getDef();
+  IOpaths iopaths;
+  getAllIOPaths(mdef->getInterface(), &iopaths);
+  Instance* pt = addPassthrough(c,mdef->getInterface(),"_self");
+  for (auto path : iopaths.IO16) {
+    string ioname = "io16in"+c->getUnique();
+    mdef->addInstance(ioname,IO,aWidth,{{"mode",c->argString("i")}});
+    path[0] = "in";
+    path.insert(path.begin(),"_self");
+    mdef->connect({ioname,"out"},path);
+  }
+  for (auto path : iopaths.IO16in) {
+    string ioname = "io16"+c->getUnique();
+    mdef->addInstance(ioname,IO,aWidth,{{"mode",c->argString("o")}});
+    path[0] = "in";
+    path.insert(path.begin(),"_self");
+    mdef->connect({ioname,"in"},path);
+  }
+  mdef->disconnect(mdef->getInterface());
+  inlineInstance(pt);
   
-  //Set to hold const inst names for now
-  unordered_set<string> consts;
-  
-  for (auto instmap : mdef->getInstances()) {
-    Instance* inst = instmap.second;
-    Generator* node = inst->getGeneratorRef();
-    if (node == stdlib->getGenerator("add")) {
-      Args configargs = Args({{"op",c->argString("add")}});
-      Args genargs = Args({{"width",c->argInt(16)},{"numin",c->argInt(2)}});
-      Instance* i = mappedDef->addInstance(inst);
-      i->replace(PE,genargs,configargs);
-      cout << i->toString() << endl;
-      cout << i->getModuleRef()->getName() << endl;
-    }
-    else if (node == stdlib->getGenerator("mul")) {
-      Args configargs = Args({{"op",c->argString("mul")}});
-      Args genargs = Args({{"width",c->argInt(16)},{"numin",c->argInt(2)}});
-      Instance* i = mappedDef->addInstance(inst);
-      i->replace(PE,genargs,configargs);
-    }
-    else if (node == stdlib->getGenerator("const")) {
-      Args configargs = inst->getConfigArgs();
-      Args genargs = Args({{"width",c->argInt(16)}});
-      Instance* i = mappedDef->addInstance(inst);
-      i->replace(Const,genargs,configargs);
-      consts.insert(instmap.first);
-    }
-    else { 
-      cout << "NYI for " << node->getNamespace()->getName() << "." << node->getName();
-      c->die(); 
-    }
+  cout << "MAR!!!" << endl;
+  for (auto op : opmap["binary"]) {
+    matchAndReplace(m,patns->getModule(op),PE16,{{"op",c->argString(op)}});
   }
 
-  for (auto con : mdef->getConnections() ) {
-    SelectPath pathA = toIOPath(con.first->getSelectPath(),consts);
-    SelectPath pathB = toIOPath(con.second->getSelectPath(),consts);
-    cout << "connecting: " << SelectPath2Str(pathA) << " to " << SelectPath2Str(pathB) << endl;
-    mappedDef->connect(pathA,pathB);
-  }
-  mapped->setDef(mappedDef);
-  return mapped;
+  matchAndReplace(m,patternConst,Const16,[](const Instance* matched) {
+    return matched->getConfigArgs();
+  });
+  matchAndReplace(m,patternReg,Reg16);
+  
+
 }
 
 

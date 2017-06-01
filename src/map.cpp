@@ -26,15 +26,15 @@ int main(int argc, char *argv[]){
   
   m->print();
   cout << "Trying to map" << endl;
-  Module* mapped = mapper(c,m,&err);
+  mapper(c,m,&err);
   if(err){
     cout << "failed mapping!" << endl;
     c->die();
   }
-  mapped->print();
+  m->print();
 
   cout << "Trying to save" << endl;
-  saveModule(mapped,argv[2],&err);
+  saveModule(m,argv[2],&err);
   if (err) c->die();
 
   deleteContext(c);

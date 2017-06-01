@@ -10,7 +10,7 @@ addons:
       - g++-4.9
 
 before_install:
-  - git clone https://github.com/rdaly525/coreir.git
+  - git clone -b dev https://github.com/rdaly525/coreir.git
   - export COREIRCONFIG="g++-4.9";
   - export COREIR=`pwd`/coreir
   - export LD_LIBRARY_PATH=`pwd`/coreir/lib:$LD_LIBRARY_PATH
