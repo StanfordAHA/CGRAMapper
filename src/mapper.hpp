@@ -16,14 +16,14 @@ typedef struct {
   vector<SelectPath> IO1in;
 } IOpaths;
 
-void getAllIOPaths(Wireable* w, IOpaths* paths) {
+void getAllIOPaths(Wireable* w, IOpaths& paths) {
   Type* t = w->getType();
   if (auto at = dyn_cast<ArrayType>(t)) {
     if (at->getLen()==16 && isa<BitType>(at->getElemType())) {
-      paths->IO16.push_back(w->getSelectPath());
+      paths.IO16.push_back(w->getSelectPath());
     }
     else if (at->getLen() == 16 && isa<BitInType>(at->getElemType())) {
-      paths->IO16in.push_back(w->getSelectPath());
+      paths.IO16in.push_back(w->getSelectPath());
     }
     else {
       for (auto sw : w->getSelects()) {
@@ -31,13 +31,18 @@ void getAllIOPaths(Wireable* w, IOpaths* paths) {
       }
     }
   }
+  else if (isa<BitType>(t)) {
+    paths.IO1.push_back(w->getSelectPath());
+  }
+  else if (isa<BitInType>(t)) {
+    paths.IO1in.push_back(w->getSelectPath());
+  }
   else {
     for (auto sw : w->getSelects()) {
       getAllIOPaths(sw.second,paths);
     }
   }
-
-
+  
 }
 
 //This will edit the module
@@ -87,6 +92,22 @@ void mapper(Context* c, Module* m, bool* err) {
   });
  
 
+  for (auto op : opmap["unary"]) {
+    Module* patternOp = patns->newModuleDecl(op,PE16->getType());
+    ModuleDef* pdef = patternOp->newModuleDef();
+      pdef->addInstance("inst",stdlib->getGenerator(op),{{"width",c->argInt(16)}});
+      pdef->connect("self.data.in.0","inst.in");
+      pdef->connect("self.data.out","inst.out");
+    patternOp->setDef(pdef);
+  }
+  for (auto op : opmap["unaryReduce"]) {
+    Module* patternOp = patns->newModuleDecl(op,PE16->getType());
+    ModuleDef* pdef = patternOp->newModuleDef();
+      pdef->addInstance("inst",stdlib->getGenerator(op),{{"width",c->argInt(16)}});
+      pdef->connect("self.data.in.0","inst.in");
+      pdef->connect("self.bit.out","inst.out");
+    patternOp->setDef(pdef);
+  }
   for (auto op : opmap["binary"]) {
     Module* patternOp = patns->newModuleDecl(op,PE16->getType());
     ModuleDef* pdef = patternOp->newModuleDef();
@@ -95,7 +116,23 @@ void mapper(Context* c, Module* m, bool* err) {
       pdef->connect("self.data.out","inst.out");
     patternOp->setDef(pdef);
   }
-  
+  for (auto op : opmap["binaryReduce"]) {
+    Module* patternOp = patns->newModuleDecl(op,PE16->getType());
+    ModuleDef* pdef = patternOp->newModuleDef();
+      pdef->addInstance("inst",stdlib->getGenerator(op),{{"width",c->argInt(16)}});
+      pdef->connect("self.data.in","inst.in");
+      pdef->connect("self.bit.out","inst.out");
+    patternOp->setDef(pdef);
+  }
+  for (auto op : opmap["ternary"]) {
+    Module* patternOp = patns->newModuleDecl(op,PE16->getType());
+    ModuleDef* pdef = patternOp->newModuleDef();
+      pdef->addInstance("inst",stdlib->getGenerator(op),{{"width",c->argInt(16)}});
+      pdef->connect("self.data.in","inst.in.data");
+      pdef->connect("self.bit.in.0","inst.in.bit");
+      pdef->connect("self.data.out","inst.out");
+    patternOp->setDef(pdef);
+  }
   
   //Search pattern for Const TODO probably could do this usng a simpler method
   Module* patternConst = patns->newModuleDecl("const",Const16->getType());
@@ -120,7 +157,7 @@ void mapper(Context* c, Module* m, bool* err) {
   Args aWidth({{"width",c->argInt(16)}});
   ModuleDef* mdef = m->getDef();
   IOpaths iopaths;
-  getAllIOPaths(mdef->getInterface(), &iopaths);
+  getAllIOPaths(mdef->getInterface(), iopaths);
   Instance* pt = addPassthrough(c,mdef->getInterface(),"_self");
   for (auto path : iopaths.IO16) {
     string ioname = "io16in"+c->getUnique();
@@ -136,12 +173,28 @@ void mapper(Context* c, Module* m, bool* err) {
     path.insert(path.begin(),"_self");
     mdef->connect({ioname,"in"},path);
   }
+  for (auto path : iopaths.IO1) {
+    string ioname = "io1in"+c->getUnique();
+    mdef->addInstance(ioname,IO,{{"width",c->argInt(1)}},{{"mode",c->argString("i")}});
+    path[0] = "in";
+    path.insert(path.begin(),"_self");
+    mdef->connect({ioname,"out"},path);
+  }
+  for (auto path : iopaths.IO1in) {
+    string ioname = "io1"+c->getUnique();
+    mdef->addInstance(ioname,IO,{{"width",c->argInt(1)}},{{"mode",c->argString("o")}});
+    path[0] = "in";
+    path.insert(path.begin(),"_self");
+    mdef->connect({ioname,"in"},path);
+  }
   mdef->disconnect(mdef->getInterface());
   inlineInstance(pt);
   
   cout << "MAR!!!" << endl;
-  for (auto op : opmap["binary"]) {
-    matchAndReplace(m,patns->getModule(op),PE16,{{"op",c->argString(op)}});
+  for (auto tmap : opmap) {
+    for (auto op : tmap.second) {
+      matchAndReplace(m,patns->getModule(op),PE16,{{"op",c->argString(op)}});
+    }
   }
 
   matchAndReplace(m,patternConst,Const16,[](const Instance* matched) {
