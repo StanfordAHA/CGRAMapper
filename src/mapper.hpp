@@ -69,16 +69,34 @@ void mapper(Context* c, Module* m, bool* err) {
   //Create all the search and replace patterns. 
   Namespace* patns = c->newNamespace("mapperpatterns");
   
-  //Search pattern for bop
-  vector<string> binops = {"add","mul"};
-  for (auto bop : binops) {
-    Module* patternBop = patns->newModuleDecl(bop,PE16->getType());
-    ModuleDef* pdef = patternBop->newModuleDef();
-      pdef->addInstance("inst",stdlib->getGenerator(bop),{{"width",c->argInt(16)}});
+   unordered_map<string,vector<string>> opmap({
+    {"unary",{"not","neg"}},
+    {"unaryReduce",{"andr","orr","xorr"}},
+    {"binary",{
+      "and","or","xor",
+      "dshl","dlshr","dashr",
+      "add","sub","mul",
+      "udiv","urem",
+      "sdiv","srem","smod"
+    }},
+    {"binaryReduce",{"eq",
+      "slt","sgt","sle","sge",
+      "ult","ugt","ule","uge"
+    }},
+    {"ternary",{"mux"}},
+  });
+ 
+
+  for (auto op : opmap["binary"]) {
+    Module* patternOp = patns->newModuleDecl(op,PE16->getType());
+    ModuleDef* pdef = patternOp->newModuleDef();
+      pdef->addInstance("inst",stdlib->getGenerator(op),{{"width",c->argInt(16)}});
       pdef->connect("self.data.in","inst.in");
       pdef->connect("self.data.out","inst.out");
-    patternBop->setDef(pdef);
+    patternOp->setDef(pdef);
   }
+  
+  
   //Search pattern for Const TODO probably could do this usng a simpler method
   Module* patternConst = patns->newModuleDecl("const",Const16->getType());
   ModuleDef* pdef = patternConst->newModuleDef();
@@ -122,9 +140,10 @@ void mapper(Context* c, Module* m, bool* err) {
   inlineInstance(pt);
   
   cout << "MAR!!!" << endl;
-  for (auto bop : binops) {
-    matchAndReplace(m,patns->getModule(bop),PE16,{{"op",c->argString(bop)}});
+  for (auto op : opmap["binary"]) {
+    matchAndReplace(m,patns->getModule(op),PE16,{{"op",c->argString(op)}});
   }
+
   matchAndReplace(m,patternConst,Const16,[](const Instance* matched) {
     return matched->getConfigArgs();
   });
