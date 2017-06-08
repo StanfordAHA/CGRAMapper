@@ -1,0 +1,1007 @@
+{
+  "namespaces": {
+    "_G": {
+      "modules": {
+        "DesignTarget": {
+          "def": {
+            "connections": [
+              [
+                [
+                  "lb_repeat_edge_2_stencil_update_stream$reg_2_2",
+                  "out"
+                ],
+                [
+                  "mul_711_712",
+                  "in",
+                  "0"
+                ]
+              ],
+              [
+                [
+                  "lb_repeat_edge_2_stencil_update_stream$reg_2_0",
+                  "out"
+                ],
+                [
+                  "mul_675_676",
+                  "in",
+                  "0"
+                ]
+              ],
+              [
+                [
+                  "lb_repeat_edge_2_stencil_update_stream$reg_1_2",
+                  "out"
+                ],
+                [
+                  "mul_705_706",
+                  "in",
+                  "0"
+                ]
+              ],
+              [
+                [
+                  "mul_669_670",
+                  "in",
+                  "0"
+                ],
+                [
+                  "lb_repeat_edge_2_stencil_update_stream$reg_1_0",
+                  "out"
+                ]
+              ],
+              [
+                [
+                  "mul_681_682",
+                  "in",
+                  "0"
+                ],
+                [
+                  "lb_repeat_edge_2_stencil_update_stream$reg_0_1",
+                  "out"
+                ]
+              ],
+              [
+                [
+                  "mul_663_664",
+                  "in",
+                  "0"
+                ],
+                [
+                  "lb_repeat_edge_2_stencil_update_stream$reg_0_0",
+                  "out"
+                ]
+              ],
+              [
+                [
+                  "lb_repeat_edge_2_stencil_update_stream$reg_2_0",
+                  "out"
+                ],
+                [
+                  "lb_repeat_edge_2_stencil_update_stream$reg_2_1",
+                  "in"
+                ]
+              ],
+              [
+                [
+                  "cnst_688",
+                  "out"
+                ],
+                [
+                  "mul_687_688",
+                  "in",
+                  "1"
+                ]
+              ],
+              [
+                [
+                  "mul_663_664",
+                  "in",
+                  "1"
+                ],
+                [
+                  "cnst_664",
+                  "out"
+                ]
+              ],
+              [
+                [
+                  "add_697_701",
+                  "in",
+                  "1"
+                ],
+                [
+                  "mul_699_700",
+                  "out"
+                ]
+              ],
+              [
+                [
+                  "mul_705_706",
+                  "out"
+                ],
+                [
+                  "add_703_707",
+                  "in",
+                  "1"
+                ]
+              ],
+              [
+                [
+                  "mul_681_682",
+                  "out"
+                ],
+                [
+                  "add_679_683",
+                  "in",
+                  "1"
+                ]
+              ],
+              [
+                [
+                  "cnst_700",
+                  "out"
+                ],
+                [
+                  "mul_699_700",
+                  "in",
+                  "1"
+                ]
+              ],
+              [
+                [
+                  "lb_repeat_edge_2_stencil_update_stream$reg_0_1",
+                  "out"
+                ],
+                [
+                  "lb_repeat_edge_2_stencil_update_stream$reg_0_2",
+                  "in"
+                ]
+              ],
+              [
+                [
+                  "add_667_671",
+                  "out"
+                ],
+                [
+                  "add_673_677",
+                  "in",
+                  "0"
+                ]
+              ],
+              [
+                [
+                  "add_703_707",
+                  "in",
+                  "0"
+                ],
+                [
+                  "add_697_701",
+                  "out"
+                ]
+              ],
+              [
+                [
+                  "mul_681_682",
+                  "in",
+                  "1"
+                ],
+                [
+                  "cnst_682",
+                  "out"
+                ]
+              ],
+              [
+                [
+                  "self",
+                  "in",
+                  "0"
+                ],
+                [
+                  "lb_repeat_edge_2_stencil_update_stream$reg_0_0",
+                  "in"
+                ]
+              ],
+              [
+                [
+                  "cnst_676",
+                  "out"
+                ],
+                [
+                  "mul_675_676",
+                  "in",
+                  "1"
+                ]
+              ],
+              [
+                [
+                  "add_673_677",
+                  "in",
+                  "1"
+                ],
+                [
+                  "mul_675_676",
+                  "out"
+                ]
+              ],
+              [
+                [
+                  "add_673_677",
+                  "out"
+                ],
+                [
+                  "add_679_683",
+                  "in",
+                  "0"
+                ]
+              ],
+              [
+                [
+                  "const_660",
+                  "out"
+                ],
+                [
+                  "add_661_665",
+                  "in",
+                  "0"
+                ]
+              ],
+              [
+                [
+                  "mul_663_664",
+                  "out"
+                ],
+                [
+                  "add_661_665",
+                  "in",
+                  "1"
+                ]
+              ],
+              [
+                [
+                  "add_709_713",
+                  "in",
+                  "1"
+                ],
+                [
+                  "mul_711_712",
+                  "out"
+                ]
+              ],
+              [
+                [
+                  "mul_693_694",
+                  "in",
+                  "0"
+                ],
+                [
+                  "lb_repeat_edge_2_stencil_update_stream$reg_2_1",
+                  "out"
+                ]
+              ],
+              [
+                [
+                  "add_709_713",
+                  "out"
+                ],
+                [
+                  "self",
+                  "out"
+                ]
+              ],
+              [
+                [
+                  "lb_repeat_edge_2_stencil_update_stream$reg_2_1",
+                  "out"
+                ],
+                [
+                  "lb_repeat_edge_2_stencil_update_stream$reg_2_2",
+                  "in"
+                ]
+              ],
+              [
+                [
+                  "lb_repeat_edge_2_stencil_update_stream$mem_2",
+                  "rdata"
+                ],
+                [
+                  "lb_repeat_edge_2_stencil_update_stream$reg_2_0",
+                  "in"
+                ]
+              ],
+              [
+                [
+                  "cnst_706",
+                  "out"
+                ],
+                [
+                  "mul_705_706",
+                  "in",
+                  "1"
+                ]
+              ],
+              [
+                [
+                  "add_685_689",
+                  "in",
+                  "0"
+                ],
+                [
+                  "add_679_683",
+                  "out"
+                ]
+              ],
+              [
+                [
+                  "cnst_694",
+                  "out"
+                ],
+                [
+                  "mul_693_694",
+                  "in",
+                  "1"
+                ]
+              ],
+              [
+                [
+                  "add_685_689",
+                  "out"
+                ],
+                [
+                  "add_691_695",
+                  "in",
+                  "0"
+                ]
+              ],
+              [
+                [
+                  "mul_699_700",
+                  "in",
+                  "0"
+                ],
+                [
+                  "lb_repeat_edge_2_stencil_update_stream$reg_0_2",
+                  "out"
+                ]
+              ],
+              [
+                [
+                  "mul_693_694",
+                  "out"
+                ],
+                [
+                  "add_691_695",
+                  "in",
+                  "1"
+                ]
+              ],
+              [
+                [
+                  "cnst_712",
+                  "out"
+                ],
+                [
+                  "mul_711_712",
+                  "in",
+                  "1"
+                ]
+              ],
+              [
+                [
+                  "add_697_701",
+                  "in",
+                  "0"
+                ],
+                [
+                  "add_691_695",
+                  "out"
+                ]
+              ],
+              [
+                [
+                  "self",
+                  "in",
+                  "0"
+                ],
+                [
+                  "lb_repeat_edge_2_stencil_update_stream$mem_1",
+                  "wdata"
+                ]
+              ],
+              [
+                [
+                  "add_709_713",
+                  "in",
+                  "0"
+                ],
+                [
+                  "add_703_707",
+                  "out"
+                ]
+              ],
+              [
+                [
+                  "lb_repeat_edge_2_stencil_update_stream$reg_0_0",
+                  "out"
+                ],
+                [
+                  "lb_repeat_edge_2_stencil_update_stream$reg_0_1",
+                  "in"
+                ]
+              ],
+              [
+                [
+                  "lb_repeat_edge_2_stencil_update_stream$reg_1_1",
+                  "out"
+                ],
+                [
+                  "mul_687_688",
+                  "in",
+                  "0"
+                ]
+              ],
+              [
+                [
+                  "add_685_689",
+                  "in",
+                  "1"
+                ],
+                [
+                  "mul_687_688",
+                  "out"
+                ]
+              ],
+              [
+                [
+                  "lb_repeat_edge_2_stencil_update_stream$mem_1",
+                  "rdata"
+                ],
+                [
+                  "lb_repeat_edge_2_stencil_update_stream$mem_2",
+                  "wdata"
+                ]
+              ],
+              [
+                [
+                  "cnst_670",
+                  "out"
+                ],
+                [
+                  "mul_669_670",
+                  "in",
+                  "1"
+                ]
+              ],
+              [
+                [
+                  "add_661_665",
+                  "out"
+                ],
+                [
+                  "add_667_671",
+                  "in",
+                  "0"
+                ]
+              ],
+              [
+                [
+                  "lb_repeat_edge_2_stencil_update_stream$mem_1",
+                  "rdata"
+                ],
+                [
+                  "lb_repeat_edge_2_stencil_update_stream$reg_1_0",
+                  "in"
+                ]
+              ],
+              [
+                [
+                  "mul_669_670",
+                  "out"
+                ],
+                [
+                  "add_667_671",
+                  "in",
+                  "1"
+                ]
+              ],
+              [
+                [
+                  "lb_repeat_edge_2_stencil_update_stream$reg_1_0",
+                  "out"
+                ],
+                [
+                  "lb_repeat_edge_2_stencil_update_stream$reg_1_1",
+                  "in"
+                ]
+              ],
+              [
+                [
+                  "lb_repeat_edge_2_stencil_update_stream$reg_1_1",
+                  "out"
+                ],
+                [
+                  "lb_repeat_edge_2_stencil_update_stream$reg_1_2",
+                  "in"
+                ]
+              ]
+            ],
+            "instances": {
+              "add_661_665": {
+                "genargs": {
+                  "width": 16
+                },
+                "generatorref": [
+                  "stdlib",
+                  "add"
+                ]
+              },
+              "add_667_671": {
+                "genargs": {
+                  "width": 16
+                },
+                "generatorref": [
+                  "stdlib",
+                  "add"
+                ]
+              },
+              "add_673_677": {
+                "genargs": {
+                  "width": 16
+                },
+                "generatorref": [
+                  "stdlib",
+                  "add"
+                ]
+              },
+              "add_679_683": {
+                "genargs": {
+                  "width": 16
+                },
+                "generatorref": [
+                  "stdlib",
+                  "add"
+                ]
+              },
+              "add_685_689": {
+                "genargs": {
+                  "width": 16
+                },
+                "generatorref": [
+                  "stdlib",
+                  "add"
+                ]
+              },
+              "add_691_695": {
+                "genargs": {
+                  "width": 16
+                },
+                "generatorref": [
+                  "stdlib",
+                  "add"
+                ]
+              },
+              "add_697_701": {
+                "genargs": {
+                  "width": 16
+                },
+                "generatorref": [
+                  "stdlib",
+                  "add"
+                ]
+              },
+              "add_703_707": {
+                "genargs": {
+                  "width": 16
+                },
+                "generatorref": [
+                  "stdlib",
+                  "add"
+                ]
+              },
+              "add_709_713": {
+                "genargs": {
+                  "width": 16
+                },
+                "generatorref": [
+                  "stdlib",
+                  "add"
+                ]
+              },
+              "cnst_664": {
+                "configargs": {
+                  "value": 999
+                },
+                "genargs": {
+                  "width": 16
+                },
+                "generatorref": [
+                  "stdlib",
+                  "const"
+                ]
+              },
+              "cnst_670": {
+                "configargs": {
+                  "value": 999
+                },
+                "genargs": {
+                  "width": 16
+                },
+                "generatorref": [
+                  "stdlib",
+                  "const"
+                ]
+              },
+              "cnst_676": {
+                "configargs": {
+                  "value": 999
+                },
+                "genargs": {
+                  "width": 16
+                },
+                "generatorref": [
+                  "stdlib",
+                  "const"
+                ]
+              },
+              "cnst_682": {
+                "configargs": {
+                  "value": 999
+                },
+                "genargs": {
+                  "width": 16
+                },
+                "generatorref": [
+                  "stdlib",
+                  "const"
+                ]
+              },
+              "cnst_688": {
+                "configargs": {
+                  "value": 999
+                },
+                "genargs": {
+                  "width": 16
+                },
+                "generatorref": [
+                  "stdlib",
+                  "const"
+                ]
+              },
+              "cnst_694": {
+                "configargs": {
+                  "value": 999
+                },
+                "genargs": {
+                  "width": 16
+                },
+                "generatorref": [
+                  "stdlib",
+                  "const"
+                ]
+              },
+              "cnst_700": {
+                "configargs": {
+                  "value": 999
+                },
+                "genargs": {
+                  "width": 16
+                },
+                "generatorref": [
+                  "stdlib",
+                  "const"
+                ]
+              },
+              "cnst_706": {
+                "configargs": {
+                  "value": 999
+                },
+                "genargs": {
+                  "width": 16
+                },
+                "generatorref": [
+                  "stdlib",
+                  "const"
+                ]
+              },
+              "cnst_712": {
+                "configargs": {
+                  "value": 999
+                },
+                "genargs": {
+                  "width": 16
+                },
+                "generatorref": [
+                  "stdlib",
+                  "const"
+                ]
+              },
+              "const_660": {
+                "configargs": {
+                  "value": 0
+                },
+                "genargs": {
+                  "width": 16
+                },
+                "generatorref": [
+                  "stdlib",
+                  "const"
+                ]
+              },
+              "lb_repeat_edge_2_stencil_update_stream$mem_1": {
+                "configargs": {
+                  "mode": "o"
+                },
+                "genargs": {
+                  "depth": -1,
+                  "width": 16
+                },
+                "generatorref": [
+                  "cgralib",
+                  "Mem"
+                ]
+              },
+              "lb_repeat_edge_2_stencil_update_stream$mem_2": {
+                "configargs": {
+                  "mode": "o"
+                },
+                "genargs": {
+                  "depth": -1,
+                  "width": 16
+                },
+                "generatorref": [
+                  "cgralib",
+                  "Mem"
+                ]
+              },
+              "lb_repeat_edge_2_stencil_update_stream$reg_0_0": {
+                "genargs": {
+                  "width": 16
+                },
+                "generatorref": [
+                  "cgralib",
+                  "Reg"
+                ]
+              },
+              "lb_repeat_edge_2_stencil_update_stream$reg_0_1": {
+                "genargs": {
+                  "width": 16
+                },
+                "generatorref": [
+                  "cgralib",
+                  "Reg"
+                ]
+              },
+              "lb_repeat_edge_2_stencil_update_stream$reg_0_2": {
+                "genargs": {
+                  "width": 16
+                },
+                "generatorref": [
+                  "cgralib",
+                  "Reg"
+                ]
+              },
+              "lb_repeat_edge_2_stencil_update_stream$reg_1_0": {
+                "genargs": {
+                  "width": 16
+                },
+                "generatorref": [
+                  "cgralib",
+                  "Reg"
+                ]
+              },
+              "lb_repeat_edge_2_stencil_update_stream$reg_1_1": {
+                "genargs": {
+                  "width": 16
+                },
+                "generatorref": [
+                  "cgralib",
+                  "Reg"
+                ]
+              },
+              "lb_repeat_edge_2_stencil_update_stream$reg_1_2": {
+                "genargs": {
+                  "width": 16
+                },
+                "generatorref": [
+                  "cgralib",
+                  "Reg"
+                ]
+              },
+              "lb_repeat_edge_2_stencil_update_stream$reg_2_0": {
+                "genargs": {
+                  "width": 16
+                },
+                "generatorref": [
+                  "cgralib",
+                  "Reg"
+                ]
+              },
+              "lb_repeat_edge_2_stencil_update_stream$reg_2_1": {
+                "genargs": {
+                  "width": 16
+                },
+                "generatorref": [
+                  "cgralib",
+                  "Reg"
+                ]
+              },
+              "lb_repeat_edge_2_stencil_update_stream$reg_2_2": {
+                "genargs": {
+                  "width": 16
+                },
+                "generatorref": [
+                  "cgralib",
+                  "Reg"
+                ]
+              },
+              "mul_663_664": {
+                "genargs": {
+                  "width": 16
+                },
+                "generatorref": [
+                  "stdlib",
+                  "mul"
+                ]
+              },
+              "mul_669_670": {
+                "genargs": {
+                  "width": 16
+                },
+                "generatorref": [
+                  "stdlib",
+                  "mul"
+                ]
+              },
+              "mul_675_676": {
+                "genargs": {
+                  "width": 16
+                },
+                "generatorref": [
+                  "stdlib",
+                  "mul"
+                ]
+              },
+              "mul_681_682": {
+                "genargs": {
+                  "width": 16
+                },
+                "generatorref": [
+                  "stdlib",
+                  "mul"
+                ]
+              },
+              "mul_687_688": {
+                "genargs": {
+                  "width": 16
+                },
+                "generatorref": [
+                  "stdlib",
+                  "mul"
+                ]
+              },
+              "mul_693_694": {
+                "genargs": {
+                  "width": 16
+                },
+                "generatorref": [
+                  "stdlib",
+                  "mul"
+                ]
+              },
+              "mul_699_700": {
+                "genargs": {
+                  "width": 16
+                },
+                "generatorref": [
+                  "stdlib",
+                  "mul"
+                ]
+              },
+              "mul_705_706": {
+                "genargs": {
+                  "width": 16
+                },
+                "generatorref": [
+                  "stdlib",
+                  "mul"
+                ]
+              },
+              "mul_711_712": {
+                "genargs": {
+                  "width": 16
+                },
+                "generatorref": [
+                  "stdlib",
+                  "mul"
+                ]
+              }
+            }
+          },
+          "type": [
+            "Record",
+            [
+              [
+                "in",
+                [
+                  "Array",
+                  1,
+                  [
+                    "Array",
+                    16,
+                    "BitIn"
+                  ]
+                ]
+              ],
+              [
+                "out",
+                [
+                  "Array",
+                  16,
+                  "Bit"
+                ]
+              ]
+            ]
+          ]
+        },
+        "PLACEHOLDER": {
+          "type": [
+            "Record",
+            [
+              [
+                "in",
+                [
+                  "Array",
+                  16,
+                  "BitIn"
+                ]
+              ],
+              [
+                "out",
+                [
+                  "Array",
+                  16,
+                  "Bit"
+                ]
+              ]
+            ]
+          ]
+        },
+        "linebuffer33": {
+          "def": null,
+          "type": [
+            "Record",
+            [
+              [
+                "in",
+                [
+                  "Array",
+                  16,
+                  "BitIn"
+                ]
+              ],
+              [
+                "out",
+                [
+                  "Array",
+                  3,
+                  [
+                    "Array",
+                    3,
+                    [
+                      "Array",
+                      16,
+                      "Bit"
+                    ]
+                  ]
+                ]
+              ]
+            ]
+          ]
+        }
+      }
+    }
+  },
+  "top": [
+    "_G",
+    "DesignTarget"
+  ]
+}
