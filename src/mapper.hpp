@@ -190,7 +190,6 @@ void mapper(Context* c, Module* m, bool* err) {
   mdef->disconnect(mdef->getInterface());
   inlineInstance(pt);
   
-  cout << "MAR!!!" << endl;
   for (auto tmap : opmap) {
     for (auto op : tmap.second) {
       matchAndReplace(m,patns->getModule(op),PE16,{{"op",c->argString(op)}});
