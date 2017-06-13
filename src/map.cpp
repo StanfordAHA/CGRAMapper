@@ -24,14 +24,12 @@ int main(int argc, char *argv[]){
   Module* m = loadModule(c,argv[1],&err);
   if(err){c->die();}
   
-  m->print();
   cout << "Trying to map" << endl;
   mapper(c,m,&err);
   if(err){
     cout << "failed mapping!" << endl;
     c->die();
   }
-  m->print();
 
   cout << "Trying to save" << endl;
   saveModule(m,argv[2],&err);
@@ -45,6 +43,5 @@ int main(int argc, char *argv[]){
   CoreIRLoadLibrary_cgralib(c);
   m = loadModule(c,argv[2],&err);
   if (err) c->die();
-  m->print();
   return 0;
 }

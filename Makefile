@@ -4,6 +4,7 @@ all: travis
 test: install
 	./bin/map examples/caleb_example2.json _mapped.json
 	./bin/map examples/conv.json _conv_mapped.json
+	./bin/map examples/caleb_simplemem.json _simplemem.json
 
 .PHONY: install
 install:
