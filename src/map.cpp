@@ -14,37 +14,46 @@ int main(int argc, char *argv[]){
   CoreIRLoadLibrary_stdlib(c);
   CoreIRLoadLibrary_cgralib(c);
 
-  if(argc!=3){
-    cout << "usage: mapper premapped.json mapped.json" << endl;
+  bool debug = false;
+  string premap;
+  string postmap;
+  if (argc >= 3 && argc <=4) {
+    premap = argv[1];
+    postmap = argv[2];
+    if (argc==4) debug = true;
+  }
+  else {
+    cout << "usage: mapper premapped.json mapped.json <debug>" << endl;
     return 1;
   }
 
   bool err = false;
-  cout << "Loading " << argv[1] << endl;
-  Module* m = loadModule(c,argv[1],&err);
+  cout << "Loading " << premap << endl;
+  Module* m = loadModule(c,premap,&err);
   if(err){c->die();}
   
-  m->print();
   cout << "Trying to map" << endl;
   mapper(c,m,&err);
   if(err){
     cout << "failed mapping!" << endl;
     c->die();
   }
-  m->print();
 
   cout << "Trying to save" << endl;
-  saveModule(m,argv[2],&err);
+  saveModule(m,postmap,&err);
   if (err) c->die();
 
   deleteContext(c);
 
-  cout << "Trying to Load" << endl;
-  c = newContext();
-  CoreIRLoadLibrary_stdlib(c);
-  CoreIRLoadLibrary_cgralib(c);
-  m = loadModule(c,argv[2],&err);
-  if (err) c->die();
-  m->print();
+  if (debug) {
+    cout << "Trying to Load" << endl;
+    c = newContext();
+    CoreIRLoadLibrary_stdlib(c);
+    CoreIRLoadLibrary_cgralib(c);
+    m = loadModule(c,argv[2],&err);
+    if (err) c->die();
+    m->print();
+    deleteContext(c);
+  }
   return 0;
 }
