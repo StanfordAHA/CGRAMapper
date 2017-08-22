@@ -5,6 +5,8 @@ test: install
 	./bin/map examples/caleb_example2.json _mapped.json
 	./bin/map examples/conv.json _conv_mapped.json
 	./bin/map examples/caleb_simplemem.json _simplemem.json
+	cd tests
+	pytest --libs cgralib --files _mapped.json _conv_mapped.json _simplemem.json
 
 .PHONY: install
 install:
@@ -13,8 +15,8 @@ install:
 .PHONY: clean
 clean:
 	$(MAKE) -C src clean
-	-rm bin/*
-	-rm _*.json
+	-rm -f bin/*
+	-rm -f _*.json
 
 .PHONY: travis
 travis:
