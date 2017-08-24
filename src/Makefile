@@ -8,7 +8,7 @@ CXXFLAGS = -std=c++11  -Wall  -fPIC -g
 
 INCS = -I$(COREIR)/include
 LPATH = -L$(COREIR)/lib
-LIBS = -Wl,-rpath,$(COREIR)/lib -lcoreir-cgralib -lcoreir-stdlib -lcoreir-passes -lcoreir
+LIBS = -Wl,-rpath,$(COREIR)/lib -lcoreir-cgralib -lcoreir
 
 all: build/map
 	cp build/map ../bin/.

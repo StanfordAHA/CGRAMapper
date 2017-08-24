@@ -2,8 +2,7 @@
 #define MAPPER_HPP_
 
 #include "coreir.h"
-#include "coreir-lib/stdlib.h"
-#include  <unordered_set>
+#include "coreir-passes/transform/matchandreplace.h"
 
 using namespace std;
 
@@ -54,7 +53,7 @@ void mapper(Context* c, Module* m, bool* err) {
     c->error(e);
   } 
 
-  Namespace* stdlib = c->getNamespace("stdlib");
+  Namespace* coreir = c->getNamespace("coreir");
 
 
   Generator* PE = c->getNamespace("cgralib")->getGenerator("PE");
@@ -64,12 +63,14 @@ void mapper(Context* c, Module* m, bool* err) {
   //Generator* Mem = c->getNamespace("cgralib")->getGenerator("Mem");
   
   //PE replacement module:
-  Module* PE16 = PE->getModule({{"width",c->argInt(16)},{"numin",c->argInt(2)}});
-  Module* Const16 = Const->getModule({{"width",c->argInt(16)}});
-  Module* Reg16 = Reg->getModule({{"width",c->argInt(16)}});
-
-  c->getGlobal()->addModule(PE16);
-  c->getGlobal()->addModule(Const16);
+  Args PEGenArgs = {{"width",c->argInt(16)},{"numin",c->argInt(2)}};
+  Type* PEType = PE->getTypeGen()->getType(PEGenArgs);
+  
+  Args ConstGenArgs = {{"width",c->argInt(16)}};
+  Type* ConstType = Const->getTypeGen()->getType(ConstGenArgs);
+  
+  Args RegGenArgs = {{"width",c->argInt(16)}};
+  Type* RegType = Reg->getTypeGen()->getType(RegGenArgs);
 
   //Create all the search and replace patterns. 
   Namespace* patns = c->newNamespace("mapperpatterns");
@@ -91,58 +92,62 @@ void mapper(Context* c, Module* m, bool* err) {
     {"ternary",{"mux"}},
   });
  
-
   for (auto op : opmap["unary"]) {
-    Module* patternOp = patns->newModuleDecl(op,PE16->getType());
+    Module* patternOp = patns->newModuleDecl(op,PEType);
     ModuleDef* pdef = patternOp->newModuleDef();
-      pdef->addInstance("inst",stdlib->getGenerator(op),{{"width",c->argInt(16)}});
+      pdef->addInstance("inst",coreir->getGenerator(op),{{"width",c->argInt(16)}});
       pdef->connect("self.data.in.0","inst.in");
       pdef->connect("self.data.out","inst.out");
     patternOp->setDef(pdef);
   }
   for (auto op : opmap["unaryReduce"]) {
-    Module* patternOp = patns->newModuleDecl(op,PE16->getType());
+    Module* patternOp = patns->newModuleDecl(op,PEType);
     ModuleDef* pdef = patternOp->newModuleDef();
-      pdef->addInstance("inst",stdlib->getGenerator(op),{{"width",c->argInt(16)}});
+      pdef->addInstance("inst",coreir->getGenerator(op),{{"width",c->argInt(16)}});
       pdef->connect("self.data.in.0","inst.in");
       pdef->connect("self.bit.out","inst.out");
     patternOp->setDef(pdef);
   }
   for (auto op : opmap["binary"]) {
-    Module* patternOp = patns->newModuleDecl(op,PE16->getType());
+    Module* patternOp = patns->newModuleDecl(op,PEType);
     ModuleDef* pdef = patternOp->newModuleDef();
-      pdef->addInstance("inst",stdlib->getGenerator(op),{{"width",c->argInt(16)}});
-      pdef->connect("self.data.in","inst.in");
+      pdef->addInstance("inst",coreir->getGenerator(op),{{"width",c->argInt(16)}});
+      pdef->connect("self.data.in.0","inst.in0");
+      pdef->connect("self.data.in.1","inst.in1");
       pdef->connect("self.data.out","inst.out");
     patternOp->setDef(pdef);
   }
   for (auto op : opmap["binaryReduce"]) {
-    Module* patternOp = patns->newModuleDecl(op,PE16->getType());
+    Module* patternOp = patns->newModuleDecl(op,PEType);
     ModuleDef* pdef = patternOp->newModuleDef();
-      pdef->addInstance("inst",stdlib->getGenerator(op),{{"width",c->argInt(16)}});
-      pdef->connect("self.data.in","inst.in");
+      pdef->addInstance("inst",coreir->getGenerator(op),{{"width",c->argInt(16)}});
+      pdef->connect("self.data.in.0","inst.in0");
+      pdef->connect("self.data.in.1","inst.in1");
       pdef->connect("self.bit.out","inst.out");
     patternOp->setDef(pdef);
   }
   for (auto op : opmap["ternary"]) {
-    Module* patternOp = patns->newModuleDecl(op,PE16->getType());
+    Module* patternOp = patns->newModuleDecl(op,PEType);
     ModuleDef* pdef = patternOp->newModuleDef();
-      pdef->addInstance("inst",stdlib->getGenerator(op),{{"width",c->argInt(16)}});
-      pdef->connect("self.data.in","inst.in.data");
-      pdef->connect("self.bit.in.0","inst.in.bit");
+      pdef->addInstance("inst",coreir->getGenerator(op),{{"width",c->argInt(16)}});
+      pdef->connect("self.data.in.0","inst.in0");
+      pdef->connect("self.data.in.1","inst.in1");
+      pdef->connect("self.bit.in.0","inst.sel");
       pdef->connect("self.data.out","inst.out");
     patternOp->setDef(pdef);
   }
   
+  cout << "Added PE Passes!!" << endl;
   //Search pattern for Const TODO probably could do this usng a simpler method
-  Module* patternConst = patns->newModuleDecl("const",Const16->getType());
+  Module* patternConst = patns->newModuleDecl("const",ConstType);
   ModuleDef* pdef = patternConst->newModuleDef();
-    pdef->addInstance("inst",stdlib->getGenerator("const"),{{"width",c->argInt(16)}},{{"value",c->argInt(13)}});
+    pdef->addInstance("inst",coreir->getGenerator("const"),{{"width",c->argInt(16)}},{{"value",c->argInt(13)}});
     pdef->connect("self","inst"); //These are the same
   patternConst->setDef(pdef);
+  cout << "Added Cons Passes!!" << endl;
 
   //Search pattern for Reg TODO probably could do this usng a simpler method
-  Module* patternReg = patns->newModuleDecl("reg",Reg16->getType());
+  Module* patternReg = patns->newModuleDecl("reg",RegType);
   pdef = patternReg->newModuleDef();
     Args regArgs({
       {"width",c->argInt(16)},
@@ -150,15 +155,17 @@ void mapper(Context* c, Module* m, bool* err) {
       {"clr",c->argBool(false)},
       {"rst",c->argBool(false)}
     });
-    pdef->addInstance("inst",stdlib->getGenerator("reg"),regArgs,{{"init",c->argInt(0)}});
-    pdef->connect("self","inst"); //These are the same
+    pdef->addInstance("inst",coreir->getGenerator("reg"),regArgs,{{"init",c->argInt(0)}});
+    pdef->connect("self.in","inst.in"); 
+    pdef->connect("self.out","inst.out"); 
   patternReg->setDef(pdef);
+  cout << "Added Reg Passes!!" << endl;
 
   Args aWidth({{"width",c->argInt(16)}});
   ModuleDef* mdef = m->getDef();
   IOpaths iopaths;
   getAllIOPaths(mdef->getInterface(), iopaths);
-  Instance* pt = addPassthrough(c,mdef->getInterface(),"_self");
+  Instance* pt = addPassthrough(mdef->getInterface(),"_self");
   for (auto path : iopaths.IO16) {
     string ioname = "io16in"+c->getUnique();
     mdef->addInstance(ioname,IO,aWidth,{{"mode",c->argString("i")}});
@@ -190,18 +197,31 @@ void mapper(Context* c, Module* m, bool* err) {
   mdef->disconnect(mdef->getInterface());
   inlineInstance(pt);
   
+  vector<string> toRun;
   for (auto tmap : opmap) {
     for (auto op : tmap.second) {
-      matchAndReplace(m,patns->getModule(op),PE16,{{"op",c->argString(op)}});
+      Passes::MatchAndReplace::Opts opts;
+      opts.configargs = {{"op",c->argString(op)}};
+      opts.genargs = PEGenArgs;
+      c->addPass(new Passes::MatchAndReplace(op,patns->getModule(op),PE,opts));
+      toRun.push_back(op);
     }
   }
-
-  matchAndReplace(m,patternConst,Const16,[](const Instance* matched) {
-    return matched->getConfigArgs();
-  });
-  matchAndReplace(m,patternReg,Reg16);
   
+  Passes::MatchAndReplace::Opts copts;
+  copts.genargs = ConstGenArgs;
+  copts.getConfigArgs = [](const vector<Instance*>& matches) {
+    return matches[0]->getConfigArgs();
+  };
+  c->addPass(new Passes::MatchAndReplace("const",patternConst,Const,copts));
 
+  Passes::MatchAndReplace::Opts ropts;
+  ropts.genargs = RegGenArgs;
+  c->addPass(new Passes::MatchAndReplace("reg",patternReg,Reg,ropts));
+  cout << "Added all passes!!" << endl;
+  toRun.push_back("const");
+  toRun.push_back("reg");
+  c->runPasses(toRun,{"global","mapperpatterns"});
 }
 
 
