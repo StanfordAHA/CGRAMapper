@@ -12,8 +12,7 @@ INCS=-I$(COREIR)/include
 LPATH=-L$(COREIR)/lib
 LIBS=-Wl,-rpath,$(COREIR)/lib -lcoreir-cgralib -lcoreir
 
-
-TEST_FILES=$(wildcard examples/*.json)
+TEST_FILES=$(wildcard examples/[^_]*.json)
 MAPPED_FILES=$(patsubst examples/%, mapped/%, $(TEST_FILES))
 
 all: $(BIN)
@@ -26,9 +25,6 @@ build/%.o: src/%.cpp
 	mkdir -p build
 	$(CXX) $(CXXFLAGS) $(INCS) -c $^ -o $@
 
-
-TESTS = $(wildcard [^_]*.json)
-
 .PHONY: test
 test: $(MAPPED_FILES)
 	pytest --libs cgralib --files $(MAPPED_FILES) -- tests
@@ -39,7 +35,10 @@ $(MAPPED_FILES): $(BIN)
 	$(BIN) examples/$(@F) $(@)
 
 .PHONY: travis
-travis: all test
+travis:
+	$(MAKE) clean
+	$(MAKE) all
+	$(MAKE) test
 
 .PHONY: clean
 clean:
@@ -47,7 +46,3 @@ clean:
 	-rm -f build/*
 	-rm -f mapped/*
 
-.PHONY: travis
-travis:
-	$(MAKE) clean
-	$(MAKE) test
