@@ -221,7 +221,7 @@ void mapper(Context* c, Module* m, bool* err) {
   cout << "Added all passes!!" << endl;
   toRun.push_back("const");
   toRun.push_back("reg");
-  c->runPasses(toRun,{"_G","mapperpatterns"});
+  c->runPasses(toRun,{"global","mapperpatterns"});
 }
 
 
