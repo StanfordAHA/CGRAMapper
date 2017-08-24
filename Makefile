@@ -27,9 +27,12 @@ build/%.o: src/%.cpp
 	$(CXX) $(CXXFLAGS) $(INCS) -c $^ -o $@
 
 
+TESTS = $(wildcard [^_]*.json)
+
 .PHONY: test
 test: $(MAPPED_FILES)
 	pytest --libs cgralib --files $(MAPPED_FILES) -- tests
+
 
 $(MAPPED_FILES): $(BIN)
 	mkdir -p mapped
@@ -44,3 +47,7 @@ clean:
 	-rm -f build/*
 	-rm -f mapped/*
 
+.PHONY: travis
+travis:
+	$(MAKE) clean
+	$(MAKE) test
