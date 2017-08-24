@@ -27,8 +27,10 @@ build/%.o: src/%.cpp
 
 .PHONY: test
 test: $(MAPPED_FILES)
-	pytest --libs cgralib --files $(MAPPED_FILES) -- tests
 
+.PHONY: pytest
+pytest: test
+	pytest --libs cgralib --files $(MAPPED_FILES) -- tests
 
 $(MAPPED_FILES): $(BIN)
 	mkdir -p mapped
@@ -39,6 +41,7 @@ travis:
 	$(MAKE) clean
 	$(MAKE) all
 	$(MAKE) test
+	$(MAKE) pytest
 
 .PHONY: clean
 clean:
