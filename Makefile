@@ -1,10 +1,13 @@
 all: travis 
 
+TESTS = $(wildcard [^_]*.json)
+
 .PHONY: test
 test: install
-	#./bin/map examples/caleb_example2.json _mapped.json
-	#./bin/map examples/conv.json _conv_mapped.json
-	./bin/map examples/add4.json _add4.json
+	$(MAKE)
+
+mapped/%.json: examples/%.json
+	./bin/map $< mapped/$*_mapped.json
 
 .PHONY: install
 install:
@@ -20,3 +23,5 @@ clean:
 travis:
 	$(MAKE) clean
 	$(MAKE) test
+
+
