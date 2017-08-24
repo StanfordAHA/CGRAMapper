@@ -1,0 +1,53 @@
+{
+  "namespaces": {
+    "global": {
+      "modules": {
+        "DesignTop": {
+          "connections": [
+            [
+              "self.in.0",
+              "ult_147_148.in1"
+            ],
+            [
+              "ult_147_148.in0",
+              "const15_.out"
+            ]
+          ],
+          "instances": {
+            "const15_": {
+              "configargs": {
+                "value": 15
+              },
+              "genargs": {
+                "width": 16
+              },
+              "genref": "coreir.const"
+            },
+            "ult_147_148": {
+              "genargs": {
+                "width": 16
+              },
+              "genref": "coreir.ult"
+            }
+          },
+          "type": [
+            "Record",
+            {
+              "in": [
+                "Array",
+                1,
+                [
+                  "Array",
+                  16,
+                  "BitIn"
+                ]
+              ],
+              "out": "Bit"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "top": "global.DesignTop"
+}
