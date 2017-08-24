@@ -1,22 +1,46 @@
-all: travis 
+CXX?=g++
+ifeq ($(COREIRCONFIG),g++-4.9)
+CXX=g++-4.9
+endif
+CXXFLAGS=-std=c++11 -Wall -fPIC -g
+
+SRC=$(wildcard src/*.cpp)
+OBJ=$(patsubst src/%.cpp, build/%.o, $(SRC))
+BIN=./bin/map
+
+INCS=-I$(COREIR)/include
+LPATH=-L$(COREIR)/lib
+LIBS=-Wl,-rpath,$(COREIR)/lib -lcoreir-cgralib -lcoreir
+
+
+TEST_FILES=$(wildcard examples/*.json)
+MAPPED_FILES=$(patsubst examples/%, mapped/%, $(TEST_FILES))
+
+all: $(BIN)
+
+$(BIN): $(OBJ)
+	mkdir -p bin
+	$(CXX) $(CXXFLAGS) $(INCS) -o $@ $^ $(LPATH) $(LIBS)
+
+build/%.o: src/%.cpp 
+	mkdir -p build
+	$(CXX) $(CXXFLAGS) $(INCS) -c $^ -o $@
+
 
 .PHONY: test
-test: install
-	#./bin/map examples/caleb_example2.json _mapped.json
-	#./bin/map examples/conv.json _conv_mapped.json
-	./bin/map examples/add4.json _add4.json
+test: $(MAPPED_FILES)
+	pytest --libs cgralib --files $(MAPPED_FILES) -- tests
 
-.PHONY: install
-install:
-	$(MAKE) -C src 
+$(MAPPED_FILES): $(BIN)
+	mkdir -p mapped
+	$(BIN) examples/$(@F) $(@)
+
+.PHONY: travis
+travis: all test
 
 .PHONY: clean
 clean:
-	$(MAKE) -C src clean
-	-rm bin/*
-	-rm _*.json
+	-rm -f bin/*
+	-rm -f build/*
+	-rm -f mapped/*
 
-.PHONY: travis
-travis:
-	$(MAKE) clean
-	$(MAKE) test
