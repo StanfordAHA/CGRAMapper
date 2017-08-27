@@ -1,9 +1,11 @@
 #include "coreir.h"
 
 #include "coreir-lib/cgralib.h"
+#include "coreir-lib/common.h"
 
 #include "passes/verifycanmap.h"
 #include "passes/opsubstitution.h"
+#include "passes/bitop2lut.h"
 #include "coreir-passes/analysis/coreirjson.h"
 
 #include <fstream>
@@ -15,6 +17,7 @@ int main(int argc, char *argv[]){
   Context* c = newContext();
   
   CoreIRLoadLibrary_cgralib(c);
+  CoreIRLoadLibrary_common(c);
 
   string premap;
   string postmap;
@@ -40,6 +43,7 @@ int main(int argc, char *argv[]){
       cgenmap.second->addDefaultGenArgs({{"width",c->argInt(16)}});
     }
   }
+  c->getGenerator("common.lutN")->addDefaultGenArgs({{"N",c->argInt(3)}});
 
   
   c->runPasses({"rungenerators","verifyfullyconnected-noclkrst","removebulkconnections","flattentypes"});
@@ -52,7 +56,8 @@ int main(int argc, char *argv[]){
 
   //Pre-Technolog Mapping steps
   c->addPass(new MapperPasses::OpSubstitution);
-  c->runPasses({"opsubstitution"});
+  c->addPass(new MapperPasses::BitOp2Lut);
+  c->runPasses({"opsubstitution","bitop2lut"});
 
 
 
