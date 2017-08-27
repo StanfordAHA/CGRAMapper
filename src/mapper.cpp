@@ -1,7 +1,10 @@
 #include "coreir.h"
-#include "mapper.hpp"
+
 #include "coreir-lib/cgralib.h"
+
+#include "passes/verifycanmap.h"
 #include "coreir-passes/analysis/coreirjson.h"
+
 #include <fstream>
 
 using namespace CoreIR;
@@ -30,14 +33,17 @@ int main(int argc, char *argv[]){
   }
   ASSERT(m,"Could not load top:");
 
+  
+  c->runPasses({"rungenerators","verifyfullyconnected-noclkrst","removebulkconnections","flattentypes"});
+  
+  //load last verification
+  c->addPass(new MapperPasses::VerifyCanMap);
+  c->runPasses({"verifycanmap"});
 
-  bool err = false;
-  cout << "Trying to map" << endl;
-  mapper(c,m,&err);
-  if(err){
-    cout << "failed mapping!" << endl;
-    c->die();
-  }
+  //DO any normal optimizations
+
+  //Pre-Technolog Mapping steps
+
   c->getPassManager()->printLog();
   cout << "Trying to save" << endl;
   c->runPasses({"coreirjson"});

@@ -11,7 +11,8 @@
             [
               "mul_347_348.in1",
               "const2_.out"
-            ]
+            ],
+            ["mul_347_348.out","self.out"]
           ],
           "instances": {
             "const2_": {

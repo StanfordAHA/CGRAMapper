@@ -85,7 +85,7 @@
               "genargs": {
                 "width": 16
               },
-              "genref": "cgralib.Reg"
+              "genref": "coreir.reg"
             },
             "mul_307_308": {
               "genargs": {
@@ -140,7 +140,7 @@
               "genargs": {
                 "width": 16
               },
-              "genref": "cgralib.Reg"
+              "genref": "coreir.reg"
             }
           },
           "type": [
