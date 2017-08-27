@@ -3,6 +3,7 @@
 #include "coreir-lib/cgralib.h"
 
 #include "passes/verifycanmap.h"
+#include "passes/opsubstitution.h"
 #include "coreir-passes/analysis/coreirjson.h"
 
 #include <fstream>
@@ -33,6 +34,13 @@ int main(int argc, char *argv[]){
   }
   ASSERT(m,"Could not load top:");
 
+  //SLight hack. Add a default width for all of coreir
+  for (auto cgenmap : c->getNamespace("coreir")->getGenerators()) {
+    if (cgenmap.second->getGenParams().count("width")) {
+      cgenmap.second->addDefaultGenArgs({{"width",c->argInt(16)}});
+    }
+  }
+
   
   c->runPasses({"rungenerators","verifyfullyconnected-noclkrst","removebulkconnections","flattentypes"});
   
@@ -43,6 +51,10 @@ int main(int argc, char *argv[]){
   //DO any normal optimizations
 
   //Pre-Technolog Mapping steps
+  c->addPass(new MapperPasses::OpSubstitution);
+  c->runPasses({"opsubstitution"});
+
+
 
   c->getPassManager()->printLog();
   cout << "Trying to save" << endl;

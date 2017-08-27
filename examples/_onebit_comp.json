@@ -11,7 +11,8 @@
             [
               "ult_147_148.in0",
               "const15_.out"
-            ]
+            ],
+            ["self.out","ult_147_148.out"]
           ],
           "instances": {
             "const15_": {

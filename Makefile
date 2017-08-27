@@ -33,4 +33,5 @@ clean:
 	$(MAKE) -C src clean
 	-rm -f bin/*
 	-rm -f mapped/*
+	-rm -f _*.json
 
