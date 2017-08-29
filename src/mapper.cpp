@@ -6,6 +6,9 @@
 #include "passes/verifycanmap.h"
 #include "passes/opsubstitution.h"
 #include "passes/bitop2lut.h"
+#include "passes/techmapping.h"
+
+
 #include "coreir-passes/analysis/coreirjson.h"
 
 #include <fstream>
@@ -59,6 +62,10 @@ int main(int argc, char *argv[]){
   c->addPass(new MapperPasses::BitOp2Lut);
   c->runPasses({"opsubstitution","bitop2lut"});
 
+  //Tech mapping
+  c->addPass(new MapperPasses::TechMapping);
+  c->runPasses({"techmapping"});
+  
 
 
   c->getPassManager()->printLog();

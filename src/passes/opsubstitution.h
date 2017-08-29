@@ -11,6 +11,7 @@ class OpSubstitution : public InstanceVisitorPass {
 
 }
 
+//TODO also replace Static SHifts with Dynamic SHifts
 namespace {
 //Replaces UGT with ULTE + bitnot
 bool UGTReplacement(Instance* gt) {
