@@ -10,7 +10,7 @@
 #include "definitions/linebuffermem.h"
 #include "passes/techmapping.h"
 #include "passes/verifytechmapping.h"
-#include "passes/constduplication.h"
+#include "passes/constregduplication.h"
 
 
 #include "coreir-passes/analysis/coreirjson.h"
