@@ -9,6 +9,7 @@
 
 #include "definitions/linebuffermem.h"
 #include "passes/techmapping.h"
+#include "passes/verifytechmapping.h"
 #include "passes/constduplication.h"
 
 
@@ -70,7 +71,8 @@ int main(int argc, char *argv[]){
   //Link in LBMem def
   LoadDefinition_LinebufferMem(c);
   c->addPass(new MapperPasses::TechMapping);
-  c->runPasses({"techmapping"});
+  c->addPass(new MapperPasses::VerifyTechMapping);
+  c->runPasses({"techmapping","verifytechmapping"});
   
 
 
