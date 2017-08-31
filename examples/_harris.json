@@ -2048,55 +2048,55 @@
               "genargs": {
                 "width": 16
               },
-              "genref": "cgralib.Reg"
+              "genref": "coreir.reg"
             },
             "lb_grad_xx_2_stencil_update_stream$reg_0_2": {
               "genargs": {
                 "width": 16
               },
-              "genref": "cgralib.Reg"
+              "genref": "coreir.reg"
             },
             "lb_grad_xx_2_stencil_update_stream$reg_0_3": {
               "genargs": {
                 "width": 16
               },
-              "genref": "cgralib.Reg"
+              "genref": "coreir.reg"
             },
             "lb_grad_xx_2_stencil_update_stream$reg_1_1": {
               "genargs": {
                 "width": 16
               },
-              "genref": "cgralib.Reg"
+              "genref": "coreir.reg"
             },
             "lb_grad_xx_2_stencil_update_stream$reg_1_2": {
               "genargs": {
                 "width": 16
               },
-              "genref": "cgralib.Reg"
+              "genref": "coreir.reg"
             },
             "lb_grad_xx_2_stencil_update_stream$reg_1_3": {
               "genargs": {
                 "width": 16
               },
-              "genref": "cgralib.Reg"
+              "genref": "coreir.reg"
             },
             "lb_grad_xx_2_stencil_update_stream$reg_2_1": {
               "genargs": {
                 "width": 16
               },
-              "genref": "cgralib.Reg"
+              "genref": "coreir.reg"
             },
             "lb_grad_xx_2_stencil_update_stream$reg_2_2": {
               "genargs": {
                 "width": 16
               },
-              "genref": "cgralib.Reg"
+              "genref": "coreir.reg"
             },
             "lb_grad_xx_2_stencil_update_stream$reg_2_3": {
               "genargs": {
                 "width": 16
               },
-              "genref": "cgralib.Reg"
+              "genref": "coreir.reg"
             },
             "lb_grad_xy_2_stencil_update_stream$mem_1": {
               "configargs": {
@@ -2122,55 +2122,55 @@
               "genargs": {
                 "width": 16
               },
-              "genref": "cgralib.Reg"
+              "genref": "coreir.reg"
             },
             "lb_grad_xy_2_stencil_update_stream$reg_0_2": {
               "genargs": {
                 "width": 16
               },
-              "genref": "cgralib.Reg"
+              "genref": "coreir.reg"
             },
             "lb_grad_xy_2_stencil_update_stream$reg_0_3": {
               "genargs": {
                 "width": 16
               },
-              "genref": "cgralib.Reg"
+              "genref": "coreir.reg"
             },
             "lb_grad_xy_2_stencil_update_stream$reg_1_1": {
               "genargs": {
                 "width": 16
               },
-              "genref": "cgralib.Reg"
+              "genref": "coreir.reg"
             },
             "lb_grad_xy_2_stencil_update_stream$reg_1_2": {
               "genargs": {
                 "width": 16
               },
-              "genref": "cgralib.Reg"
+              "genref": "coreir.reg"
             },
             "lb_grad_xy_2_stencil_update_stream$reg_1_3": {
               "genargs": {
                 "width": 16
               },
-              "genref": "cgralib.Reg"
+              "genref": "coreir.reg"
             },
             "lb_grad_xy_2_stencil_update_stream$reg_2_1": {
               "genargs": {
                 "width": 16
               },
-              "genref": "cgralib.Reg"
+              "genref": "coreir.reg"
             },
             "lb_grad_xy_2_stencil_update_stream$reg_2_2": {
               "genargs": {
                 "width": 16
               },
-              "genref": "cgralib.Reg"
+              "genref": "coreir.reg"
             },
             "lb_grad_xy_2_stencil_update_stream$reg_2_3": {
               "genargs": {
                 "width": 16
               },
-              "genref": "cgralib.Reg"
+              "genref": "coreir.reg"
             },
             "lb_grad_yy_2_stencil_update_stream$mem_1": {
               "configargs": {
@@ -2196,55 +2196,55 @@
               "genargs": {
                 "width": 16
               },
-              "genref": "cgralib.Reg"
+              "genref": "coreir.reg"
             },
             "lb_grad_yy_2_stencil_update_stream$reg_0_2": {
               "genargs": {
                 "width": 16
               },
-              "genref": "cgralib.Reg"
+              "genref": "coreir.reg"
             },
             "lb_grad_yy_2_stencil_update_stream$reg_0_3": {
               "genargs": {
                 "width": 16
               },
-              "genref": "cgralib.Reg"
+              "genref": "coreir.reg"
             },
             "lb_grad_yy_2_stencil_update_stream$reg_1_1": {
               "genargs": {
                 "width": 16
               },
-              "genref": "cgralib.Reg"
+              "genref": "coreir.reg"
             },
             "lb_grad_yy_2_stencil_update_stream$reg_1_2": {
               "genargs": {
                 "width": 16
               },
-              "genref": "cgralib.Reg"
+              "genref": "coreir.reg"
             },
             "lb_grad_yy_2_stencil_update_stream$reg_1_3": {
               "genargs": {
                 "width": 16
               },
-              "genref": "cgralib.Reg"
+              "genref": "coreir.reg"
             },
             "lb_grad_yy_2_stencil_update_stream$reg_2_1": {
               "genargs": {
                 "width": 16
               },
-              "genref": "cgralib.Reg"
+              "genref": "coreir.reg"
             },
             "lb_grad_yy_2_stencil_update_stream$reg_2_2": {
               "genargs": {
                 "width": 16
               },
-              "genref": "cgralib.Reg"
+              "genref": "coreir.reg"
             },
             "lb_grad_yy_2_stencil_update_stream$reg_2_3": {
               "genargs": {
                 "width": 16
               },
-              "genref": "cgralib.Reg"
+              "genref": "coreir.reg"
             },
             "lb_p3_cim_stencil_update_stream$mem_1": {
               "configargs": {
@@ -2270,55 +2270,55 @@
               "genargs": {
                 "width": 16
               },
-              "genref": "cgralib.Reg"
+              "genref": "coreir.reg"
             },
             "lb_p3_cim_stencil_update_stream$reg_0_2": {
               "genargs": {
                 "width": 16
               },
-              "genref": "cgralib.Reg"
+              "genref": "coreir.reg"
             },
             "lb_p3_cim_stencil_update_stream$reg_0_3": {
               "genargs": {
                 "width": 16
               },
-              "genref": "cgralib.Reg"
+              "genref": "coreir.reg"
             },
             "lb_p3_cim_stencil_update_stream$reg_1_1": {
               "genargs": {
                 "width": 16
               },
-              "genref": "cgralib.Reg"
+              "genref": "coreir.reg"
             },
             "lb_p3_cim_stencil_update_stream$reg_1_2": {
               "genargs": {
                 "width": 16
               },
-              "genref": "cgralib.Reg"
+              "genref": "coreir.reg"
             },
             "lb_p3_cim_stencil_update_stream$reg_1_3": {
               "genargs": {
                 "width": 16
               },
-              "genref": "cgralib.Reg"
+              "genref": "coreir.reg"
             },
             "lb_p3_cim_stencil_update_stream$reg_2_1": {
               "genargs": {
                 "width": 16
               },
-              "genref": "cgralib.Reg"
+              "genref": "coreir.reg"
             },
             "lb_p3_cim_stencil_update_stream$reg_2_2": {
               "genargs": {
                 "width": 16
               },
-              "genref": "cgralib.Reg"
+              "genref": "coreir.reg"
             },
             "lb_p3_cim_stencil_update_stream$reg_2_3": {
               "genargs": {
                 "width": 16
               },
-              "genref": "cgralib.Reg"
+              "genref": "coreir.reg"
             },
             "lb_padded_2_stencil_update_stream$mem_1": {
               "configargs": {
@@ -2344,55 +2344,55 @@
               "genargs": {
                 "width": 16
               },
-              "genref": "cgralib.Reg"
+              "genref": "coreir.reg"
             },
             "lb_padded_2_stencil_update_stream$reg_0_2": {
               "genargs": {
                 "width": 16
               },
-              "genref": "cgralib.Reg"
+              "genref": "coreir.reg"
             },
             "lb_padded_2_stencil_update_stream$reg_0_3": {
               "genargs": {
                 "width": 16
               },
-              "genref": "cgralib.Reg"
+              "genref": "coreir.reg"
             },
             "lb_padded_2_stencil_update_stream$reg_1_1": {
               "genargs": {
                 "width": 16
               },
-              "genref": "cgralib.Reg"
+              "genref": "coreir.reg"
             },
             "lb_padded_2_stencil_update_stream$reg_1_2": {
               "genargs": {
                 "width": 16
               },
-              "genref": "cgralib.Reg"
+              "genref": "coreir.reg"
             },
             "lb_padded_2_stencil_update_stream$reg_1_3": {
               "genargs": {
                 "width": 16
               },
-              "genref": "cgralib.Reg"
+              "genref": "coreir.reg"
             },
             "lb_padded_2_stencil_update_stream$reg_2_1": {
               "genargs": {
                 "width": 16
               },
-              "genref": "cgralib.Reg"
+              "genref": "coreir.reg"
             },
             "lb_padded_2_stencil_update_stream$reg_2_2": {
               "genargs": {
                 "width": 16
               },
-              "genref": "cgralib.Reg"
+              "genref": "coreir.reg"
             },
             "lb_padded_2_stencil_update_stream$reg_2_3": {
               "genargs": {
                 "width": 16
               },
-              "genref": "cgralib.Reg"
+              "genref": "coreir.reg"
             },
             "mul_1000_1000": {
               "genargs": {
@@ -2871,55 +2871,55 @@
               "genargs": {
                 "width": 16
               },
-              "genref": "cgralib.Reg"
+              "genref": "coreir.reg"
             },
             "reg_0_2": {
               "genargs": {
                 "width": 16
               },
-              "genref": "cgralib.Reg"
+              "genref": "coreir.reg"
             },
             "reg_0_3": {
               "genargs": {
                 "width": 16
               },
-              "genref": "cgralib.Reg"
+              "genref": "coreir.reg"
             },
             "reg_1_1": {
               "genargs": {
                 "width": 16
               },
-              "genref": "cgralib.Reg"
+              "genref": "coreir.reg"
             },
             "reg_1_2": {
               "genargs": {
                 "width": 16
               },
-              "genref": "cgralib.Reg"
+              "genref": "coreir.reg"
             },
             "reg_1_3": {
               "genargs": {
                 "width": 16
               },
-              "genref": "cgralib.Reg"
+              "genref": "coreir.reg"
             },
             "reg_2_1": {
               "genargs": {
                 "width": 16
               },
-              "genref": "cgralib.Reg"
+              "genref": "coreir.reg"
             },
             "reg_2_2": {
               "genargs": {
                 "width": 16
               },
-              "genref": "cgralib.Reg"
+              "genref": "coreir.reg"
             },
             "reg_2_3": {
               "genargs": {
                 "width": 16
               },
-              "genref": "cgralib.Reg"
+              "genref": "coreir.reg"
             }
           },
           "type": [
@@ -3066,55 +3066,55 @@
               "genargs": {
                 "width": 16
               },
-              "genref": "cgralib.Reg"
+              "genref": "coreir.reg"
             },
             "reg_0_2": {
               "genargs": {
                 "width": 16
               },
-              "genref": "cgralib.Reg"
+              "genref": "coreir.reg"
             },
             "reg_0_3": {
               "genargs": {
                 "width": 16
               },
-              "genref": "cgralib.Reg"
+              "genref": "coreir.reg"
             },
             "reg_1_1": {
               "genargs": {
                 "width": 16
               },
-              "genref": "cgralib.Reg"
+              "genref": "coreir.reg"
             },
             "reg_1_2": {
               "genargs": {
                 "width": 16
               },
-              "genref": "cgralib.Reg"
+              "genref": "coreir.reg"
             },
             "reg_1_3": {
               "genargs": {
                 "width": 16
               },
-              "genref": "cgralib.Reg"
+              "genref": "coreir.reg"
             },
             "reg_2_1": {
               "genargs": {
                 "width": 16
               },
-              "genref": "cgralib.Reg"
+              "genref": "coreir.reg"
             },
             "reg_2_2": {
               "genargs": {
                 "width": 16
               },
-              "genref": "cgralib.Reg"
+              "genref": "coreir.reg"
             },
             "reg_2_3": {
               "genargs": {
                 "width": 16
               },
-              "genref": "cgralib.Reg"
+              "genref": "coreir.reg"
             }
           },
           "type": [
@@ -3261,55 +3261,55 @@
               "genargs": {
                 "width": 16
               },
-              "genref": "cgralib.Reg"
+              "genref": "coreir.reg"
             },
             "reg_0_2": {
               "genargs": {
                 "width": 16
               },
-              "genref": "cgralib.Reg"
+              "genref": "coreir.reg"
             },
             "reg_0_3": {
               "genargs": {
                 "width": 16
               },
-              "genref": "cgralib.Reg"
+              "genref": "coreir.reg"
             },
             "reg_1_1": {
               "genargs": {
                 "width": 16
               },
-              "genref": "cgralib.Reg"
+              "genref": "coreir.reg"
             },
             "reg_1_2": {
               "genargs": {
                 "width": 16
               },
-              "genref": "cgralib.Reg"
+              "genref": "coreir.reg"
             },
             "reg_1_3": {
               "genargs": {
                 "width": 16
               },
-              "genref": "cgralib.Reg"
+              "genref": "coreir.reg"
             },
             "reg_2_1": {
               "genargs": {
                 "width": 16
               },
-              "genref": "cgralib.Reg"
+              "genref": "coreir.reg"
             },
             "reg_2_2": {
               "genargs": {
                 "width": 16
               },
-              "genref": "cgralib.Reg"
+              "genref": "coreir.reg"
             },
             "reg_2_3": {
               "genargs": {
                 "width": 16
               },
-              "genref": "cgralib.Reg"
+              "genref": "coreir.reg"
             }
           },
           "type": [

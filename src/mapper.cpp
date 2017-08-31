@@ -6,7 +6,10 @@
 #include "passes/verifycanmap.h"
 #include "passes/opsubstitution.h"
 #include "passes/bitop2lut.h"
+
+#include "definitions/linebuffermem.h"
 #include "passes/techmapping.h"
+#include "passes/constduplication.h"
 
 
 #include "coreir-passes/analysis/coreirjson.h"
@@ -48,7 +51,8 @@ int main(int argc, char *argv[]){
   }
   c->getGenerator("common.lutN")->addDefaultGenArgs({{"N",c->argInt(3)}});
 
-  
+  c->getPassManager()->setVerbosity(true);
+
   c->runPasses({"rungenerators","verifyfullyconnected-noclkrst","removebulkconnections","flattentypes"});
   
   //load last verification
@@ -63,10 +67,16 @@ int main(int argc, char *argv[]){
   c->runPasses({"opsubstitution","bitop2lut"});
 
   //Tech mapping
+  //Link in LBMem def
+  LoadDefinition_LinebufferMem(c);
   c->addPass(new MapperPasses::TechMapping);
   c->runPasses({"techmapping"});
   
 
+
+  //Fold constants and registers into PEs
+  c->addPass(new MapperPasses::ConstDuplication);
+  c->runPasses({"constduplication"});
 
   c->getPassManager()->printLog();
   cout << "Trying to save" << endl;

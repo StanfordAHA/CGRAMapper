@@ -23,7 +23,8 @@
             [
               "mux_318040.in0",
               "const0_.out"
-            ]
+            ],
+            ["self.out","mux_318040.out"]
           ],
           "instances": {
             "const0_": {

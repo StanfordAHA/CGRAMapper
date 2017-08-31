@@ -35,6 +35,7 @@ bool UGTReplacement(Instance* gt) {
   inlineInstance(pt);
   return true;
 }
+
 //Replaces ULT with UGTE + bitnot
 bool ULTReplacement(Instance* gt) {
   Context* c = gt->getContext();
@@ -58,6 +59,29 @@ bool ULTReplacement(Instance* gt) {
   return true;
 }
 
+//Replaces neg with 0 - val
+bool NegReplacement(Instance* neg) {
+  Context* c = neg->getContext();
+  ModuleDef* def = neg->getContainer();
+  string iname = neg->getInstname();
+  //Add the ule + not instances
+  Instance* sub = def->addInstance(iname+"_sub","coreir.sub");
+  Instance* zero = def->addInstance(iname + "_not","coreir.const",{},{{"value",c->argInt(0)}});
+  def->connect(sub->sel("in0"),zero->sel("out"));
+  
+  //Isolate the instance
+  Instance* pt = addPassthrough(neg,"_pt"+c->getUnique());
+  def->disconnect(pt->sel("in"),neg);
+  def->connect(pt->sel("in")->sel("in"),sub->sel("in1"));
+  def->connect(pt->sel("in")->sel("out"),sub->sel("out"));
+  
+  //Remove instance and inline passthrough
+  def->removeInstance(neg);
+  inlineInstance(pt);
+  return true;
+}
+
+
 }
 
 
@@ -66,4 +90,6 @@ void MapperPasses::OpSubstitution::setVisitorInfo() {
   Context* c = this->getContext();
   addVisitorFunction(c->getInstantiable("coreir.ugt"),UGTReplacement);
   addVisitorFunction(c->getInstantiable("coreir.ult"),ULTReplacement);
+  addVisitorFunction(c->getInstantiable("coreir.neg"),NegReplacement);
+
 }

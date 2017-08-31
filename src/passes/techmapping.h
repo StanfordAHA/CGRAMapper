@@ -44,7 +44,7 @@ bool binaryOpReplacement(Instance* inst) {
   //For now just use the coreir lib name as the op
   string opstr = inst->getInstantiableRef()->getName();
   Args dataPEArgs({{"op",c->argString(opstr)}});
-  Instance* dataPE = def->addInstance(iname+"_PE","cgralib.dataPE",{},dataPEArgs);
+  Instance* dataPE = def->addInstance(iname+"_PE","cgralib.DataPE",{},dataPEArgs);
   
   //Isolate the instance
   Instance* pt = addPassthrough(inst,"_pt"+c->getUnique());
@@ -112,16 +112,31 @@ bool muxOpReplacement(Instance* inst) {
   return true;
 }
 
+//This will assume lbMem will have been linked with a cgra def
+bool lbMemReplacement(Instance* inst) {
+  Namespace* ns = inst->getInstantiableRef()->getNamespace();
+  inst->runGenerator();
+  Module* m = inst->getModuleRef();
+  if (!ns->hasModule(m->getName())) {
+    ns->addModule(m);
+  }
+  inlineInstance(inst);
+  return true;
+}
+
 }
 
 
 std::string MapperPasses::TechMapping::ID = "techmapping";
+
 void MapperPasses::TechMapping::setVisitorInfo() {
   Context* c = this->getContext();
   addVisitorFunction(c->getInstantiable("common.lutN"),lutReplacement);
   addVisitorFunction(c->getInstantiable("coreir.uge"),compOpReplacement);
   addVisitorFunction(c->getInstantiable("coreir.ule"),compOpReplacement);
   addVisitorFunction(c->getInstantiable("coreir.mux"),muxOpReplacement);
+  addVisitorFunction(c->getInstantiable("common.LinebufferMem"),lbMemReplacement);
+  
   //TODO what about dlshl
   for (auto str : {"add","sub","dshl","dashr","mul","or","and","xor"}) {
     addVisitorFunction(c->getInstantiable("coreir." + string(str)),binaryOpReplacement);
