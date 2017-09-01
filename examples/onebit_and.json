@@ -9,7 +9,11 @@
               "and_315_316.in0"
             ],
             [
-              "const5_.out",
+              "self.out",
+              "and_315_316.out"
+            ],
+            [
+              "const_316.out",
               "and_315_316.in1"
             ]
           ],
@@ -20,7 +24,7 @@
               },
               "genref": "coreir.and"
             },
-            "const5_": {
+            "const_316": {
               "configargs": {
                 "value": 5
               },

@@ -14,19 +14,23 @@
             ],
             [
               "ult_316_317.in0",
-              "const5_.out"
+              "const_316.out"
+            ],
+            [
+              "self.out",
+              "mux_318040.out"
             ],
             [
               "mux_318040.in1",
-              "const40_.out"
+              "const40.out"
             ],
             [
               "mux_318040.in0",
-              "const0_.out"
+              "const0.out"
             ]
           ],
           "instances": {
-            "const0_": {
+            "const0": {
               "configargs": {
                 "value": 0
               },
@@ -35,7 +39,7 @@
               },
               "genref": "coreir.const"
             },
-            "const40_": {
+            "const40": {
               "configargs": {
                 "value": 40
               },
@@ -44,7 +48,7 @@
               },
               "genref": "coreir.const"
             },
-            "const5_": {
+            "const_316": {
               "configargs": {
                 "value": 5
               },
