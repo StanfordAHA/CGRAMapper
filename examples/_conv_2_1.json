@@ -10,7 +10,7 @@
             ],
             [
               "self.in.0",
-              "lb_p4_clamped_stencil_update_stream$mem_1.wdata"
+              "lb_p4_clamped_stencil_update_stream.in"
             ],
             [
               "mul_343_344.out",
@@ -30,7 +30,7 @@
             ],
             [
               "mul_337_338.in0",
-              "lb_p4_clamped_stencil_update_stream$mem_1.rdata"
+              "lb_p4_clamped_stencil_update_stream.out"
             ],
             [
               "const0_.out",

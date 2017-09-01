@@ -39,7 +39,8 @@
             [
               "add_311_315.in0",
               "add_305_309.out"
-            ]
+            ],
+            ["self.out","add_311_315.out"]
           ],
           "instances": {
             "add_305_309": {
@@ -85,7 +86,7 @@
               "genargs": {
                 "width": 16
               },
-              "genref": "cgralib.Reg"
+              "genref": "coreir.reg"
             },
             "mul_307_308": {
               "genargs": {
@@ -140,7 +141,7 @@
               "genargs": {
                 "width": 16
               },
-              "genref": "cgralib.Reg"
+              "genref": "coreir.reg"
             }
           },
           "type": [

@@ -6,28 +6,29 @@
           "connections": [
             [
               "self.in.0",
-              "and_315_316.in0"
+              "ult_147_148.in1"
             ],
             [
-              "const5_.out",
-              "and_315_316.in1"
-            ]
+              "ult_147_148.in0",
+              "const15_.out"
+            ],
+            ["self.out","ult_147_148.out"]
           ],
           "instances": {
-            "and_315_316": {
-              "genargs": {
-                "width": 16
-              },
-              "genref": "coreir.and"
-            },
-            "const5_": {
+            "const15_": {
               "configargs": {
-                "value": 5
+                "value": 15
               },
               "genargs": {
                 "width": 16
               },
               "genref": "coreir.const"
+            },
+            "ult_147_148": {
+              "genargs": {
+                "width": 16
+              },
+              "genref": "coreir.ult"
             }
           },
           "type": [
@@ -42,11 +43,7 @@
                   "BitIn"
                 ]
               ],
-              "out": [
-                "Array",
-                16,
-                "Bit"
-              ]
+              "out": "Bit"
             }
           ]
         }
