@@ -1,0 +1,97 @@
+{
+  "namespaces": {
+    "global": {
+      "modules": {
+        "DesignTop": {
+          "connections": [
+            [
+              "self.in.0",
+              "ult_316_317.in1"
+            ],
+            [
+              "ult_316_317.out",
+              "mux_318040.sel"
+            ],
+            [
+              "ult_316_317.in0",
+              "const_316.out"
+            ],
+            [
+              "self.out",
+              "mux_318040.out"
+            ],
+            [
+              "mux_318040.in1",
+              "const40.out"
+            ],
+            [
+              "mux_318040.in0",
+              "const0.out"
+            ]
+          ],
+          "instances": {
+            "const0": {
+              "configargs": {
+                "value": 0
+              },
+              "genargs": {
+                "width": 16
+              },
+              "genref": "coreir.const"
+            },
+            "const40": {
+              "configargs": {
+                "value": 40
+              },
+              "genargs": {
+                "width": 16
+              },
+              "genref": "coreir.const"
+            },
+            "const_316": {
+              "configargs": {
+                "value": 5
+              },
+              "genargs": {
+                "width": 16
+              },
+              "genref": "coreir.const"
+            },
+            "mux_318040": {
+              "genargs": {
+                "width": 16
+              },
+              "genref": "coreir.mux"
+            },
+            "ult_316_317": {
+              "genargs": {
+                "width": 16
+              },
+              "genref": "coreir.ult"
+            }
+          },
+          "type": [
+            "Record",
+            {
+              "in": [
+                "Array",
+                1,
+                [
+                  "Array",
+                  16,
+                  "BitIn"
+                ]
+              ],
+              "out": [
+                "Array",
+                16,
+                "Bit"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  },
+  "top": "global.DesignTop"
+}
