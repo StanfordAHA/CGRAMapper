@@ -45,6 +45,10 @@
               "lb_p4_clamped_stencil_update_stream.in"
             ],
             [
+              "self.out",
+              "add_497_500.out"
+            ],
+            [
               "mul_49919.out",
               "add_497_500.in1"
             ],
