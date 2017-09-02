@@ -19,8 +19,7 @@
             [
               "const0_.out",
               "add_285_289.in0"
-            ],
-            ["self.out","add_285_289.out"]
+            ]
           ],
           "instances": {
             "add_285_289": {
