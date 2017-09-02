@@ -9,7 +9,7 @@ OBJ=$(patsubst %.cpp, build/%.o, $(SRC))
 
 INCS=-I$(COREIR)/include
 LPATH=-L$(COREIR)/lib
-LIBS=-Wl,-rpath,$(COREIR)/lib -lcoreir-cgralib -lcoreir-common -lcoreir
+LIBS=-Wl,-rpath,$(COREIR)/lib -lcoreir-cgralib -lcoreir-commonlib -lcoreir
 
 all: build/mapper
 

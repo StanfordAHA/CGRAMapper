@@ -1,7 +1,7 @@
 #include "coreir.h"
 
 #include "coreir-lib/cgralib.h"
-#include "coreir-lib/common.h"
+#include "coreir-lib/commonlib.h"
 
 #include "passes/verifycanmap.h"
 #include "passes/opsubstitution.h"
@@ -24,7 +24,7 @@ int main(int argc, char *argv[]){
   Context* c = newContext();
   
   CoreIRLoadLibrary_cgralib(c);
-  CoreIRLoadLibrary_common(c);
+  CoreIRLoadLibrary_commonlib(c);
 
   string premap;
   string postmap;
@@ -50,7 +50,7 @@ int main(int argc, char *argv[]){
       cgenmap.second->addDefaultGenArgs({{"width",c->argInt(16)}});
     }
   }
-  c->getGenerator("common.lutN")->addDefaultGenArgs({{"N",c->argInt(3)}});
+  c->getGenerator("commonlib.lutN")->addDefaultGenArgs({{"N",c->argInt(3)}});
 
   c->getPassManager()->setVerbosity(true);
 

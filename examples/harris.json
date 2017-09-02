@@ -1825,7 +1825,7 @@
                 "stencil_height": 3,
                 "stencil_width": 4
               },
-              "genref": "cgralib.Linebuffer"
+              "genref": "commonlib.Linebuffer"
             },
             "lb_grad_xy_2_stencil_update_stream": {
               "genargs": {
@@ -1834,7 +1834,7 @@
                 "stencil_height": 3,
                 "stencil_width": 4
               },
-              "genref": "cgralib.Linebuffer"
+              "genref": "commonlib.Linebuffer"
             },
             "lb_grad_yy_2_stencil_update_stream": {
               "genargs": {
@@ -1843,7 +1843,7 @@
                 "stencil_height": 3,
                 "stencil_width": 4
               },
-              "genref": "cgralib.Linebuffer"
+              "genref": "commonlib.Linebuffer"
             },
             "lb_p3_cim_stencil_update_stream": {
               "genargs": {
@@ -1852,7 +1852,7 @@
                 "stencil_height": 3,
                 "stencil_width": 4
               },
-              "genref": "cgralib.Linebuffer"
+              "genref": "commonlib.Linebuffer"
             },
             "lb_padded_2_stencil_update_stream": {
               "genargs": {
@@ -1861,7 +1861,7 @@
                 "stencil_height": 3,
                 "stencil_width": 4
               },
-              "genref": "cgralib.Linebuffer"
+              "genref": "commonlib.Linebuffer"
             },
             "mul_1000_1000": {
               "genargs": {

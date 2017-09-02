@@ -131,11 +131,11 @@ std::string MapperPasses::TechMapping::ID = "techmapping";
 
 void MapperPasses::TechMapping::setVisitorInfo() {
   Context* c = this->getContext();
-  addVisitorFunction(c->getInstantiable("common.lutN"),lutReplacement);
+  addVisitorFunction(c->getInstantiable("commonlib.lutN"),lutReplacement);
   addVisitorFunction(c->getInstantiable("coreir.uge"),compOpReplacement);
   addVisitorFunction(c->getInstantiable("coreir.ule"),compOpReplacement);
   addVisitorFunction(c->getInstantiable("coreir.mux"),muxOpReplacement);
-  addVisitorFunction(c->getInstantiable("common.LinebufferMem"),lbMemReplacement);
+  addVisitorFunction(c->getInstantiable("commonlib.LinebufferMem"),lbMemReplacement);
   
   //TODO what about dlshl
   for (auto str : {"add","sub","dshl","dashr","mul","or","and","xor"}) {

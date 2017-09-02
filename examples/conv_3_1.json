@@ -119,7 +119,7 @@
                 "stencil_height": 3,
                 "stencil_width": 1
               },
-              "genref": "cgralib.Linebuffer"
+              "genref": "commonlib.Linebuffer"
             },
             "mul_3423": {
               "genargs": {
