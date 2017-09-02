@@ -9,6 +9,10 @@
               "and_315_316.in0"
             ],
             [
+              "self.out",
+              "and_315_316.out"
+            ],
+            [
               "const5_.out",
               "and_315_316.in1"
             ]
