@@ -5,12 +5,16 @@
         "DesignTop": {
           "connections": [
             [
-              "self.in.0",
+              "lb_p4_clamped_stencil_update_stream.out.0.1",
               "mul_313_314.in0"
             ],
             [
+              "lb_p4_clamped_stencil_update_stream.out.0.0",
+              "mul_307_308.in0"
+            ],
+            [
               "self.in.0",
-              "lb_p4_clamped_stencil_update_stream$reg_0_1.in"
+              "lb_p4_clamped_stencil_update_stream.in"
             ],
             [
               "mul_313_314.out",
@@ -29,18 +33,13 @@
               "const5_.out"
             ],
             [
-              "mul_307_308.in0",
-              "lb_p4_clamped_stencil_update_stream$reg_0_1.out"
-            ],
-            [
               "const0_.out",
               "add_305_309.in0"
             ],
             [
               "add_311_315.in0",
               "add_305_309.out"
-            ],
-            ["self.out","add_311_315.out"]
+            ]
           ],
           "instances": {
             "add_305_309": {
@@ -82,11 +81,14 @@
               },
               "genref": "coreir.const"
             },
-            "lb_p4_clamped_stencil_update_stream$reg_0_1": {
+            "lb_p4_clamped_stencil_update_stream": {
               "genargs": {
-                "width": 16
+                "bitwidth": 16,
+                "image_width": 9,
+                "stencil_height": 1,
+                "stencil_width": 2
               },
-              "genref": "coreir.reg"
+              "genref": "cgralib.Linebuffer"
             },
             "mul_307_308": {
               "genargs": {
@@ -117,53 +119,6 @@
                 "Array",
                 16,
                 "Bit"
-              ]
-            }
-          ]
-        },
-        "Linebuffer_U0": {
-          "connections": [
-            [
-              "self.out.0.1",
-              "self.in"
-            ],
-            [
-              "self.out.0.0",
-              "reg_0_1.out"
-            ],
-            [
-              "self.in",
-              "reg_0_1.in"
-            ]
-          ],
-          "instances": {
-            "reg_0_1": {
-              "genargs": {
-                "width": 16
-              },
-              "genref": "coreir.reg"
-            }
-          },
-          "type": [
-            "Record",
-            {
-              "in": [
-                "Array",
-                16,
-                "BitIn"
-              ],
-              "out": [
-                "Array",
-                1,
-                [
-                  "Array",
-                  2,
-                  [
-                    "Array",
-                    16,
-                    "Bit"
-                  ]
-                ]
               ]
             }
           ]

@@ -11,8 +11,7 @@
             [
               "const5_.out",
               "and_315_316.in1"
-            ],
-            ["self.out","and_315_316.out"]
+            ]
           ],
           "instances": {
             "and_315_316": {

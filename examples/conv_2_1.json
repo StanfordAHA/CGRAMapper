@@ -5,8 +5,12 @@
         "DesignTop": {
           "connections": [
             [
-              "self.in.0",
+              "lb_p4_clamped_stencil_update_stream.out.1.0",
               "mul_343_344.in0"
+            ],
+            [
+              "lb_p4_clamped_stencil_update_stream.out.0.0",
+              "mul_337_338.in0"
             ],
             [
               "self.in.0",
@@ -27,10 +31,6 @@
             [
               "mul_337_338.in1",
               "const7_.out"
-            ],
-            [
-              "mul_337_338.in0",
-              "lb_p4_clamped_stencil_update_stream.out"
             ],
             [
               "const0_.out",
@@ -81,15 +81,14 @@
               },
               "genref": "coreir.const"
             },
-            "lb_p4_clamped_stencil_update_stream$mem_1": {
-              "configargs": {
-                "mode": "linebuffer"
-              },
+            "lb_p4_clamped_stencil_update_stream": {
               "genargs": {
-                "depth": 10,
-                "width": 16
+                "bitwidth": 16,
+                "image_width": 10,
+                "stencil_height": 2,
+                "stencil_width": 1
               },
-              "genref": "cgralib.Mem"
+              "genref": "cgralib.Linebuffer"
             },
             "mul_337_338": {
               "genargs": {
@@ -120,57 +119,6 @@
                 "Array",
                 16,
                 "Bit"
-              ]
-            }
-          ]
-        },
-        "Linebuffer_U0": {
-          "connections": [
-            [
-              "self.out.1.0",
-              "self.in"
-            ],
-            [
-              "self.out.0.0",
-              "mem_1.rdata"
-            ],
-            [
-              "self.in",
-              "mem_1.wdata"
-            ]
-          ],
-          "instances": {
-            "mem_1": {
-              "configargs": {
-                "mode": "linebuffer"
-              },
-              "genargs": {
-                "depth": 10,
-                "width": 16
-              },
-              "genref": "cgralib.Mem"
-            }
-          },
-          "type": [
-            "Record",
-            {
-              "in": [
-                "Array",
-                16,
-                "BitIn"
-              ],
-              "out": [
-                "Array",
-                2,
-                [
-                  "Array",
-                  1,
-                  [
-                    "Array",
-                    16,
-                    "Bit"
-                  ]
-                ]
               ]
             }
           ]

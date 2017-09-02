@@ -6,28 +6,49 @@
           "connections": [
             [
               "self.in.0",
-              "mul_347_348.in0"
+              "lb_repeat_edge_2_stencil_update_stream.in"
             ],
             [
-              "mul_347_348.in1",
-              "const2_.out"
+              "lb_conv1_2_stencil_update_stream.in",
+              "const0_.out"
             ]
           ],
           "instances": {
-            "const2_": {
+            "const0_": {
               "configargs": {
-                "value": 2
+                "value": 0
               },
               "genargs": {
                 "width": 16
               },
               "genref": "coreir.const"
             },
-            "mul_347_348": {
+            "const0_$1": {
+              "configargs": {
+                "value": 0
+              },
               "genargs": {
                 "width": 16
               },
-              "genref": "coreir.mul"
+              "genref": "coreir.const"
+            },
+            "lb_conv1_2_stencil_update_stream": {
+              "genargs": {
+                "bitwidth": 16,
+                "image_width": 258,
+                "stencil_height": 3,
+                "stencil_width": 3
+              },
+              "genref": "cgralib.Linebuffer"
+            },
+            "lb_repeat_edge_2_stencil_update_stream": {
+              "genargs": {
+                "bitwidth": 16,
+                "image_width": 260,
+                "stencil_height": 3,
+                "stencil_width": 3
+              },
+              "genref": "cgralib.Linebuffer"
             }
           },
           "type": [
