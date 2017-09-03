@@ -17,6 +17,10 @@
               "const5_.out"
             ],
             [
+              "self.out",
+              "mux_318040.out"
+            ],
+            [
               "mux_318040.in1",
               "const40_.out"
             ],

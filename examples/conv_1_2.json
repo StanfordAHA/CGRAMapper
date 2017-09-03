@@ -17,6 +17,10 @@
               "lb_p4_clamped_stencil_update_stream.in"
             ],
             [
+              "self.out",
+              "add_311_315.out"
+            ],
+            [
               "mul_313_314.out",
               "add_311_315.in1"
             ],

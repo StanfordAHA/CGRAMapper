@@ -9,6 +9,10 @@
               "ult_147_148.in1"
             ],
             [
+              "ult_147_148.out",
+              "self.out"
+            ],
+            [
               "ult_147_148.in0",
               "const15_.out"
             ]

@@ -9,6 +9,10 @@
               "lb_repeat_edge_2_stencil_update_stream.in"
             ],
             [
+              "self.out",
+              "const0_$1.out"
+            ],
+            [
               "lb_conv1_2_stencil_update_stream.in",
               "const0_.out"
             ]
