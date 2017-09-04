@@ -10,7 +10,7 @@
 #include "definitions/linebuffermem.h"
 #include "passes/techmapping.h"
 #include "passes/verifytechmapping.h"
-#include "passes/constregduplication.h"
+//#include "passes/constregduplication.h"
 
 
 #include "coreir-passes/analysis/coreirjson.h"
@@ -18,6 +18,82 @@
 #include <fstream>
 
 using namespace CoreIR;
+
+typedef struct {
+  vector<SelectPath> IO16;
+  vector<SelectPath> IO16in;
+  vector<SelectPath> IO1;
+  vector<SelectPath> IO1in;
+} IOpaths;
+
+void getAllIOPaths(Wireable* w, IOpaths& paths) {
+  Type* t = w->getType();
+  if (auto at = dyn_cast<ArrayType>(t)) {
+    if (at->getLen()==16 && isa<BitType>(at->getElemType())) {
+      paths.IO16.push_back(w->getSelectPath());
+    }
+    else if (at->getLen() == 16 && isa<BitInType>(at->getElemType())) {
+      paths.IO16in.push_back(w->getSelectPath());
+    }
+    else {
+      for (auto sw : w->getSelects()) {
+        getAllIOPaths(sw.second,paths);
+      }
+    }
+  }
+  else if (isa<BitType>(t)) {
+    paths.IO1.push_back(w->getSelectPath());
+  }
+  else if (isa<BitInType>(t)) {
+    paths.IO1in.push_back(w->getSelectPath());
+  }
+  else {
+    for (auto sw : w->getSelects()) {
+      getAllIOPaths(sw.second,paths);
+    }
+  }
+  
+}
+
+void addIOs(Module* top) {
+  Context* c = top->getContext();
+  ModuleDef* mdef = top->getDef();
+
+  Args aWidth({{"width",c->argInt(16)}});
+  IOpaths iopaths;
+  getAllIOPaths(mdef->getInterface(), iopaths);
+  Instance* pt = addPassthrough(mdef->getInterface(),"_self");
+  for (auto path : iopaths.IO16) {
+    string ioname = "io16in"+c->getUnique();
+    mdef->addInstance(ioname,"cgralib.IO",aWidth,{{"mode",c->argString("i")}});
+    path[0] = "in";
+    path.insert(path.begin(),"_self");
+    mdef->connect({ioname,"out"},path);
+  }
+  for (auto path : iopaths.IO16in) {
+    string ioname = "io16"+c->getUnique();
+    mdef->addInstance(ioname,"cgralib.IO",aWidth,{{"mode",c->argString("o")}});
+    path[0] = "in";
+    path.insert(path.begin(),"_self");
+    mdef->connect({ioname,"in"},path);
+  }
+  for (auto path : iopaths.IO1) {
+    string ioname = "io1in"+c->getUnique();
+    mdef->addInstance(ioname,"cgralib.bitIO",{{"mode",c->argString("i")}});
+    path[0] = "in";
+    path.insert(path.begin(),"_self");
+    mdef->connect({ioname,"out"},path);
+  }
+  for (auto path : iopaths.IO1in) {
+    string ioname = "io1"+c->getUnique();
+    mdef->addInstance(ioname,"cgralib.bitIO",{{"mode",c->argString("o")}});
+    path[0] = "in";
+    path.insert(path.begin(),"_self");
+    mdef->connect({ioname,"in"},path);
+  }
+  mdef->disconnect(mdef->getInterface());
+  inlineInstance(pt);
+}
 
 
 int main(int argc, char *argv[]){
@@ -38,11 +114,11 @@ int main(int argc, char *argv[]){
   }
 
   cout << "Loading " << premap << endl;
-  Module* m = nullptr;
-  if (!loadFromFile(c,premap,&m)) {
+  Module* top = nullptr;
+  if (!loadFromFile(c,premap,&top)) {
     c->die();
   }
-  ASSERT(m,"Could not load top:");
+  ASSERT(top,"Could not load top:");
 
   //SLight hack. Add a default width for all of coreir
   for (auto cgenmap : c->getNamespace("coreir")->getGenerators()) {
@@ -55,7 +131,7 @@ int main(int argc, char *argv[]){
   c->getPassManager()->setVerbosity(true);
 
   c->runPasses({"rungenerators","verifyfullyconnected-noclkrst","removebulkconnections","flattentypes"},{"global","commonlib"});
-  
+ 
 
   //load last verification
   c->addPass(new MapperPasses::VerifyCanMap);
@@ -72,14 +148,14 @@ int main(int argc, char *argv[]){
   //Link in LBMem def
   LoadDefinition_LinebufferMem(c);
   c->addPass(new MapperPasses::TechMapping);
+  addIOs(top);
   c->addPass(new MapperPasses::VerifyTechMapping);
   c->runPasses({"techmapping","verifytechmapping"});
   
 
-
-  //Fold constants and registers into PEs
-  c->addPass(new MapperPasses::ConstDuplication);
-  c->runPasses({"constduplication"});
+  ////Fold constants and registers into PEs
+  //c->addPass(new MapperPasses::ConstDuplication);
+  //c->runPasses({"constduplication"});
 
 
 
@@ -91,7 +167,7 @@ int main(int argc, char *argv[]){
   auto jpass = static_cast<Passes::CoreIRJson*>(c->getPassManager()->getAnalysisPass("coreirjson"));
   //Create file here.
   std::ofstream file(postmap);
-  jpass->writeToStream(file,m->getNamespace()->getName() + "." +m->getName());
+  jpass->writeToStream(file,top->getRefName());
  
   
   //if (saveToFile(m->getNamespace(),postmap,m)) {
