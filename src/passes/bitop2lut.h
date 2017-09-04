@@ -125,6 +125,27 @@ bool bitmuxReplacement(Instance* inst) {
   return true;
 }
 
+//Replaces bitconst with lut
+bool bitconstReplacement(Instance* inst) {
+  Context* c = inst->getContext();
+  ModuleDef* def = inst->getContainer();
+  string iname = inst->getInstname();
+  uint val = inst->getConfigArgs().at("value")->get<ArgInt>();
+  ASSERT(val==0 || val==1,"invalid val for " + iname + ": " + to_string(val));
+  //Add the Lut
+  Instance* lut = def->addInstance(iname+"_lut","commonlib.lutN",{},{{"init",c->argInt(val)}});
+  
+  //Isolate the instance
+  Instance* pt = addPassthrough(inst,"_pt"+c->getUnique());
+  def->disconnect(pt->sel("in"),inst);
+  def->connect(pt->sel("in")->sel("out"),lut->sel("out"));
+  
+  //Remove instance and inline passthrough
+  def->removeInstance(inst);
+  inlineInstance(pt);
+  return true;
+}
+
 }
 
 
@@ -136,4 +157,5 @@ void MapperPasses::BitOp2Lut::setVisitorInfo() {
   addVisitorFunction(c->getInstantiable("coreir.bitor"),bitorReplacement);
   addVisitorFunction(c->getInstantiable("coreir.bitxor"),bitxorReplacement);
   addVisitorFunction(c->getInstantiable("coreir.bitmux"),bitmuxReplacement);
+  addVisitorFunction(c->getInstantiable("coreir.bitconst"),bitconstReplacement);
 }

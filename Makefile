@@ -14,7 +14,6 @@ $(BIN):
 test: $(MAPPED_FILES)
 
 $(MAPPED_FILES): $(BIN)
-	mkdir -p mapped
 	$(BIN) examples/$(@F) $(@)
 
 .PHONY: pytest

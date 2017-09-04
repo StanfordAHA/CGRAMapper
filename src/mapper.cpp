@@ -54,8 +54,9 @@ int main(int argc, char *argv[]){
 
   c->getPassManager()->setVerbosity(true);
 
-  c->runPasses({"rungenerators","verifyfullyconnected-noclkrst","removebulkconnections","flattentypes"});
+  c->runPasses({"rungenerators","verifyfullyconnected-noclkrst","removebulkconnections","flattentypes"},{"global","commonlib"});
   
+
   //load last verification
   c->addPass(new MapperPasses::VerifyCanMap);
   c->runPasses({"verifycanmap"});
@@ -80,6 +81,10 @@ int main(int argc, char *argv[]){
   c->addPass(new MapperPasses::ConstDuplication);
   c->runPasses({"constduplication"});
 
+
+
+  //Flatten
+  c->runPasses({"flatten"});
   c->getPassManager()->printLog();
   cout << "Trying to save" << endl;
   c->runPasses({"coreirjson"});

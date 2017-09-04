@@ -44,6 +44,9 @@ bool MapperPasses::VerifyCanMap::runOnInstance(Instance* inst) {
   
   auto iref = inst->getInstantiableRef();
   
+  if (iref == c->getInstantiable("commonlib.LinebufferMem") ){
+    return false;
+  }
   if (iref == c->getInstantiable("coreir.reg")) {
     Args genargs = inst->getGenArgs();
     ASSERT(genargs["en"]->get<ArgBool>()==false,"NYI registers with en");
