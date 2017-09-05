@@ -124,6 +124,11 @@ bool lbMemReplacement(Instance* inst) {
   return true;
 }
 
+bool removeInstance(Instance* inst) {
+  inst->getContainer()->removeInstance(inst);
+  return true;
+}
+
 }
 
 
@@ -135,6 +140,8 @@ void MapperPasses::TechMapping::setVisitorInfo() {
   addVisitorFunction(c->getInstantiable("coreir.uge"),compOpReplacement);
   addVisitorFunction(c->getInstantiable("coreir.ule"),compOpReplacement);
   addVisitorFunction(c->getInstantiable("coreir.mux"),muxOpReplacement);
+  addVisitorFunction(c->getInstantiable("coreir.term"),removeInstance);
+  addVisitorFunction(c->getInstantiable("coreir.bitterm"),removeInstance);
   addVisitorFunction(c->getInstantiable("commonlib.LinebufferMem"),lbMemReplacement);
   
   //TODO what about dlshl
