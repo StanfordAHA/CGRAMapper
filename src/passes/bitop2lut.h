@@ -23,7 +23,7 @@ bool bitnotReplacement(Instance* inst) {
   string iname = inst->getInstname();
   
   //Add the Lut
-  Instance* lut = def->addInstance(iname+"_lut","commonlib.lutN",{},{{"init",c->argInt(~B0)}});
+  Instance* lut = def->addInstance(iname+"_lut","commonlib.lutN",Args(),{{"init",c->argInt(~B0)}});
   
   //Isolate the instance
   Instance* pt = addPassthrough(inst,"_pt"+c->getUnique());
@@ -44,7 +44,7 @@ bool bitandReplacement(Instance* inst) {
   string iname = inst->getInstname();
   
   //Add the Lut
-  Instance* lut = def->addInstance(iname+"_lut","commonlib.lutN",{},{{"init",c->argInt(B0 & B1)}});
+  Instance* lut = def->addInstance(iname+"_lut","commonlib.lutN",Args(),{{"init",c->argInt(B0 & B1)}});
   
   //Isolate the instance
   Instance* pt = addPassthrough(inst,"_pt"+c->getUnique());
@@ -66,7 +66,7 @@ bool bitorReplacement(Instance* inst) {
   string iname = inst->getInstname();
   
   //Add the Lut
-  Instance* lut = def->addInstance(iname+"_lut","commonlib.lutN",{},{{"init",c->argInt(B0 | B1)}});
+  Instance* lut = def->addInstance(iname+"_lut","commonlib.lutN",Args(),{{"init",c->argInt(B0 | B1)}});
   
   //Isolate the instance
   Instance* pt = addPassthrough(inst,"_pt"+c->getUnique());
@@ -87,7 +87,7 @@ bool bitxorReplacement(Instance* inst) {
   string iname = inst->getInstname();
   
   //Add the Lut
-  Instance* lut = def->addInstance(iname+"_lut","commonlib.lutN",{},{{"init",c->argInt(B0 ^ B1)}});
+  Instance* lut = def->addInstance(iname+"_lut","commonlib.lutN",Args(),{{"init",c->argInt(B0 ^ B1)}});
   
   //Isolate the instance
   Instance* pt = addPassthrough(inst,"_pt"+c->getUnique());
@@ -109,7 +109,7 @@ bool bitmuxReplacement(Instance* inst) {
   string iname = inst->getInstname();
   
   //Add the Lut
-  Instance* lut = def->addInstance(iname+"_lut","commonlib.lutN",{},{{"init",c->argInt((~B2 & B0) | (B2 & B1))}});
+  Instance* lut = def->addInstance(iname+"_lut","commonlib.lutN",Args(),{{"init",c->argInt((~B2 & B0) | (B2 & B1))}});
   
   //Isolate the instance
   Instance* pt = addPassthrough(inst,"_pt"+c->getUnique());
@@ -133,7 +133,7 @@ bool bitconstReplacement(Instance* inst) {
   uint val = inst->getConfigArgs().at("value")->get<ArgInt>();
   ASSERT(val==0 || val==1,"invalid val for " + iname + ": " + to_string(val));
   //Add the Lut
-  Instance* lut = def->addInstance(iname+"_lut","commonlib.lutN",{},{{"init",c->argInt(val)}});
+  Instance* lut = def->addInstance(iname+"_lut","commonlib.lutN",Args(),{{"init",c->argInt(val)}});
   
   //Isolate the instance
   Instance* pt = addPassthrough(inst,"_pt"+c->getUnique());

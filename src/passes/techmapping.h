@@ -18,7 +18,7 @@ bool lutReplacement(Instance* inst) {
   ModuleDef* def = inst->getContainer();
   string iname = inst->getInstname();
   Args bitPEArgs({{"LUT_init",inst->getConfigArgs()["init"]}});
-  Instance* bitPE = def->addInstance(iname+"_bitPE","cgralib.BitPE",{},bitPEArgs);
+  Instance* bitPE = def->addInstance(iname+"_bitPE","cgralib.BitPE",Args(),bitPEArgs);
   
   //Isolate the instance
   Instance* pt = addPassthrough(inst,"_pt"+c->getUnique());
@@ -44,7 +44,7 @@ bool binaryOpReplacement(Instance* inst) {
   //For now just use the coreir lib name as the op
   string opstr = inst->getInstantiableRef()->getName();
   Args dataPEArgs({{"op",c->argString(opstr)}});
-  Instance* dataPE = def->addInstance(iname+"_PE","cgralib.DataPE",{},dataPEArgs);
+  Instance* dataPE = def->addInstance(iname+"_PE","cgralib.DataPE",Args(),dataPEArgs);
   
   //Isolate the instance
   Instance* pt = addPassthrough(inst,"_pt"+c->getUnique());
@@ -69,7 +69,7 @@ bool compOpReplacement(Instance* inst) {
   //For now just use the coreir lib name as the op
   string opstr = inst->getInstantiableRef()->getName();
   Args PEArgs({{"op",c->argString(opstr)}});
-  Instance* PE = def->addInstance(iname+"_PE","cgralib.PE",{},PEArgs);
+  Instance* PE = def->addInstance(iname+"_PE","cgralib.PE",Args(),PEArgs);
   
   //Isolate the instance
   Instance* pt = addPassthrough(inst,"_pt"+c->getUnique());
@@ -94,7 +94,7 @@ bool muxOpReplacement(Instance* inst) {
   //For now just use the coreir lib name as the op
   string opstr = inst->getInstantiableRef()->getName();
   Args PEArgs({{"op",c->argString("mux")}});
-  Instance* PE = def->addInstance(iname+"_PE","cgralib.PE",{},PEArgs);
+  Instance* PE = def->addInstance(iname+"_PE","cgralib.PE",Args(),PEArgs);
   
   //Isolate the instance
   Instance* pt = addPassthrough(inst,"_pt"+c->getUnique());
