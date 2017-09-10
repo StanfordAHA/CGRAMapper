@@ -23,7 +23,7 @@ void checkType(Context* c,Type* t) {
     t == c->Named("coreir.rstIn")
   ) return;
   if (auto at = dyn_cast<ArrayType>(t)) {
-    ASSERT(at->getLen()==16,"NYI, Arrays have to be 16: " + t->toString());
+    ASSERT(at->getLen()==16,"NYI, Arrays have to be BitIn[16] or Bit[16]. Type=" + t->toString());
     ASSERT(isa<BitType>(at->getElemType()) || isa<BitInType>(at->getElemType()),"Need to flatten types: " + t->toString());
   }
   else {
