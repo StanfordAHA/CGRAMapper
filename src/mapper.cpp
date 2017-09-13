@@ -1,7 +1,13 @@
 #include "coreir.h"
 
-#include "coreir-lib/cgralib.h"
-#include "coreir-lib/commonlib.h"
+#include "coreir/libs/cgralib.h"
+#include "coreir/libs/commonlib.h"
+#include "coreir/passes/analysis/coreirjson.h"
+
+
+#include <fstream>
+
+using namespace std;
 
 #include "passes/verifycanmap.h"
 #include "passes/opsubstitution.h"
@@ -13,9 +19,6 @@
 //#include "passes/constregduplication.h"
 
 
-#include "coreir-passes/analysis/coreirjson.h"
-
-#include <fstream>
 
 using namespace CoreIR;
 

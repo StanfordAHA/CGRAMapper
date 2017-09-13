@@ -7,18 +7,16 @@ CXXFLAGS=-std=c++11 -Wall -fPIC -g
 SRC=$(wildcard [^_]*.cpp)
 OBJ=$(patsubst %.cpp, build/%.o, $(SRC))
 
-INCS=-I$(COREIR)/include
-LPATH=-L$(COREIR)/lib
-LIBS=-Wl,-rpath,$(COREIR)/lib -lcoreir-cgralib -lcoreir-commonlib -lcoreir
+LIBS= -lcoreir-cgralib -lcoreir-commonlib -lcoreir
 
 all: build/mapper
 
 build/mapper: build/mapper.o 
-	$(CXX) $(CXXFLAGS) $(INCS) -o $@ $< $(LPATH) $(LIBS) 
+	$(CXX) $(CXXFLAGS) -o $@ $< $(LIBS) 
 	cp build/mapper ../bin/.
 
 build/%.o: %.cpp 
-	$(CXX) $(CXXFLAGS) $(INCS) -c $^ -o $@
+	$(CXX) $(CXXFLAGS) -c $^ -o $@
 
 .PHONY: clean
 clean:
