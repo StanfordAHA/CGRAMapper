@@ -113,7 +113,7 @@ bool muxOpReplacement(Instance* inst) {
 }
 
 //This will assume lbMem will have been linked with a cgra def
-bool lbMemReplacement(Instance* inst) {
+bool rungenAndReplace(Instance* inst) {
   Namespace* ns = inst->getInstantiableRef()->getNamespace();
   inst->runGenerator();
   Module* m = inst->getModuleRef();
@@ -142,7 +142,8 @@ void MapperPasses::TechMapping::setVisitorInfo() {
   addVisitorFunction(c->getInstantiable("coreir.mux"),muxOpReplacement);
   addVisitorFunction(c->getInstantiable("coreir.term"),removeInstance);
   addVisitorFunction(c->getInstantiable("coreir.bitterm"),removeInstance);
-  addVisitorFunction(c->getInstantiable("commonlib.LinebufferMem"),lbMemReplacement);
+  addVisitorFunction(c->getInstantiable("commonlib.LinebufferMem"),rungenAndReplace);
+  addVisitorFunction(c->getInstantiable("commonlib.smax"),rungenAndReplace);
   
   //TODO what about dlshl
   for (auto str : {"add","sub","dshl","dashr","mul","or","and","xor"}) {
