@@ -5,8 +5,8 @@ using namespace CoreIR;
 void LoadDefinition_LinebufferMem(Context* c) {
   Generator* lbmem = c->getGenerator("commonlib.LinebufferMem");
   lbmem->setGeneratorDefFromFun([](ModuleDef* def,Context* c, Type* t, Args args) {
-    uint width = args.at("width")->get<ArgInt>();
-    uint depth = args.at("depth")->get<ArgInt>();
+    uint width = args.at("width")->get<int>();
+    uint depth = args.at("depth")->get<int>();
     ASSERT(width==16,"NYI Non 16 bit width");
     ASSERT(depth<=1024,"NYI using mutliple memories");
     def->addInstance("cgramem","cgralib.Mem",{{"width",c->argInt(width)},{"depth",c->argInt(1024)}},{{"mode",c->argString("linebuffer")},{"fifo_depth",c->argInt(depth)}});
@@ -20,7 +20,7 @@ void LoadDefinition_LinebufferMem(Context* c) {
 
   Generator* smax = c->getGenerator("commonlib.smax");
   smax->setGeneratorDefFromFun([](ModuleDef* def,Context* c, Type* t, Args args) {
-    uint width = args.at("width")->get<ArgInt>();
+    uint width = args.at("width")->get<int>();
     ASSERT(width==16,"NYI non 16");
     def->addInstance("cgramax","cgralib.PE",{},{{"op",c->argString("max")}});
     def->connect("self.in0","cgramax.data.in.0");

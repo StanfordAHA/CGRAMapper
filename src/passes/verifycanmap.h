@@ -27,8 +27,8 @@ bool MapperPasses::VerifyCanMap::runOnInstance(Instance* inst) {
   }
   else if( iref == c->getInstantiable("coreir.reg")) {
     Args genargs = inst->getGenArgs();
-    ASSERT(genargs["en"]->get<ArgBool>()==false,"NYI registers with en");
-    ASSERT(genargs["clr"]->get<ArgBool>()==false,"NYI registers with en");
+    ASSERT(genargs["en"]->get<bool>()==false,"NYI registers with en");
+    ASSERT(genargs["clr"]->get<bool>()==false,"NYI registers with en");
     isLeaf = true;
   }
   else if (iref->getNamespace() == c->getNamespace("coreir")) {

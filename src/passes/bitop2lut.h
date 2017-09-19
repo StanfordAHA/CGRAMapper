@@ -130,7 +130,7 @@ bool bitconstReplacement(Instance* inst) {
   Context* c = inst->getContext();
   ModuleDef* def = inst->getContainer();
   string iname = inst->getInstname();
-  uint val = inst->getConfigArgs().at("value")->get<ArgInt>();
+  uint val = inst->getConfigArgs().at("value")->get<int>();
   ASSERT(val==0 || val==1,"invalid val for " + iname + ": " + to_string(val));
   //Add the Lut
   Instance* lut = def->addInstance(iname+"_lut","commonlib.lutN",Args(),{{"init",c->argInt(val)}});
