@@ -1,6 +1,9 @@
 dist: trusty
 language: c
-sudo: false
+sudo: true
+
+cache:
+    apt: true
 
 addons:
   apt:
@@ -8,19 +11,22 @@ addons:
     - ubuntu-toolchain-r-test
     packages:
       - g++-4.9
+      - python3
+      - python-virtualenv
 
 before_install:
   - git clone -b dev https://github.com/rdaly525/coreir.git
   - export COREIRCONFIG="g++-4.9";
   - export COREIR=`pwd`/coreir
   - export LD_LIBRARY_PATH=`pwd`/coreir/lib:$LD_LIBRARY_PATH
-  - pip3 install virtualenv
   - virtualenv --python=python3 env
   - source env/bin/activate
   - pip install pytest  
   - cd coreir
-  - make -j2 py
+  - make -j2 all
+  - sudo make -j2 install
   - cd -
+  - pip install coreir
   - make -j2 all
 
 script:
