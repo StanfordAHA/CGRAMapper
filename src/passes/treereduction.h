@@ -121,13 +121,13 @@ bool MapperPasses::TreeReduction::runOnModule(Module* m) {
 
     // create tree version
     string opName = getOpName(headInst);
-    auto arg_op = c->argString("coreir." + opName);
+    auto arg_op = Const("coreir." + opName);
 
-    auto arg_N = c->argInt(inputs.size());
+    auto arg_N = Const(inputs.size());
 
     Type* out_type = headInst->sel("out")->getType();
     assert(out_type->getKind() == Type::TypeKind::TK_Array);
-    auto arg_width = c->argInt(static_cast<ArrayType*>(out_type)->getLen());
+    auto arg_width = Const(static_cast<ArrayType*>(out_type)->getLen());
 
     string tree_name = headInst->getInstname() + "_tree";
 

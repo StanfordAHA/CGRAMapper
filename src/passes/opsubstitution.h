@@ -66,7 +66,7 @@ bool NegReplacement(Instance* neg) {
   string iname = neg->getInstname();
   //Add the ule + not instances
   Instance* sub = def->addInstance(iname+"_sub","coreir.sub");
-  Instance* zero = def->addInstance(iname + "_not","coreir.const",Args(),{{"value",c->argInt(0)}});
+  Instance* zero = def->addInstance(iname + "_not","coreir.const",Args(),{{"value",Const(0)}});
   def->connect(sub->sel("in0"),zero->sel("out"));
   
   //Isolate the instance

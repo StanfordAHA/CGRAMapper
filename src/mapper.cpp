@@ -59,37 +59,36 @@ void getAllIOPaths(Wireable* w, IOpaths& paths) {
 }
 
 void addIOs(Module* top) {
-  Context* c = top->getContext();
   ModuleDef* mdef = top->getDef();
 
-  Args aWidth({{"width",c->argInt(16)}});
+  Args aWidth({{"width",Const(16)}});
   IOpaths iopaths;
   getAllIOPaths(mdef->getInterface(), iopaths);
   Instance* pt = addPassthrough(mdef->getInterface(),"_self");
   for (auto path : iopaths.IO16) {
     string ioname = "io16in_" + join(++path.begin(),path.end(),string("_"));
-    mdef->addInstance(ioname,"cgralib.IO",aWidth,{{"mode",c->argString("i")}});
+    mdef->addInstance(ioname,"cgralib.IO",aWidth,{{"mode",Const("i")}});
     path[0] = "in";
     path.insert(path.begin(),"_self");
     mdef->connect({ioname,"out"},path);
   }
   for (auto path : iopaths.IO16in) {
     string ioname = "io16_" + join(++path.begin(),path.end(),string("_"));
-    mdef->addInstance(ioname,"cgralib.IO",aWidth,{{"mode",c->argString("o")}});
+    mdef->addInstance(ioname,"cgralib.IO",aWidth,{{"mode",Const("o")}});
     path[0] = "in";
     path.insert(path.begin(),"_self");
     mdef->connect({ioname,"in"},path);
   }
   for (auto path : iopaths.IO1) {
     string ioname = "io1in_" + join(++path.begin(),path.end(),string("_"));
-    mdef->addInstance(ioname,"cgralib.bitIO",{{"mode",c->argString("i")}});
+    mdef->addInstance(ioname,"cgralib.bitIO",{{"mode",Const("i")}});
     path[0] = "in";
     path.insert(path.begin(),"_self");
     mdef->connect({ioname,"out"},path);
   }
   for (auto path : iopaths.IO1in) {
     string ioname = "io1_" + join(++path.begin(),path.end(),string("_"));
-    mdef->addInstance(ioname,"cgralib.bitIO",{{"mode",c->argString("o")}});
+    mdef->addInstance(ioname,"cgralib.bitIO",{{"mode",Const("o")}});
     path[0] = "in";
     path.insert(path.begin(),"_self");
     mdef->connect({ioname,"in"},path);
@@ -126,10 +125,10 @@ int main(int argc, char *argv[]){
   //SLight hack. Add a default width for all of coreir
   for (auto cgenmap : c->getNamespace("coreir")->getGenerators()) {
     if (cgenmap.second->getGenParams().count("width")) {
-      cgenmap.second->addDefaultGenArgs({{"width",c->argInt(16)}});
+      cgenmap.second->addDefaultGenArgs({{"width",Const(16)}});
     }
   }
-  c->getGenerator("commonlib.lutN")->addDefaultGenArgs({{"N",c->argInt(3)}});
+  c->getGenerator("commonlib.lutN")->addDefaultGenArgs({{"N",Const(3)}});
 
   c->getPassManager()->setVerbosity(true);
 

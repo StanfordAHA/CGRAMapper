@@ -17,7 +17,8 @@ bool lutReplacement(Instance* inst) {
   Context* c = inst->getContext();
   ModuleDef* def = inst->getContainer();
   string iname = inst->getInstname();
-  Args bitPEArgs({{"LUT_init",inst->getConfigArgs()["init"]}});
+  Args configargs = inst->getConfigArgs();
+  Args bitPEArgs({{"LUT_init",configargs["init"]}});
   Instance* bitPE = def->addInstance(iname+"_bitPE","cgralib.BitPE",Args(),bitPEArgs);
   
   //Isolate the instance
@@ -43,7 +44,7 @@ bool binaryOpReplacement(Instance* inst) {
   string iname = inst->getInstname();
   //For now just use the coreir lib name as the op
   string opstr = inst->getInstantiableRef()->getName();
-  Args dataPEArgs({{"op",c->argString(opstr)}});
+  Args dataPEArgs({{"op",Const(opstr)}});
   Instance* dataPE = def->addInstance(iname+"_PE","cgralib.DataPE",Args(),dataPEArgs);
   
   //Isolate the instance
@@ -68,7 +69,7 @@ bool compOpReplacement(Instance* inst) {
   string iname = inst->getInstname();
   //For now just use the coreir lib name as the op
   string opstr = inst->getInstantiableRef()->getName();
-  Args PEArgs({{"op",c->argString(opstr)}});
+  Args PEArgs({{"op",Const(opstr)}});
   Instance* PE = def->addInstance(iname+"_PE","cgralib.PE",Args(),PEArgs);
   
   //Isolate the instance
@@ -93,7 +94,7 @@ bool muxOpReplacement(Instance* inst) {
   string iname = inst->getInstname();
   //For now just use the coreir lib name as the op
   string opstr = inst->getInstantiableRef()->getName();
-  Args PEArgs({{"op",c->argString("mux")}});
+  Args PEArgs({{"op",Const("mux")}});
   Instance* PE = def->addInstance(iname+"_PE","cgralib.PE",Args(),PEArgs);
   
   //Isolate the instance
