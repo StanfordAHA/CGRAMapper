@@ -2,11 +2,10 @@ import coreir
 
 def test_load_core(libs, files):
     print()
-    context = coreir.Context()
-    for lib in libs:
-        context.load_library(lib)
-
     for file in files:
+        context = coreir.Context()
+        for lib in libs:
+            context.load_library(lib)
         top_module = context.load_from_file(file)
         assert top_module is not None
         top_def = top_module.definition
@@ -40,6 +39,9 @@ def test_load_core(libs, files):
 
             elif inst_type == 'reg':
                 modules[inst_name]['type'] = 'Reg'
+                modules[inst_name]['conf'] = None
+            elif inst_type == 'bitreg':
+                modules[inst_name]['type'] = 'BitReg'
                 modules[inst_name]['conf'] = None
 
             elif inst_type == 'Mem':
@@ -119,6 +121,11 @@ _PORT_TRANSLATION = {
 
     'Reg' : {
         'in'  : 'a',
+        'out' : 'out',
+    },
+    
+    'BitReg' : {
+        'in'  : 'd',
         'out' : 'out',
     },
 

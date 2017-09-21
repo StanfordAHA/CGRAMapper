@@ -22,6 +22,7 @@ bool MapperPasses::VerifyTechMapping::runOnInstanceGraphNode(InstanceGraphNode& 
   //  Or a module with a definition
   if (i == c->getInstantiable("coreir.const")) return false;
   if (i == c->getInstantiable("coreir.reg")) return false;
+  if (i == c->getInstantiable("coreir.bitreg")) return false;
   if (i->getNamespace() == c->getNamespace("cgralib")) return false;
   ASSERT(isa<Module>(i),"NYI mapping " +i->toString() + ". Needs to be a module with def!");
   ASSERT(cast<Module>(i)->hasDef(),"NYI mapping " +i->toString() + ". Needs to be a module with def!");
