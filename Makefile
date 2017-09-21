@@ -17,8 +17,8 @@ $(MAPPED_FILES): $(BIN)
 	$(BIN) examples/$(@F) $(@)
 
 .PHONY: pytest
-pytest: test
-	pytest --libs cgralib --files $(MAPPED_FILES) -- tests
+pytest:
+	pytest -s --libs cgralib --files $(MAPPED_FILES) -- tests
 
 .PHONY: travis
 travis:
