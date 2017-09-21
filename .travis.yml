@@ -31,7 +31,7 @@ before_install:
 
 script:
   - make test
-#  - make pytest
+  - make pytest
 
 compiler:
   - gcc
