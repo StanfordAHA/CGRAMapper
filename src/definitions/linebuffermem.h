@@ -22,7 +22,7 @@ void LoadDefinition_LinebufferMem(Context* c) {
   smax->setGeneratorDefFromFun([](ModuleDef* def,Context* c, Type* t, Args args) {
     uint width = args.at("width")->get<int>();
     ASSERT(width==16,"NYI non 16");
-    def->addInstance("cgramax","cgralib.PE",{},{{"op",Const("max")}});
+    def->addInstance("cgramax","cgralib.PE",{},{{"op_kind",Const("combined")},{"alu_op",Const("max")}});
     def->connect("self.in0","cgramax.data.in.0");
     def->connect("self.in1","cgramax.data.in.1");
     def->connect("self.out","cgramax.data.out");

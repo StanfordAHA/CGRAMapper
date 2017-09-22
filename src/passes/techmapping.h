@@ -18,8 +18,8 @@ bool lutReplacement(Instance* inst) {
   ModuleDef* def = inst->getContainer();
   string iname = inst->getInstname();
   Args configargs = inst->getConfigArgs();
-  Args bitPEArgs({{"LUT_init",configargs["init"]}});
-  Instance* bitPE = def->addInstance(iname+"_bitPE","cgralib.BitPE",Args(),bitPEArgs);
+  Args bitPEArgs({{"op_kind",Const("bit")},{"lut_value",configargs["init"]}});
+  Instance* bitPE = def->addInstance(iname+"_bitPE","cgralib.PE",Args(),bitPEArgs);
   
   //Isolate the instance
   Instance* pt = addPassthrough(inst,"_pt"+c->getUnique());
@@ -44,8 +44,8 @@ bool binaryOpReplacement(Instance* inst) {
   string iname = inst->getInstname();
   //For now just use the coreir lib name as the op
   string opstr = inst->getInstantiableRef()->getName();
-  Args dataPEArgs({{"op",Const(opstr)}});
-  Instance* dataPE = def->addInstance(iname+"_PE","cgralib.DataPE",Args(),dataPEArgs);
+  Args dataPEArgs({{"op_kind",Const("alu")},{"alu_op",Const(opstr)}});
+  Instance* dataPE = def->addInstance(iname+"_PE","cgralib.PE",Args(),dataPEArgs);
   
   //Isolate the instance
   Instance* pt = addPassthrough(inst,"_pt"+c->getUnique());
@@ -69,7 +69,7 @@ bool compOpReplacement(Instance* inst) {
   string iname = inst->getInstname();
   //For now just use the coreir lib name as the op
   string opstr = inst->getInstantiableRef()->getName();
-  Args PEArgs({{"op",Const(opstr)}});
+  Args PEArgs({{"op_kind",Const("bit")},{"alu_op",Const(opstr)}});
   Instance* PE = def->addInstance(iname+"_PE","cgralib.PE",Args(),PEArgs);
   
   //Isolate the instance
@@ -94,7 +94,7 @@ bool muxOpReplacement(Instance* inst) {
   string iname = inst->getInstname();
   //For now just use the coreir lib name as the op
   string opstr = inst->getInstantiableRef()->getName();
-  Args PEArgs({{"op",Const("mux")}});
+  Args PEArgs({{"op_kind",Const("bit")},{"alu_op",Const("mux")}});
   Instance* PE = def->addInstance(iname+"_PE","cgralib.PE",Args(),PEArgs);
   
   //Isolate the instance
@@ -147,7 +147,7 @@ void MapperPasses::TechMapping::setVisitorInfo() {
   addVisitorFunction(c->getInstantiable("commonlib.smax"),rungenAndReplace);
   
   //TODO what about dlshl
-  for (auto str : {"add","sub","dshl","dashr","mul","or","and","xor"}) {
+  for (auto str : {"add","sub","shl","ashr","mul","or","and","xor"}) {
     addVisitorFunction(c->getInstantiable("coreir." + string(str)),binaryOpReplacement);
   }
 

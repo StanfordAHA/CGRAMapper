@@ -33,7 +33,7 @@ def test_load_core(libs, files):
             elif inst_type == 'IO':
                 modules[inst_name]['type'] = 'IO'
                 modules[inst_name]['conf'] = inst.config['mode'].value
-            elif inst_type == 'bitIO':
+            elif inst_type == 'BitIO':
                 modules[inst_name]['type'] = 'BitIO'
                 modules[inst_name]['conf'] = inst.config['mode'].value
 
@@ -56,7 +56,7 @@ def test_load_core(libs, files):
                 }
 
             else:
-                raise ValueError("Unknown module_name `{}' in `{}' expected <`PE', `DataPE', `BitPE', `Const', `IO', `bitIO',  `Reg', `Mem'>".format(inst_type, file))
+                raise ValueError("Unknown module_name `{}' in `{}' expected <`PE', `DataPE', `BitPE', `Const', `IO', `BitIO',  `Reg', `Mem'>".format(inst_type, file))
 
         ties = set()
         for con in top_module.directed_module.connections:

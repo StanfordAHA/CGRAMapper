@@ -81,14 +81,14 @@ void addIOs(Module* top) {
   }
   for (auto path : iopaths.IO1) {
     string ioname = "io1in_" + join(++path.begin(),path.end(),string("_"));
-    mdef->addInstance(ioname,"cgralib.bitIO",{{"mode",Const("i")}});
+    mdef->addInstance(ioname,"cgralib.BitIO",{{"mode",Const("i")}});
     path[0] = "in";
     path.insert(path.begin(),"_self");
     mdef->connect({ioname,"out"},path);
   }
   for (auto path : iopaths.IO1in) {
     string ioname = "io1_" + join(++path.begin(),path.end(),string("_"));
-    mdef->addInstance(ioname,"cgralib.bitIO",{{"mode",Const("o")}});
+    mdef->addInstance(ioname,"cgralib.BitIO",{{"mode",Const("o")}});
     path[0] = "in";
     path.insert(path.begin(),"_self");
     mdef->connect({ioname,"in"},path);

@@ -214,7 +214,7 @@
             ],
             [
               "sub_770_773.in1",
-              "dashr_771_772.out"
+              "ashr_771_772.out"
             ],
             [
               "sub_770_773.in0",
@@ -322,15 +322,15 @@
             ],
             [
               "mul_768_768.in1",
-              "dashr_762_763.out"
+              "ashr_762_763.out"
             ],
             [
               "mul_768_768.in0",
-              "dashr_762_763.out"
+              "ashr_762_763.out"
             ],
             [
               "mul_766_766.out",
-              "dashr_771_772.in0"
+              "ashr_771_772.in0"
             ],
             [
               "mul_766_766.in1",
@@ -342,11 +342,11 @@
             ],
             [
               "mul_764_765.in1",
-              "dashr_761_763.out"
+              "ashr_761_763.out"
             ],
             [
               "mul_764_765.in0",
-              "dashr_760_763.out"
+              "ashr_760_763.out"
             ],
             [
               "mul_731_731.out",
@@ -409,39 +409,39 @@
               "_635const2_.out"
             ],
             [
-              "dashr_771_772.in1",
+              "ashr_771_772.in1",
               "_772const4_.out"
             ],
             [
-              "dashr_762_763.in1",
+              "ashr_762_763.in1",
               "_763const7_$2.out"
             ],
             [
-              "dashr_762_763.in0",
+              "ashr_762_763.in0",
               "add_727_728.out"
             ],
             [
-              "dashr_761_763.out",
+              "ashr_761_763.out",
               "add_764_765.in1"
             ],
             [
-              "dashr_761_763.in1",
+              "ashr_761_763.in1",
               "_763const7_$1.out"
             ],
             [
-              "dashr_761_763.in0",
+              "ashr_761_763.in0",
               "add_757_758.out"
             ],
             [
-              "dashr_760_763.out",
+              "ashr_760_763.out",
               "add_764_765.in0"
             ],
             [
-              "dashr_760_763.in1",
+              "ashr_760_763.in1",
               "_763const7_.out"
             ],
             [
-              "dashr_760_763.in0",
+              "ashr_760_763.in0",
               "add_675_676.out"
             ],
             [
@@ -875,29 +875,29 @@
             "bitand_791_792": {
               "modref": "coreir.bitand"
             },
-            "dashr_760_763": {
+            "ashr_760_763": {
               "genargs": {
                 "width": 16
               },
-              "genref": "coreir.dashr"
+              "genref": "coreir.ashr"
             },
-            "dashr_761_763": {
+            "ashr_761_763": {
               "genargs": {
                 "width": 16
               },
-              "genref": "coreir.dashr"
+              "genref": "coreir.ashr"
             },
-            "dashr_762_763": {
+            "ashr_762_763": {
               "genargs": {
                 "width": 16
               },
-              "genref": "coreir.dashr"
+              "genref": "coreir.ashr"
             },
-            "dashr_771_772": {
+            "ashr_771_772": {
               "genargs": {
                 "width": 16
               },
-              "genref": "coreir.dashr"
+              "genref": "coreir.ashr"
             },
             "lb_grad_xx_2_stencil_update_stream": {
               "genargs": {
