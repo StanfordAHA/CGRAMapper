@@ -19,16 +19,17 @@ def test_load_core(libs, files):
 
             if inst_type == 'PE':
                 modules[inst_name]['type'] = 'PE'
-                modules[inst_name]['conf'] = inst.config['op'].value
-            elif inst_type == 'DataPE':
-                modules[inst_name]['type'] = 'DataPE'
-                modules[inst_name]['conf'] = inst.config['op'].value
-            elif inst_type == 'BitPE':
-                modules[inst_name]['type'] = 'BitPE'
-                modules[inst_name]['conf'] = inst.config['LUT_init'].value
-            elif inst_type == 'const':
-                modules[inst_name]['type'] = 'Const'
-                modules[inst_name]['conf'] = inst.config['value'].value
+
+                op_kind = inst.config['op_kind'].value 
+
+                if op_kind in ('alu', 'combined'):
+                    modules[inst_name]['alu_op'] = inst.config['alu_op'].value
+
+                if op_kind in ('bit', 'combined'):
+                    modules[inst_name]['lut_value'] = inst.config['lut_value'].value
+
+                if op_kind not in ('bit', 'alu', 'combined'):
+                    raise ValueError("Unkown op_kind `{}' in `{}' expected <`bit', `data', `combined'>".format(file, op_kind))
 
             elif inst_type == 'IO':
                 modules[inst_name]['type'] = 'IO'
@@ -54,6 +55,13 @@ def test_load_core(libs, files):
                         'chain_enable'      : '0', #HACK
                         'tile_en'           : '1', #HACK
                 }
+
+            elif inst_type == 'const':
+                modules[inst_name]['type'] = 'Const'
+                modules[inst_name]['conf'] = inst.config['value'].value
+            elif inst_type == 'bitconst':
+                modules[inst_name]['type'] = 'Const'
+                modules[inst_name]['conf'] = inst.config['value'].value
 
             else:
                 raise ValueError("Unknown module_name `{}' in `{}' expected <`PE', `DataPE', `BitPE', `Const', `IO', `BitIO',  `Reg', `Mem'>".format(inst_type, file))
@@ -92,19 +100,6 @@ _PORT_TRANSLATION = {
         'bit.out'   : 'pe_out_p',
     },
     
-    'BitPE' : {
-        'bit.in.0'  : 'd',
-        'bit.in.1'  : 'e',
-        'bit.in.2'  : 'f',
-        'bit.out'   : 'pe_out_p',
-    },
-
-    'DataPE' : {
-        'data.in.0' : 'a',
-        'data.in.1' : 'b',
-        'data.out'  : 'pe_out_res',
-    },
-
     'Const' : {
         'out' : 'out',
     },
