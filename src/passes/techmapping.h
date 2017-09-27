@@ -69,7 +69,7 @@ bool compOpReplacement(Instance* inst) {
   string iname = inst->getInstname();
   //For now just use the coreir lib name as the op
   string opstr = inst->getInstantiableRef()->getName();
-  Args PEArgs({{"op_kind",Const("bit")},{"alu_op",Const(opstr)}});
+  Args PEArgs({{"op_kind",Const("combined")},{"alu_op",Const(opstr)}});
   Instance* PE = def->addInstance(iname+"_PE","cgralib.PE",Args(),PEArgs);
   
   //Isolate the instance
@@ -94,7 +94,7 @@ bool muxOpReplacement(Instance* inst) {
   string iname = inst->getInstname();
   //For now just use the coreir lib name as the op
   string opstr = inst->getInstantiableRef()->getName();
-  Args PEArgs({{"op_kind",Const("bit")},{"alu_op",Const("mux")}});
+  Args PEArgs({{"op_kind",Const("combined")},{"alu_op",Const("mux")}});
   Instance* PE = def->addInstance(iname+"_PE","cgralib.PE",Args(),PEArgs);
   
   //Isolate the instance
