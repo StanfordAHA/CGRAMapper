@@ -46,6 +46,7 @@ bool binaryOpReplacement(Instance* inst) {
   string opstr = inst->getInstantiableRef()->getName();
   Values dataPEArgs({{"alu_op",Const::make(c,opstr)}});
   Instance* dataPE = def->addInstance(iname+"_PE","cgralib.PE",{{"op_kind",Const::make(c,"alu")}},dataPEArgs);
+
   
   //Isolate the instance
   Instance* pt = addPassthrough(inst,"_pt"+c->getUnique());
@@ -71,6 +72,7 @@ bool compOpReplacement(Instance* inst) {
   string opstr = inst->getInstantiableRef()->getName();
   Values PEArgs({{"alu_op",Const::make(c,opstr)}});
   Instance* PE = def->addInstance(iname+"_PE","cgralib.PE",{{"op_kind",Const::make(c,"combined")}},PEArgs);
+
   
   //Isolate the instance
   Instance* pt = addPassthrough(inst,"_pt"+c->getUnique());
@@ -96,6 +98,7 @@ bool muxOpReplacement(Instance* inst) {
   string opstr = inst->getInstantiableRef()->getName();
   Values PEArgs({{"alu_op",Const::make(c,"mux")}});
   Instance* PE = def->addInstance(iname+"_PE","cgralib.PE",{{"op_kind",Const::make(c,"combined")}},PEArgs);
+
   
   //Isolate the instance
   Instance* pt = addPassthrough(inst,"_pt"+c->getUnique());
