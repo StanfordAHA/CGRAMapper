@@ -10,12 +10,12 @@
         "instances":{
           "_147_pt":{
             "genref":"coreir.passthrough",
-            "genargs":{"type":["Array",16,"Bit"]}
+            "genargs":{"type":["CoreIRType",["Array",16,"Bit"]]}
           },
           "_148const15_":{
             "genref":"coreir.const",
             "genargs":{"width":["Int",16]},
-            "modargs":{"value":[["BitVector",16],"0000000000001111"]}
+            "modargs":{"value":[["BitVector",16],2016411663]}
           },
           "neq_147_148_149":{
             "genref":"commonlib.neq",

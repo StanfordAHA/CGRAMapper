@@ -11,34 +11,34 @@
           "0const0_":{
             "genref":"coreir.const",
             "genargs":{"width":["Int",16]},
-            "modargs":{"value":[["BitVector",16],"0000000000000000"]}
+            "modargs":{"value":[["BitVector",16],60489728]}
           },
           "3const3_":{
             "genref":"coreir.const",
             "genargs":{"width":["Int",16]},
-            "modargs":{"value":[["BitVector",16],"0000000000000011"]}
+            "modargs":{"value":[["BitVector",16],-64618493]}
           },
           "5const5_":{
             "genref":"coreir.const",
             "genargs":{"width":["Int",16]},
-            "modargs":{"value":[["BitVector",16],"0000000000000101"]}
+            "modargs":{"value":[["BitVector",16],-64618491]}
           },
           "7const7_":{
             "genref":"coreir.const",
             "genargs":{"width":["Int",16]},
-            "modargs":{"value":[["BitVector",16],"0000000000000111"]}
+            "modargs":{"value":[["BitVector",16],-64618489]}
           },
           "_341_pt":{
             "genref":"coreir.passthrough",
-            "genargs":{"type":["Array",16,"Bit"]}
+            "genargs":{"type":["CoreIRType",["Array",16,"Bit"]]}
           },
           "_345_pt":{
             "genref":"coreir.passthrough",
-            "genargs":{"type":["Array",16,"Bit"]}
+            "genargs":{"type":["CoreIRType",["Array",16,"Bit"]]}
           },
           "_349_pt":{
             "genref":"coreir.passthrough",
-            "genargs":{"type":["Array",16,"Bit"]}
+            "genargs":{"type":["CoreIRType",["Array",16,"Bit"]]}
           },
           "add_340_343_344":{
             "genref":"coreir.add",

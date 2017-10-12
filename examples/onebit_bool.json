@@ -10,22 +10,22 @@
         "instances":{
           "_147_pt":{
             "genref":"coreir.passthrough",
-            "genargs":{"type":["Array",16,"Bit"]}
+            "genargs":{"type":["CoreIRType",["Array",16,"Bit"]]}
           },
           "_148const50_":{
             "genref":"coreir.const",
             "genargs":{"width":["Int",16]},
-            "modargs":{"value":[["BitVector",16],"0000000000110010"]}
+            "modargs":{"value":[["BitVector",16],1738801202]}
           },
           "_150const20_":{
             "genref":"coreir.const",
             "genargs":{"width":["Int",16]},
-            "modargs":{"value":[["BitVector",16],"0000000000010100"]}
+            "modargs":{"value":[["BitVector",16],1738801172]}
           },
           "_152const10_":{
             "genref":"coreir.const",
             "genargs":{"width":["Int",16]},
-            "modargs":{"value":[["BitVector",16],"0000000000001010"]}
+            "modargs":{"value":[["BitVector",16],1738801162]}
           },
           "bitand_153_151_154":{
             "modref":"coreir.bitand"

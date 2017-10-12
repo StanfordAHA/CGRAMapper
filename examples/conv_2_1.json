@@ -11,25 +11,25 @@
           "_334const0_":{
             "genref":"coreir.const",
             "genargs":{"width":["Int",16]},
-            "modargs":{"value":[["BitVector",16],"0000000000000000"]}
+            "modargs":{"value":[["BitVector",16],52297728]}
           },
           "_336_pt":{
             "genref":"coreir.passthrough",
-            "genargs":{"type":["Array",16,"Bit"]}
+            "genargs":{"type":["CoreIRType",["Array",16,"Bit"]]}
           },
           "_338const7_":{
             "genref":"coreir.const",
             "genargs":{"width":["Int",16]},
-            "modargs":{"value":[["BitVector",16],"0000000000000111"]}
+            "modargs":{"value":[["BitVector",16],1608646663]}
           },
           "_338const7_$1":{
             "genref":"coreir.const",
             "genargs":{"width":["Int",16]},
-            "modargs":{"value":[["BitVector",16],"0000000000000111"]}
+            "modargs":{"value":[["BitVector",16],1608646663]}
           },
           "_341_pt":{
             "genref":"coreir.passthrough",
-            "genargs":{"type":["Array",16,"Bit"]}
+            "genargs":{"type":["CoreIRType",["Array",16,"Bit"]]}
           },
           "add_335_339_340":{
             "genref":"coreir.add",

@@ -11,25 +11,25 @@
           "_304const0_":{
             "genref":"coreir.const",
             "genargs":{"width":["Int",16]},
-            "modargs":{"value":[["BitVector",16],"0000000000000000"]}
+            "modargs":{"value":[["BitVector",16],47972352]}
           },
           "_306_pt":{
             "genref":"coreir.passthrough",
-            "genargs":{"type":["Array",16,"Bit"]}
+            "genargs":{"type":["CoreIRType",["Array",16,"Bit"]]}
           },
           "_308const5_":{
             "genref":"coreir.const",
             "genargs":{"width":["Int",16]},
-            "modargs":{"value":[["BitVector",16],"0000000000000101"]}
+            "modargs":{"value":[["BitVector",16],-1981284347]}
           },
           "_308const5_$1":{
             "genref":"coreir.const",
             "genargs":{"width":["Int",16]},
-            "modargs":{"value":[["BitVector",16],"0000000000000101"]}
+            "modargs":{"value":[["BitVector",16],-1981284347]}
           },
           "_311_pt":{
             "genref":"coreir.passthrough",
-            "genargs":{"type":["Array",16,"Bit"]}
+            "genargs":{"type":["CoreIRType",["Array",16,"Bit"]]}
           },
           "add_305_309_310":{
             "genref":"coreir.add",
