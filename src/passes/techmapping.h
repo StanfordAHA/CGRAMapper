@@ -17,9 +17,9 @@ bool lutReplacement(Instance* inst) {
   Context* c = inst->getContext();
   ModuleDef* def = inst->getContainer();
   string iname = inst->getInstname();
-  Args configargs = inst->getConfigArgs();
-  Args bitPEArgs({{"op_kind",Const("bit")},{"lut_value",configargs["init"]}});
-  Instance* bitPE = def->addInstance(iname+"_bitPE","cgralib.PE",Args(),bitPEArgs);
+  Values configargs = inst->getModArgs();
+  Values bitPEArgs({{"op_kind",Const::make(c,"bit")},{"lut_value",configargs["init"]}});
+  Instance* bitPE = def->addInstance(iname+"_bitPE","cgralib.PE",Values(),bitPEArgs);
   
   //Isolate the instance
   Instance* pt = addPassthrough(inst,"_pt"+c->getUnique());
@@ -44,8 +44,8 @@ bool binaryOpReplacement(Instance* inst) {
   string iname = inst->getInstname();
   //For now just use the coreir lib name as the op
   string opstr = inst->getInstantiableRef()->getName();
-  Args dataPEArgs({{"op_kind",Const("alu")},{"alu_op",Const(opstr)}});
-  Instance* dataPE = def->addInstance(iname+"_PE","cgralib.PE",Args(),dataPEArgs);
+  Values dataPEArgs({{"op_kind",Const::make(c,"alu")},{"alu_op",Const::make(c,opstr)}});
+  Instance* dataPE = def->addInstance(iname+"_PE","cgralib.PE",Values(),dataPEArgs);
   
   //Isolate the instance
   Instance* pt = addPassthrough(inst,"_pt"+c->getUnique());
@@ -69,8 +69,8 @@ bool compOpReplacement(Instance* inst) {
   string iname = inst->getInstname();
   //For now just use the coreir lib name as the op
   string opstr = inst->getInstantiableRef()->getName();
-  Args PEArgs({{"op_kind",Const("combined")},{"alu_op",Const(opstr)}});
-  Instance* PE = def->addInstance(iname+"_PE","cgralib.PE",Args(),PEArgs);
+  Values PEArgs({{"op_kind",Const::make(c,"combined")},{"alu_op",Const::make(c,opstr)}});
+  Instance* PE = def->addInstance(iname+"_PE","cgralib.PE",Values(),PEArgs);
   
   //Isolate the instance
   Instance* pt = addPassthrough(inst,"_pt"+c->getUnique());
@@ -94,8 +94,8 @@ bool muxOpReplacement(Instance* inst) {
   string iname = inst->getInstname();
   //For now just use the coreir lib name as the op
   string opstr = inst->getInstantiableRef()->getName();
-  Args PEArgs({{"op_kind",Const("combined")},{"alu_op",Const("mux")}});
-  Instance* PE = def->addInstance(iname+"_PE","cgralib.PE",Args(),PEArgs);
+  Values PEArgs({{"op_kind",Const::make(c,"combined")},{"alu_op",Const::make(c,"mux")}});
+  Instance* PE = def->addInstance(iname+"_PE","cgralib.PE",Values(),PEArgs);
   
   //Isolate the instance
   Instance* pt = addPassthrough(inst,"_pt"+c->getUnique());

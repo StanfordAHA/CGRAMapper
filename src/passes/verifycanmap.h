@@ -26,7 +26,7 @@ bool MapperPasses::VerifyCanMap::runOnInstance(Instance* inst) {
     isLeaf = true;
   }
   else if( iref == c->getInstantiable("coreir.reg")) {
-    Args genargs = inst->getGenArgs();
+    Values genargs = inst->getGenArgs();
     ASSERT(genargs["en"]->get<bool>()==false,"NYI registers with en");
     ASSERT(genargs["clr"]->get<bool>()==false,"NYI registers with en");
     isLeaf = true;
