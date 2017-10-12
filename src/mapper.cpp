@@ -58,37 +58,37 @@ void getAllIOPaths(Wireable* w, IOpaths& paths) {
   
 }
 
-void addIOs(Module* top) {
+void addIOs(Context* c, Module* top) {
   ModuleDef* mdef = top->getDef();
 
-  Args aWidth({{"width",Const(16)}});
+  Values aWidth({{"width",Const::make(c,16)}});
   IOpaths iopaths;
   getAllIOPaths(mdef->getInterface(), iopaths);
   Instance* pt = addPassthrough(mdef->getInterface(),"_self");
   for (auto path : iopaths.IO16) {
     string ioname = "io16in_" + join(++path.begin(),path.end(),string("_"));
-    mdef->addInstance(ioname,"cgralib.IO",aWidth,{{"mode",Const("i")}});
+    mdef->addInstance(ioname,"cgralib.IO",aWidth,{{"mode",Const::make(c,"i")}});
     path[0] = "in";
     path.insert(path.begin(),"_self");
     mdef->connect({ioname,"out"},path);
   }
   for (auto path : iopaths.IO16in) {
     string ioname = "io16_" + join(++path.begin(),path.end(),string("_"));
-    mdef->addInstance(ioname,"cgralib.IO",aWidth,{{"mode",Const("o")}});
+    mdef->addInstance(ioname,"cgralib.IO",aWidth,{{"mode",Const::make(c,"o")}});
     path[0] = "in";
     path.insert(path.begin(),"_self");
     mdef->connect({ioname,"in"},path);
   }
   for (auto path : iopaths.IO1) {
     string ioname = "io1in_" + join(++path.begin(),path.end(),string("_"));
-    mdef->addInstance(ioname,"cgralib.BitIO",{{"mode",Const("i")}});
+    mdef->addInstance(ioname,"cgralib.BitIO",{{"mode",Const::make(c,"i")}});
     path[0] = "in";
     path.insert(path.begin(),"_self");
     mdef->connect({ioname,"out"},path);
   }
   for (auto path : iopaths.IO1in) {
     string ioname = "io1_" + join(++path.begin(),path.end(),string("_"));
-    mdef->addInstance(ioname,"cgralib.BitIO",{{"mode",Const("o")}});
+    mdef->addInstance(ioname,"cgralib.BitIO",{{"mode",Const::make(c,"o")}});
     path[0] = "in";
     path.insert(path.begin(),"_self");
     mdef->connect({ioname,"in"},path);
@@ -125,10 +125,10 @@ int main(int argc, char *argv[]){
   //SLight hack. Add a default width for all of coreir
   for (auto cgenmap : c->getNamespace("coreir")->getGenerators()) {
     if (cgenmap.second->getGenParams().count("width")) {
-      cgenmap.second->addDefaultGenArgs({{"width",Const(16)}});
+      cgenmap.second->addDefaultGenArgs({{"width",Const::make(c,16)}});
     }
   }
-  c->getGenerator("commonlib.lutN")->addDefaultGenArgs({{"N",Const(3)}});
+  c->getGenerator("commonlib.lutN")->addDefaultGenArgs({{"N",Const::make(c,3)}});
 
   c->getPassManager()->setVerbosity(true);
 
@@ -148,7 +148,7 @@ int main(int argc, char *argv[]){
   //Tech mapping
   //Link in LBMem def
   LoadDefinition_LinebufferMem(c);
-  addIOs(top);
+  addIOs(c,top);
   c->addPass(new MapperPasses::TechMapping);
   c->addPass(new MapperPasses::VerifyTechMapping);
   c->runPasses({"techmapping","verifytechmapping"});

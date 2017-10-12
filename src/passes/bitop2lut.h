@@ -23,7 +23,7 @@ bool bitnotReplacement(Instance* inst) {
   string iname = inst->getInstname();
   
   //Add the Lut
-  Instance* lut = def->addInstance(iname+"_lut","commonlib.lutN",Args(),{{"init",Const(~B0)}});
+  Instance* lut = def->addInstance(iname+"_lut","commonlib.lutN",Values(),{{"init",Const::make(c,8,~B0)}});
   
   //Isolate the instance
   Instance* pt = addPassthrough(inst,"_pt"+c->getUnique());
@@ -44,7 +44,7 @@ bool bitandReplacement(Instance* inst) {
   string iname = inst->getInstname();
   
   //Add the Lut
-  Instance* lut = def->addInstance(iname+"_lut","commonlib.lutN",Args(),{{"init",Const(B0 & B1)}});
+  Instance* lut = def->addInstance(iname+"_lut","commonlib.lutN",Values(),{{"init",Const::make(c,8,B0 & B1)}});
   
   //Isolate the instance
   Instance* pt = addPassthrough(inst,"_pt"+c->getUnique());
@@ -66,7 +66,7 @@ bool bitorReplacement(Instance* inst) {
   string iname = inst->getInstname();
   
   //Add the Lut
-  Instance* lut = def->addInstance(iname+"_lut","commonlib.lutN",Args(),{{"init",Const(B0 | B1)}});
+  Instance* lut = def->addInstance(iname+"_lut","commonlib.lutN",Values(),{{"init",Const::make(c,8,B0 | B1)}});
   
   //Isolate the instance
   Instance* pt = addPassthrough(inst,"_pt"+c->getUnique());
@@ -87,7 +87,7 @@ bool bitxorReplacement(Instance* inst) {
   string iname = inst->getInstname();
   
   //Add the Lut
-  Instance* lut = def->addInstance(iname+"_lut","commonlib.lutN",Args(),{{"init",Const(B0 ^ B1)}});
+  Instance* lut = def->addInstance(iname+"_lut","commonlib.lutN",Values(),{{"init",Const::make(c,8,B0 ^ B1)}});
   
   //Isolate the instance
   Instance* pt = addPassthrough(inst,"_pt"+c->getUnique());
@@ -109,7 +109,7 @@ bool bitmuxReplacement(Instance* inst) {
   string iname = inst->getInstname();
   
   //Add the Lut
-  Instance* lut = def->addInstance(iname+"_lut","commonlib.lutN",Args(),{{"init",Const((~B2 & B0) | (B2 & B1))}});
+  Instance* lut = def->addInstance(iname+"_lut","commonlib.lutN",Values(),{{"init",Const::make(c,8,(~B2 & B0) | (B2 & B1))}});
   
   //Isolate the instance
   Instance* pt = addPassthrough(inst,"_pt"+c->getUnique());
@@ -130,10 +130,10 @@ bool bitconstReplacement(Instance* inst) {
   Context* c = inst->getContext();
   ModuleDef* def = inst->getContainer();
   string iname = inst->getInstname();
-  uint val = inst->getConfigArgs().at("value")->get<int>();
+  uint val = inst->getModArgs().at("value")->get<int>();
   ASSERT(val==0 || val==1,"invalid val for " + iname + ": " + to_string(val));
   //Add the Lut
-  Instance* lut = def->addInstance(iname+"_lut","commonlib.lutN",Args(),{{"init",Const(val)}});
+  Instance* lut = def->addInstance(iname+"_lut","commonlib.lutN",Values(),{{"init",Const::make(c,8,val)}});
   
   //Isolate the instance
   Instance* pt = addPassthrough(inst,"_pt"+c->getUnique());
