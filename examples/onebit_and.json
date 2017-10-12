@@ -10,12 +10,12 @@
         "instances":{
           "_315_pt":{
             "genref":"coreir.passthrough",
-            "genargs":{"type":["Array",16,"Bit"]}
+            "genargs":{"type":["CoreIRType",["Array",16,"Bit"]]}
           },
           "_316const5_":{
             "genref":"coreir.const",
             "genargs":{"width":["Int",16]},
-            "modargs":{"value":[["BitVector",16],"0000000000000101"]}
+            "modargs":{"value":[["BitVector",16],906035205]}
           },
           "and_315_316_317":{
             "genref":"coreir.and",
