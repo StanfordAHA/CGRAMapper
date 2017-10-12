@@ -1,61 +1,35 @@
-{
-  "namespaces": {
-    "global": {
-      "modules": {
-        "DesignTop": {
-          "connections": [
-            [
-              "self.in.0",
-              "mul_347_348.in0"
-            ],
-            [
-              "self.out",
-              "mul_347_348.out"
-            ],
-            [
-              "mul_347_348.in1",
-              "const2_.out"
-            ]
-          ],
-          "instances": {
-            "const2_": {
-              "configargs": {
-                "value": 2
-              },
-              "genargs": {
-                "width": 16
-              },
-              "genref": "coreir.const"
-            },
-            "mul_347_348": {
-              "genargs": {
-                "width": 16
-              },
-              "genref": "coreir.mul"
-            }
+{"top":"global.DesignTop",
+"namespaces":{
+  "global":{
+    "modules":{
+      "DesignTop":{
+        "type":["Record",{
+          "in":["Array",1,["Array",16,"BitIn"]],
+          "out":["Array",16,"Bit"]
+        }],
+        "instances":{
+          "_347_pt":{
+            "genref":"coreir.passthrough",
+            "genargs":{"type":["Array",16,"Bit"]}
           },
-          "type": [
-            "Record",
-            {
-              "in": [
-                "Array",
-                1,
-                [
-                  "Array",
-                  16,
-                  "BitIn"
-                ]
-              ],
-              "out": [
-                "Array",
-                16,
-                "Bit"
-              ]
-            }
-          ]
-        }
+          "_348const2_":{
+            "genref":"coreir.const",
+            "genargs":{"width":["Int",16]},
+            "modargs":{"value":[["BitVector",16],"0000000000000010"]}
+          },
+          "mul_347_348_349":{
+            "genref":"coreir.mul",
+            "genargs":{"width":["Int",16]}
+          }
+        },
+        "connections":[
+          ["_347_pt.in","self.in.0"],
+          ["_347_pt.out","mul_347_348_349.in0"],
+          ["_348const2_.out","mul_347_348_349.in1"],
+          ["mul_347_348_349.out","self.out"]
+        ]
       }
     }
-  },
-  "top": "global.DesignTop"
+  }
+}
 }

@@ -1,57 +1,35 @@
-{
-  "namespaces": {
-    "global": {
-      "modules": {
-        "DesignTop": {
-          "connections": [
-            [
-              "self.in.0",
-              "ult_147_148.in1"
-            ],
-            [
-              "ult_147_148.out",
-              "self.out"
-            ],
-            [
-              "ult_147_148.in0",
-              "const15_.out"
-            ]
-          ],
-          "instances": {
-            "const15_": {
-              "configargs": {
-                "value": 15
-              },
-              "genargs": {
-                "width": 16
-              },
-              "genref": "coreir.const"
-            },
-            "ult_147_148": {
-              "genargs": {
-                "width": 16
-              },
-              "genref": "coreir.ult"
-            }
+{"top":"global.DesignTop",
+"namespaces":{
+  "global":{
+    "modules":{
+      "DesignTop":{
+        "type":["Record",{
+          "in":["Array",1,["Array",16,"BitIn"]],
+          "out":"Bit"
+        }],
+        "instances":{
+          "_147_pt":{
+            "genref":"coreir.passthrough",
+            "genargs":{"type":["Array",16,"Bit"]}
           },
-          "type": [
-            "Record",
-            {
-              "in": [
-                "Array",
-                1,
-                [
-                  "Array",
-                  16,
-                  "BitIn"
-                ]
-              ],
-              "out": "Bit"
-            }
-          ]
-        }
+          "_148const15_":{
+            "genref":"coreir.const",
+            "genargs":{"width":["Int",16]},
+            "modargs":{"value":[["BitVector",16],"0000000000001111"]}
+          },
+          "neq_147_148_149":{
+            "genref":"commonlib.neq",
+            "genargs":{"width":["Int",16]}
+          }
+        },
+        "connections":[
+          ["_147_pt.in","self.in.0"],
+          ["_147_pt.out","neq_147_148_149.in0"],
+          ["_148const15_.out","neq_147_148_149.in1"],
+          ["neq_147_148_149.out","self.out"]
+        ]
       }
     }
-  },
-  "top": "global.DesignTop"
+  }
+}
 }
