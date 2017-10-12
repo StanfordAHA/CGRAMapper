@@ -141,8 +141,10 @@ std::string MapperPasses::TechMapping::ID = "techmapping";
 void MapperPasses::TechMapping::setVisitorInfo() {
   Context* c = this->getContext();
   addVisitorFunction(c->getInstantiable("commonlib.lutN"),lutReplacement);
-  addVisitorFunction(c->getInstantiable("coreir.uge"),compOpReplacement);
-  addVisitorFunction(c->getInstantiable("coreir.ule"),compOpReplacement);
+  for (auto str : {"uge","ule","eq"}) {
+    addVisitorFunction(c->getInstantiable("coreir."+string(str)),compOpReplacement);
+  }
+  
   addVisitorFunction(c->getInstantiable("coreir.mux"),muxOpReplacement);
   addVisitorFunction(c->getInstantiable("coreir.term"),removeInstance);
   addVisitorFunction(c->getInstantiable("coreir.bitterm"),removeInstance);
