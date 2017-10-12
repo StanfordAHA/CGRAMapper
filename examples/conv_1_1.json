@@ -11,7 +11,7 @@
           "_284const0_":{
             "genref":"coreir.const",
             "genargs":{"width":["Int",16]},
-            "modargs":{"value":[["BitVector",16],68354048]}
+            "modargs":{"value":[["BitVector",16],58982400]}
           },
           "_286_pt":{
             "genref":"coreir.passthrough",
@@ -20,7 +20,7 @@
           "_288const3_":{
             "genref":"coreir.const",
             "genargs":{"width":["Int",16]},
-            "modargs":{"value":[["BitVector",16],-1317601277]}
+            "modargs":{"value":[["BitVector",16],1579024387]}
           },
           "add_285_289_290":{
             "genref":"coreir.add",

@@ -15,7 +15,7 @@
           "_148const15_":{
             "genref":"coreir.const",
             "genargs":{"width":["Int",16]},
-            "modargs":{"value":[["BitVector",16],2016411663]}
+            "modargs":{"value":[["BitVector",16],-909705201]}
           },
           "neq_147_148_149":{
             "genref":"commonlib.neq",

@@ -11,7 +11,7 @@
           "_304const0_":{
             "genref":"coreir.const",
             "genargs":{"width":["Int",16]},
-            "modargs":{"value":[["BitVector",16],47972352]}
+            "modargs":{"value":[["BitVector",16],72744960]}
           },
           "_306_pt":{
             "genref":"coreir.passthrough",
@@ -20,12 +20,12 @@
           "_308const5_":{
             "genref":"coreir.const",
             "genargs":{"width":["Int",16]},
-            "modargs":{"value":[["BitVector",16],-1981284347]}
+            "modargs":{"value":[["BitVector",16],-1580007419]}
           },
           "_308const5_$1":{
             "genref":"coreir.const",
             "genargs":{"width":["Int",16]},
-            "modargs":{"value":[["BitVector",16],-1981284347]}
+            "modargs":{"value":[["BitVector",16],-1580007419]}
           },
           "_311_pt":{
             "genref":"coreir.passthrough",
@@ -42,6 +42,10 @@
           "lb_p4_clamped_stencil_update_stream":{
             "genref":"commonlib.Linebuffer",
             "genargs":{"bitwidth":["Int",16], "image_width":["Int",9], "stencil_height":["Int",1], "stencil_width":["Int",2]}
+          },
+          "lb_p4_clamped_stencil_update_stream_wen":{
+            "modref":"coreir.bitconst",
+            "modargs":{"value":["Int",1]}
           },
           "mul_307_308_309":{
             "genref":"coreir.mul",
@@ -64,7 +68,8 @@
           ["add_305_309_310.out","add_305_313_314.in0"],
           ["add_305_313_314.in1","mul_312_308_313.out"],
           ["add_305_313_314.out","self.out"],
-          ["lb_p4_clamped_stencil_update_stream.in","self.in.0"]
+          ["lb_p4_clamped_stencil_update_stream.in","self.in.0"],
+          ["lb_p4_clamped_stencil_update_stream.wen","lb_p4_clamped_stencil_update_stream_wen.out"]
         ]
       }
     }

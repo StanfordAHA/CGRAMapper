@@ -15,7 +15,7 @@
           "_316const5_":{
             "genref":"coreir.const",
             "genargs":{"width":["Int",16]},
-            "modargs":{"value":[["BitVector",16],906035205]}
+            "modargs":{"value":[["BitVector",16],1785069573]}
           },
           "and_315_316_317":{
             "genref":"coreir.and",
