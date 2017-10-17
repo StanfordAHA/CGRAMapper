@@ -133,7 +133,7 @@ bool bitconstReplacement(Instance* inst) {
   uint val = inst->getModArgs().at("value")->get<int>();
   ASSERT(val==0 || val==1,"invalid val for " + iname + ": " + to_string(val));
   //Add the Lut
-  Instance* lut = def->addInstance(iname+"_lut","commonlib.lutN",Values(),{{"init",Const::make(c,8,val)}});
+  Instance* lut = def->addInstance(iname+"_lut","commonlib.lutN",Values(),{{"init",Const::make(c,8,(-val)&0xFF)}});
   
   //Isolate the instance
   Instance* pt = addPassthrough(inst,"_pt"+c->getUnique());
