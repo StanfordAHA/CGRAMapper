@@ -8,25 +8,25 @@
           "out":["Array",16,"Bit"]
         }],
         "instances":{
-          "_347_pt":{
+          "_315_pt":{
             "genref":"coreir.passthrough",
             "genargs":{"type":["CoreIRType",["Array",16,"Bit"]]}
           },
-          "_348const2_":{
+          "_316const5_":{
             "genref":"coreir.const",
             "genargs":{"width":["Int",16]},
-            "modargs":{"value":[["BitVector",16],-1480261630]}
+            "modargs":{"value":[["BitVector",16],1785069573]}
           },
-          "mul_347_348_349":{
-            "genref":"coreir.mul",
+          "and_315_316_317":{
+            "genref":"coreir.and",
             "genargs":{"width":["Int",16]}
           }
         },
         "connections":[
-          ["_347_pt.in","self.in.0"],
-          ["_347_pt.out","mul_347_348_349.in0"],
-          ["_348const2_.out","mul_347_348_349.in1"],
-          ["mul_347_348_349.out","self.out"]
+          ["_315_pt.in","self.in.0"],
+          ["_315_pt.out","and_315_316_317.in0"],
+          ["_316const5_.out","and_315_316_317.in1"],
+          ["and_315_316_317.out","self.out"]
         ]
       }
     }

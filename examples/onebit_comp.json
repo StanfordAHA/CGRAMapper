@@ -5,28 +5,28 @@
       "DesignTop":{
         "type":["Record",{
           "in":["Array",1,["Array",16,"BitIn"]],
-          "out":["Array",16,"Bit"]
+          "out":"Bit"
         }],
         "instances":{
-          "_347_pt":{
+          "_147_pt":{
             "genref":"coreir.passthrough",
             "genargs":{"type":["CoreIRType",["Array",16,"Bit"]]}
           },
-          "_348const2_":{
+          "_148const15_":{
             "genref":"coreir.const",
             "genargs":{"width":["Int",16]},
-            "modargs":{"value":[["BitVector",16],-1480261630]}
+            "modargs":{"value":[["BitVector",16],-909705201]}
           },
-          "mul_347_348_349":{
-            "genref":"coreir.mul",
+          "neq_147_148_149":{
+            "genref":"commonlib.neq",
             "genargs":{"width":["Int",16]}
           }
         },
         "connections":[
-          ["_347_pt.in","self.in.0"],
-          ["_347_pt.out","mul_347_348_349.in0"],
-          ["_348const2_.out","mul_347_348_349.in1"],
-          ["mul_347_348_349.out","self.out"]
+          ["_147_pt.in","self.in.0"],
+          ["_147_pt.out","neq_147_148_149.in0"],
+          ["_148const15_.out","neq_147_148_149.in1"],
+          ["neq_147_148_149.out","self.out"]
         ]
       }
     }

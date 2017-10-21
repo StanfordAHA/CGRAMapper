@@ -1,0 +1,29 @@
+{"top":"global.DesignTop",
+"namespaces":{
+  "global":{
+    "modules":{
+      "DesignTop":{
+        "type":["Record", {
+          "out":"Bit",
+          "in":"BitIn"
+        }],
+        "instances":{
+          "xor1":{
+            "modref":"coreir.bitxor"
+          },
+          "reg1":{
+            "genref":"coreir.bitreg",
+            "genargs":{}
+          }
+        },
+        "connections":[
+          ["self.in","xor1.in0"],
+          ["self.in","xor1.in1"],
+          ["reg1.in","xor1.out"],
+          ["self.out","reg1.out"]
+        ]
+      }
+    }
+  }
+}
+}

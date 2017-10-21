@@ -1,11 +1,11 @@
 import coreir
 
 def test_load_core(libs, files):
-    context = coreir.Context()
-    for lib in libs:
-        context.load_library(lib)
-
+    print()
     for file in files:
+        context = coreir.Context()
+        for lib in libs:
+            context.load_library(lib)
         top_module = context.load_from_file(file)
         assert top_module is not None
         top_def = top_module.definition
@@ -17,34 +17,54 @@ def test_load_core(libs, files):
             inst_type = inst.module_name
             modules[inst_name] = dict()
 
-            if inst_type[:2] == 'PE':
+            if inst_type == 'PE':
                 modules[inst_name]['type'] = 'PE'
-                modules[inst_name]['conf'] = inst.config['op'].value
 
-            elif inst_type[:5] == 'Const':
-                modules[inst_name]['type'] = 'Const'
-                modules[inst_name]['conf'] = inst.config['value'].value
+                op_kind = inst.config['op_kind'].value 
 
-            elif inst_type[:2] == 'IO':
+                if op_kind in ('alu', 'combined'):
+                    modules[inst_name]['alu_op'] = inst.config['alu_op'].value
+
+                if op_kind in ('bit', 'combined'):
+                    modules[inst_name]['lut_value'] = inst.config['lut_value'].value
+
+                if op_kind not in ('bit', 'alu', 'combined'):
+                    raise ValueError("Unkown op_kind `{}' in `{}' expected <`bit', `data', `combined'>".format(file, op_kind))
+
+            elif inst_type == 'IO':
                 modules[inst_name]['type'] = 'IO'
                 modules[inst_name]['conf'] = inst.config['mode'].value
+            elif inst_type == 'BitIO':
+                modules[inst_name]['type'] = 'BitIO'
+                modules[inst_name]['conf'] = inst.config['mode'].value
 
-            elif inst_type[:3] == 'Reg':
+            elif inst_type == 'reg':
                 modules[inst_name]['type'] = 'Reg'
                 modules[inst_name]['conf'] = None
+            elif inst_type == 'bitreg':
+                modules[inst_name]['type'] = 'BitReg'
+                modules[inst_name]['conf'] = None
 
-            elif inst_type[:3] == 'Mem':
+            elif inst_type == 'Mem':
                 modules[inst_name]['type'] = 'Mem'
+                assert inst.config['mode'].value in ('linebuffer', 'fifo', 'ram')
                 modules[inst_name]['conf'] = {
-                        'mode'              : 'linebuffer', #HACK inst.get_config_value('mode'),
-                        'fifo_depth'        : inst.generator_args['depth'].value,
-                        'almost_full_count' : '0', #HACK
+                        'mode'              : inst.config['mode'].value,
+                        'fifo_depth'        : inst.config['fifo_depth'].value,
+                        'almost_full_count' : inst.config['almost_full_cnt'].value,
                         'chain_enable'      : '0', #HACK
                         'tile_en'           : '1', #HACK
                 }
 
+            elif inst_type == 'const':
+                modules[inst_name]['type'] = 'Const'
+                modules[inst_name]['conf'] = inst.config['value'].value
+            elif inst_type == 'bitconst':
+                modules[inst_name]['type'] = 'Const'
+                modules[inst_name]['conf'] = inst.config['value'].value
+
             else:
-                raise ValueError("Unknown module_name '{}' expected <'PE', 'Const', 'IO', 'Reg', 'Mem'>".format(inst_type))
+                raise ValueError("Unknown module_name `{}' in `{}' expected <`PE', `DataPE', `BitPE', `Const', `IO', `BitIO',  `Reg', `Mem'>".format(inst_type, file))
 
         ties = set()
         for con in top_module.directed_module.connections:
@@ -67,15 +87,19 @@ def test_load_core(libs, files):
             tie = (src_name, src_port, dst_name, dst_port, width)
             ties.add(tie)
 
+        print("{}: PASSED".format(file))
+
 _PORT_TRANSLATION = {
     'PE' : {
         'data.in.0' : 'a',
         'data.in.1' : 'b',
         'data.out'  : 'pe_out_res',
         'bit.in.0'  : 'd',
+        'bit.in.1'  : 'e',
+        'bit.in.2'  : 'f',
         'bit.out'   : 'pe_out_p',
     },
-
+    
     'Const' : {
         'out' : 'out',
     },
@@ -85,8 +109,18 @@ _PORT_TRANSLATION = {
         'out' : 'pe_out_res',
     },
 
+    'BitIO' : {
+        'in'  : 'd',
+        'out' : 'pe_out_p',
+    },
+
     'Reg' : {
         'in'  : 'a',
+        'out' : 'out',
+    },
+    
+    'BitReg' : {
+        'in'  : 'd',
         'out' : 'out',
     },
 

@@ -1,251 +1,100 @@
-{
-  "namespaces": {
-    "global": {
-      "modules": {
-        "DesignTop": {
-          "connections": [
-            [
-              "self.in.0",
-              "mul_3527.in0"
-            ],
-            [
-              "self.in.0",
-              "lb_p4_clamped_stencil_update_stream$mem_1.wdata"
-            ],
-            [
-              "mul_3527.out",
-              "add_350_353.in1"
-            ],
-            [
-              "mul_3527.in1",
-              "const7_.out"
-            ],
-            [
-              "mul_3475.out",
-              "add_345_348.in1"
-            ],
-            [
-              "mul_3475.in1",
-              "const5_.out"
-            ],
-            [
-              "mul_3475.in0",
-              "lb_p4_clamped_stencil_update_stream$mem_1.rdata"
-            ],
-            [
-              "mul_3423.out",
-              "add_340_343.in1"
-            ],
-            [
-              "mul_3423.in1",
-              "const3_.out"
-            ],
-            [
-              "mul_3423.in0",
-              "lb_p4_clamped_stencil_update_stream$mem_2.rdata"
-            ],
-            [
-              "lb_p4_clamped_stencil_update_stream$mem_2.wdata",
-              "lb_p4_clamped_stencil_update_stream$mem_1.rdata"
-            ],
-            [
-              "const0_.out",
-              "add_340_343.in0"
-            ],
-            [
-              "add_350_353.in0",
-              "add_345_348.out"
-            ],
-            [
-              "add_345_348.in0",
-              "add_340_343.out"
-            ]
-          ],
-          "instances": {
-            "add_340_343": {
-              "genargs": {
-                "width": 16
-              },
-              "genref": "coreir.add"
-            },
-            "add_345_348": {
-              "genargs": {
-                "width": 16
-              },
-              "genref": "coreir.add"
-            },
-            "add_350_353": {
-              "genargs": {
-                "width": 16
-              },
-              "genref": "coreir.add"
-            },
-            "const0_": {
-              "configargs": {
-                "value": 0
-              },
-              "genargs": {
-                "width": 16
-              },
-              "genref": "coreir.const"
-            },
-            "const3_": {
-              "configargs": {
-                "value": 3
-              },
-              "genargs": {
-                "width": 16
-              },
-              "genref": "coreir.const"
-            },
-            "const5_": {
-              "configargs": {
-                "value": 5
-              },
-              "genargs": {
-                "width": 16
-              },
-              "genref": "coreir.const"
-            },
-            "const7_": {
-              "configargs": {
-                "value": 7
-              },
-              "genargs": {
-                "width": 16
-              },
-              "genref": "coreir.const"
-            },
-            "lb_p4_clamped_stencil_update_stream$mem_1": {
-              "configargs": {
-                "mode": "linebuffer"
-              },
-              "genargs": {
-                "depth": 10,
-                "width": 16
-              },
-              "genref": "cgralib.Mem"
-            },
-            "lb_p4_clamped_stencil_update_stream$mem_2": {
-              "configargs": {
-                "mode": "linebuffer"
-              },
-              "genargs": {
-                "depth": 10,
-                "width": 16
-              },
-              "genref": "cgralib.Mem"
-            },
-            "mul_3423": {
-              "genargs": {
-                "width": 16
-              },
-              "genref": "coreir.mul"
-            },
-            "mul_3475": {
-              "genargs": {
-                "width": 16
-              },
-              "genref": "coreir.mul"
-            },
-            "mul_3527": {
-              "genargs": {
-                "width": 16
-              },
-              "genref": "coreir.mul"
-            }
+{"top":"global.DesignTop",
+"namespaces":{
+  "global":{
+    "modules":{
+      "DesignTop":{
+        "type":["Record",{
+          "in":["Array",1,["Array",16,"BitIn"]],
+          "out":["Array",16,"Bit"]
+        }],
+        "instances":{
+          "0const0_":{
+            "genref":"coreir.const",
+            "genargs":{"width":["Int",16]},
+            "modargs":{"value":[["BitVector",16],73072640]}
           },
-          "type": [
-            "Record",
-            {
-              "in": [
-                "Array",
-                1,
-                [
-                  "Array",
-                  16,
-                  "BitIn"
-                ]
-              ],
-              "out": [
-                "Array",
-                16,
-                "Bit"
-              ]
-            }
-          ]
+          "3const3_":{
+            "genref":"coreir.const",
+            "genargs":{"width":["Int",16]},
+            "modargs":{"value":[["BitVector",16],695205891]}
+          },
+          "5const5_":{
+            "genref":"coreir.const",
+            "genargs":{"width":["Int",16]},
+            "modargs":{"value":[["BitVector",16],695205893]}
+          },
+          "7const7_":{
+            "genref":"coreir.const",
+            "genargs":{"width":["Int",16]},
+            "modargs":{"value":[["BitVector",16],695205895]}
+          },
+          "_341_pt":{
+            "genref":"coreir.passthrough",
+            "genargs":{"type":["CoreIRType",["Array",16,"Bit"]]}
+          },
+          "_345_pt":{
+            "genref":"coreir.passthrough",
+            "genargs":{"type":["CoreIRType",["Array",16,"Bit"]]}
+          },
+          "_349_pt":{
+            "genref":"coreir.passthrough",
+            "genargs":{"type":["CoreIRType",["Array",16,"Bit"]]}
+          },
+          "add_340_343_344":{
+            "genref":"coreir.add",
+            "genargs":{"has_cin":["Bool",false], "has_cout":["Bool",false], "width":["Int",16]}
+          },
+          "add_340_347_348":{
+            "genref":"coreir.add",
+            "genargs":{"has_cin":["Bool",false], "has_cout":["Bool",false], "width":["Int",16]}
+          },
+          "add_340_351_352":{
+            "genref":"coreir.add",
+            "genargs":{"has_cin":["Bool",false], "has_cout":["Bool",false], "width":["Int",16]}
+          },
+          "lb_p4_clamped_stencil_update_stream":{
+            "genref":"commonlib.Linebuffer",
+            "genargs":{"bitwidth":["Int",16], "image_width":["Int",10], "stencil_height":["Int",3], "stencil_width":["Int",1]}
+          },
+          "lb_p4_clamped_stencil_update_stream_wen":{
+            "modref":"coreir.bitconst",
+            "modargs":{"value":["Int",1]}
+          },
+          "mul_3423_343":{
+            "genref":"coreir.mul",
+            "genargs":{"width":["Int",16]}
+          },
+          "mul_3465_347":{
+            "genref":"coreir.mul",
+            "genargs":{"width":["Int",16]}
+          },
+          "mul_3507_351":{
+            "genref":"coreir.mul",
+            "genargs":{"width":["Int",16]}
+          }
         },
-        "Linebuffer_U0": {
-          "connections": [
-            [
-              "self.out.2.0",
-              "self.in"
-            ],
-            [
-              "self.out.1.0",
-              "mem_1.rdata"
-            ],
-            [
-              "self.out.0.0",
-              "mem_2.rdata"
-            ],
-            [
-              "self.in",
-              "mem_1.wdata"
-            ],
-            [
-              "mem_2.wdata",
-              "mem_1.rdata"
-            ]
-          ],
-          "instances": {
-            "mem_1": {
-              "configargs": {
-                "mode": "linebuffer"
-              },
-              "genargs": {
-                "depth": 10,
-                "width": 16
-              },
-              "genref": "cgralib.Mem"
-            },
-            "mem_2": {
-              "configargs": {
-                "mode": "linebuffer"
-              },
-              "genargs": {
-                "depth": 10,
-                "width": 16
-              },
-              "genref": "cgralib.Mem"
-            }
-          },
-          "type": [
-            "Record",
-            {
-              "in": [
-                "Array",
-                16,
-                "BitIn"
-              ],
-              "out": [
-                "Array",
-                3,
-                [
-                  "Array",
-                  1,
-                  [
-                    "Array",
-                    16,
-                    "Bit"
-                  ]
-                ]
-              ]
-            }
-          ]
-        }
+        "connections":[
+          ["0const0_.out","add_340_343_344.in0"],
+          ["3const3_.out","mul_3423_343.in1"],
+          ["5const5_.out","mul_3465_347.in1"],
+          ["7const7_.out","mul_3507_351.in1"],
+          ["_341_pt.in","lb_p4_clamped_stencil_update_stream.out.0.0"],
+          ["_341_pt.out","mul_3423_343.in0"],
+          ["_345_pt.in","lb_p4_clamped_stencil_update_stream.out.1.0"],
+          ["_345_pt.out","mul_3465_347.in0"],
+          ["_349_pt.in","lb_p4_clamped_stencil_update_stream.out.2.0"],
+          ["_349_pt.out","mul_3507_351.in0"],
+          ["add_340_343_344.in1","mul_3423_343.out"],
+          ["add_340_343_344.out","add_340_347_348.in0"],
+          ["add_340_347_348.in1","mul_3465_347.out"],
+          ["add_340_347_348.out","add_340_351_352.in0"],
+          ["add_340_351_352.in1","mul_3507_351.out"],
+          ["add_340_351_352.out","self.out"],
+          ["lb_p4_clamped_stencil_update_stream.in","self.in.0"],
+          ["lb_p4_clamped_stencil_update_stream.wen","lb_p4_clamped_stencil_update_stream_wen.out"]
+        ]
       }
     }
-  },
-  "top": "global.DesignTop"
+  }
+}
 }
