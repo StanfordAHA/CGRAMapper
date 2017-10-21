@@ -8,26 +8,6 @@
           "out":["Array",16,"Bit"]
         }],
         "instances":{
-          "0const0_":{
-            "genref":"coreir.const",
-            "genargs":{"width":["Int",16]},
-            "modargs":{"value":[["BitVector",16],57147392]}
-          },
-          "0const0_$1":{
-            "genref":"coreir.const",
-            "genargs":{"width":["Int",16]},
-            "modargs":{"value":[["BitVector",16],57147392]}
-          },
-          "0const0_$2":{
-            "genref":"coreir.const",
-            "genargs":{"width":["Int",16]},
-            "modargs":{"value":[["BitVector",16],57147392]}
-          },
-          "100const100_":{
-            "genref":"coreir.const",
-            "genargs":{"width":["Int",16]},
-            "modargs":{"value":[["BitVector",16],-1545928604]}
-          },
           "_628_pt":{
             "genref":"coreir.passthrough",
             "genargs":{"type":["CoreIRType",["Array",16,"Bit"]]}
@@ -39,16 +19,6 @@
           "_633_pt":{
             "genref":"coreir.passthrough",
             "genargs":{"type":["CoreIRType",["Array",16,"Bit"]]}
-          },
-          "_635const2_":{
-            "genref":"coreir.const",
-            "genargs":{"width":["Int",16]},
-            "modargs":{"value":[["BitVector",16],-1545928702]}
-          },
-          "_635const2_$1":{
-            "genref":"coreir.const",
-            "genargs":{"width":["Int",16]},
-            "modargs":{"value":[["BitVector",16],-1545928702]}
           },
           "_638_pt":{
             "genref":"coreir.passthrough",
@@ -105,16 +75,6 @@
           "_675_pt":{
             "genref":"coreir.passthrough",
             "genargs":{"type":["CoreIRType",["Array",16,"Bit"]]}
-          },
-          "_677const2_":{
-            "genref":"coreir.const",
-            "genargs":{"width":["Int",16]},
-            "modargs":{"value":[["BitVector",16],-1545928702]}
-          },
-          "_677const2_$1":{
-            "genref":"coreir.const",
-            "genargs":{"width":["Int",16]},
-            "modargs":{"value":[["BitVector",16],-1545928702]}
           },
           "_680_pt":{
             "genref":"coreir.passthrough",
@@ -192,26 +152,6 @@
             "genref":"coreir.passthrough",
             "genargs":{"type":["CoreIRType",["Array",16,"Bit"]]}
           },
-          "_739const7_":{
-            "genref":"coreir.const",
-            "genargs":{"width":["Int",16]},
-            "modargs":{"value":[["BitVector",16],60096519]}
-          },
-          "_739const7_$1":{
-            "genref":"coreir.const",
-            "genargs":{"width":["Int",16]},
-            "modargs":{"value":[["BitVector",16],60096519]}
-          },
-          "_739const7_$2":{
-            "genref":"coreir.const",
-            "genargs":{"width":["Int",16]},
-            "modargs":{"value":[["BitVector",16],60096519]}
-          },
-          "_748const4_":{
-            "genref":"coreir.const",
-            "genargs":{"width":["Int",16]},
-            "modargs":{"value":[["BitVector",16],-1545928700]}
-          },
           "_751_pt":{
             "genref":"coreir.passthrough",
             "genargs":{"type":["CoreIRType",["Array",16,"Bit"]]}
@@ -243,16 +183,6 @@
           "_765_pt":{
             "genref":"coreir.passthrough",
             "genargs":{"type":["CoreIRType",["Array",16,"Bit"]]}
-          },
-          "_770const255_":{
-            "genref":"coreir.const",
-            "genargs":{"width":["Int",16]},
-            "modargs":{"value":[["BitVector",16],-1545928449]}
-          },
-          "_771const0_":{
-            "genref":"coreir.const",
-            "genargs":{"width":["Int",16]},
-            "modargs":{"value":[["BitVector",16],57147392]}
           },
           "add_637_640_641":{
             "genref":"coreir.add",
@@ -401,25 +331,115 @@
           "bitand_767_768_769":{
             "modref":"coreir.bitand"
           },
+          "const0_0":{
+            "genref":"coreir.const",
+            "genargs":{"width":["Int",16]},
+            "modargs":{"value":[["BitVector",16],0]}
+          },
+          "const0_0$1":{
+            "genref":"coreir.const",
+            "genargs":{"width":["Int",16]},
+            "modargs":{"value":[["BitVector",16],0]}
+          },
+          "const0_0$2":{
+            "genref":"coreir.const",
+            "genargs":{"width":["Int",16]},
+            "modargs":{"value":[["BitVector",16],0]}
+          },
+          "const0__771$1":{
+            "genref":"coreir.const",
+            "genargs":{"width":["Int",16]},
+            "modargs":{"value":[["BitVector",16],0]}
+          },
+          "const100_100":{
+            "genref":"coreir.const",
+            "genargs":{"width":["Int",16]},
+            "modargs":{"value":[["BitVector",16],100]}
+          },
+          "const255__770":{
+            "genref":"coreir.const",
+            "genargs":{"width":["Int",16]},
+            "modargs":{"value":[["BitVector",16],255]}
+          },
+          "const2__635":{
+            "genref":"coreir.const",
+            "genargs":{"width":["Int",16]},
+            "modargs":{"value":[["BitVector",16],2]}
+          },
+          "const2__635$1":{
+            "genref":"coreir.const",
+            "genargs":{"width":["Int",16]},
+            "modargs":{"value":[["BitVector",16],2]}
+          },
+          "const2__677":{
+            "genref":"coreir.const",
+            "genargs":{"width":["Int",16]},
+            "modargs":{"value":[["BitVector",16],2]}
+          },
+          "const2__677$1":{
+            "genref":"coreir.const",
+            "genargs":{"width":["Int",16]},
+            "modargs":{"value":[["BitVector",16],2]}
+          },
+          "const4__748":{
+            "genref":"coreir.const",
+            "genargs":{"width":["Int",16]},
+            "modargs":{"value":[["BitVector",16],4]}
+          },
+          "const7__739":{
+            "genref":"coreir.const",
+            "genargs":{"width":["Int",16]},
+            "modargs":{"value":[["BitVector",16],7]}
+          },
+          "const7__739$1":{
+            "genref":"coreir.const",
+            "genargs":{"width":["Int",16]},
+            "modargs":{"value":[["BitVector",16],7]}
+          },
+          "const7__739$2":{
+            "genref":"coreir.const",
+            "genargs":{"width":["Int",16]},
+            "modargs":{"value":[["BitVector",16],7]}
+          },
           "lb_grad_xx_2_stencil_update_stream":{
             "genref":"commonlib.Linebuffer",
             "genargs":{"bitwidth":["Int",16], "image_width":["Int",484], "stencil_height":["Int",3], "stencil_width":["Int",3]}
+          },
+          "lb_grad_xx_2_stencil_update_stream_wen":{
+            "modref":"coreir.bitconst",
+            "modargs":{"value":["Int",1]}
           },
           "lb_grad_xy_2_stencil_update_stream":{
             "genref":"commonlib.Linebuffer",
             "genargs":{"bitwidth":["Int",16], "image_width":["Int",484], "stencil_height":["Int",3], "stencil_width":["Int",3]}
           },
+          "lb_grad_xy_2_stencil_update_stream_wen":{
+            "modref":"coreir.bitconst",
+            "modargs":{"value":["Int",1]}
+          },
           "lb_grad_yy_2_stencil_update_stream":{
             "genref":"commonlib.Linebuffer",
             "genargs":{"bitwidth":["Int",16], "image_width":["Int",484], "stencil_height":["Int",3], "stencil_width":["Int",3]}
+          },
+          "lb_grad_yy_2_stencil_update_stream_wen":{
+            "modref":"coreir.bitconst",
+            "modargs":{"value":["Int",1]}
           },
           "lb_p3_cim_stencil_update_stream":{
             "genref":"commonlib.Linebuffer",
             "genargs":{"bitwidth":["Int",16], "image_width":["Int",482], "stencil_height":["Int",3], "stencil_width":["Int",3]}
           },
+          "lb_p3_cim_stencil_update_stream_wen":{
+            "modref":"coreir.bitconst",
+            "modargs":{"value":["Int",1]}
+          },
           "lb_padded_2_stencil_update_stream":{
             "genref":"commonlib.Linebuffer",
             "genargs":{"bitwidth":["Int",16], "image_width":["Int",486], "stencil_height":["Int",3], "stencil_width":["Int",3]}
+          },
+          "lb_padded_2_stencil_update_stream_wen":{
+            "modref":"coreir.bitconst",
+            "modargs":{"value":["Int",1]}
           },
           "mul_634_635_636":{
             "genref":"coreir.mul",
@@ -535,18 +555,12 @@
           }
         },
         "connections":[
-          ["0const0_.out","add_651_652_653.in0"],
-          ["0const0_$1.out","add_695_696_697.in0"],
-          ["0const0_$2.out","add_717_718_719.in0"],
-          ["100const100_.out","ule100_751_768.in0"],
           ["_628_pt.in","lb_padded_2_stencil_update_stream.out.0.2"],
           ["_628_pt.out","sub_629_631_632.in0"],
           ["_630_pt.in","lb_padded_2_stencil_update_stream.out.0.0"],
           ["_630_pt.out","sub_629_631_632.in1"],
           ["_633_pt.in","lb_padded_2_stencil_update_stream.out.1.0"],
           ["_633_pt.out","mul_634_635_636.in0"],
-          ["_635const2_.out","mul_634_635_636.in1"],
-          ["_635const2_$1.out","mul_639_635_640.in1"],
           ["_638_pt.in","lb_padded_2_stencil_update_stream.out.1.2"],
           ["_638_pt.out","mul_639_635_640.in0"],
           ["_642_pt.in","lb_padded_2_stencil_update_stream.out.2.0"],
@@ -575,8 +589,6 @@
           ["_672_pt.out","sub_671_673_674.in1"],
           ["_675_pt.in","lb_padded_2_stencil_update_stream.out.2.1"],
           ["_675_pt.out","mul_676_677_678.in0"],
-          ["_677const2_.out","mul_676_677_678.in1"],
-          ["_677const2_$1.out","mul_681_677_682.in1"],
           ["_680_pt.in","lb_padded_2_stencil_update_stream.out.0.1"],
           ["_680_pt.out","mul_681_677_682.in0"],
           ["_684_pt.in","lb_padded_2_stencil_update_stream.out.2.2"],
@@ -615,10 +627,6 @@
           ["_732_pt.out","add_717_732_733.in1"],
           ["_734_pt.in","lb_grad_yy_2_stencil_update_stream.out.2.2"],
           ["_734_pt.out","add_717_734_735.in1"],
-          ["_739const7_.out","ashr_736_739_740.in1"],
-          ["_739const7_$1.out","ashr_737_739_741.in1"],
-          ["_739const7_$2.out","ashr_738_739_744.in1"],
-          ["_748const4_.out","ashr_747_748_749.in1"],
           ["_751_pt.in","lb_p3_cim_stencil_update_stream.out.1.1"],
           ["_751_pt.out","ule100_751_768.in1"],
           ["_751_pt.out","ult_766_751_767.in1"],
@@ -636,8 +644,6 @@
           ["_763_pt.out","smax_762_763_764.in1"],
           ["_765_pt.in","lb_p3_cim_stencil_update_stream.out.2.2"],
           ["_765_pt.out","smax_764_765_766.in1"],
-          ["_770const255_.out","mux_769_770_771.in0"],
-          ["_771const0_.out","mux_769_770_771.in1"],
           ["add_637_640_641.in0","sub_632_636_637.out"],
           ["add_637_640_641.in1","mul_639_635_640.out"],
           ["add_637_640_641.out","sub_641_643_644.in0"],
@@ -645,6 +651,7 @@
           ["add_644_646_647.out","mul_649_649_650.in0"],
           ["add_644_646_647.out","mul_649_649_650.in1"],
           ["add_644_646_647.out","mul_691_693_694.in0"],
+          ["add_651_652_653.in0","const0_0.out"],
           ["add_651_652_653.in1","mul_649_649_650.out"],
           ["add_651_652_653.out","add_651_654_655.in0"],
           ["add_651_654_655.out","add_651_656_657.in0"],
@@ -660,6 +667,7 @@
           ["add_674_678_679.out","sub_679_682_683.in0"],
           ["add_683_685_686.in0","sub_679_682_683.out"],
           ["add_683_685_686.out","sub_686_688_689.in0"],
+          ["add_695_696_697.in0","const0_0$1.out"],
           ["add_695_696_697.in1","mul_691_693_694.out"],
           ["add_695_696_697.out","add_695_698_699.in0"],
           ["add_695_698_699.out","add_695_700_701.in0"],
@@ -670,6 +678,7 @@
           ["add_695_708_709.out","add_695_710_711.in0"],
           ["add_695_710_711.out","add_695_712_713.in0"],
           ["add_695_712_713.out","ashr_738_739_744.in0"],
+          ["add_717_718_719.in0","const0_0$2.out"],
           ["add_717_718_719.in1","mul_715_715_716.out"],
           ["add_717_718_719.out","add_717_720_721.in0"],
           ["add_717_720_721.out","add_717_722_723.in0"],
@@ -684,20 +693,36 @@
           ["add_740_741_742.in1","ashr_737_739_741.out"],
           ["add_740_741_742.out","mul_742_742_747.in0"],
           ["add_740_741_742.out","mul_742_742_747.in1"],
+          ["ashr_736_739_740.in1","const7__739.out"],
           ["ashr_736_739_740.out","mul_740_741_743.in0"],
+          ["ashr_737_739_741.in1","const7__739$1.out"],
           ["ashr_737_739_741.out","mul_740_741_743.in1"],
+          ["ashr_738_739_744.in1","const7__739$2.out"],
           ["ashr_738_739_744.out","mul_744_744_745.in0"],
           ["ashr_738_739_744.out","mul_744_744_745.in1"],
           ["ashr_747_748_749.in0","mul_742_742_747.out"],
+          ["ashr_747_748_749.in1","const4__748.out"],
           ["ashr_747_748_749.out","sub_746_749_750.in1"],
           ["bitand_767_768_769.in0","ult_766_751_767.out"],
           ["bitand_767_768_769.in1","ule100_751_768.out"],
           ["bitand_767_768_769.out","mux_769_770_771.sel"],
+          ["const0__771$1.out","mux_769_770_771.in1"],
+          ["const100_100.out","ule100_751_768.in0"],
+          ["const255__770.out","mux_769_770_771.in0"],
+          ["const2__635.out","mul_634_635_636.in1"],
+          ["const2__635$1.out","mul_639_635_640.in1"],
+          ["const2__677.out","mul_676_677_678.in1"],
+          ["const2__677$1.out","mul_681_677_682.in1"],
           ["lb_grad_xx_2_stencil_update_stream.in","mul_649_649_650.out"],
+          ["lb_grad_xx_2_stencil_update_stream.wen","lb_grad_xx_2_stencil_update_stream_wen.out"],
           ["lb_grad_xy_2_stencil_update_stream.in","mul_691_693_694.out"],
+          ["lb_grad_xy_2_stencil_update_stream.wen","lb_grad_xy_2_stencil_update_stream_wen.out"],
           ["lb_grad_yy_2_stencil_update_stream.in","mul_715_715_716.out"],
+          ["lb_grad_yy_2_stencil_update_stream.wen","lb_grad_yy_2_stencil_update_stream_wen.out"],
           ["lb_p3_cim_stencil_update_stream.in","sub_746_749_750.out"],
+          ["lb_p3_cim_stencil_update_stream.wen","lb_p3_cim_stencil_update_stream_wen.out"],
           ["lb_padded_2_stencil_update_stream.in","self.in.0"],
+          ["lb_padded_2_stencil_update_stream.wen","lb_padded_2_stencil_update_stream_wen.out"],
           ["mul_634_635_636.out","sub_632_636_637.in1"],
           ["mul_681_677_682.out","sub_679_682_683.in1"],
           ["mul_691_693_694.in1","sub_686_688_689.out"],
