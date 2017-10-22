@@ -20,7 +20,7 @@ def test_load_core(libs, files):
             if inst_type == 'PE':
                 modules[inst_name]['type'] = 'PE'
 
-                op_kind = inst.config['op_kind'].value 
+                op_kind = inst.generator_args['op_kind'].value 
 
                 if op_kind in ('alu', 'combined'):
                     modules[inst_name]['alu_op'] = inst.config['alu_op'].value

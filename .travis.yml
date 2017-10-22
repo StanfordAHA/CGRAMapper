@@ -15,7 +15,7 @@ addons:
       - python-virtualenv
 
 before_install:
-  - git clone -b dev https://github.com/rdaly525/coreir.git
+  - git clone https://github.com/rdaly525/coreir.git
   - export COREIRCONFIG="g++-4.9";
   - virtualenv --python=python3 env
   - source env/bin/activate
