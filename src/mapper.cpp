@@ -132,7 +132,7 @@ int main(int argc, char *argv[]){
 
   c->getPassManager()->setVerbosity(true);
 
-  c->runPasses({"rungenerators","verifyconnectivity-onlyinputs-noclkrst","removebulkconnections"},{"global","commonlib"});
+  c->runPasses({"rungenerators","verifyconnectivity-onlyinputs-noclkrst","removebulkconnections"},{"global"});
 
   //load last verification
   c->addPass(new MapperPasses::VerifyCanMap);
@@ -151,7 +151,7 @@ int main(int argc, char *argv[]){
   addIOs(c,top);
   c->addPass(new MapperPasses::TechMapping);
   c->addPass(new MapperPasses::VerifyTechMapping);
-  c->runPasses({"techmapping","verifytechmapping"});
+  c->runPasses({"techmapping","cullgraph","verifytechmapping"});
   
 
   ////Fold constants and registers into PEs
