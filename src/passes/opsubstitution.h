@@ -20,7 +20,7 @@ bool UGTReplacement(Instance* gt) {
   string iname = gt->getInstname();
   //Add the ule + not instances
   Instance* ule = def->addInstance(iname+"_ule","coreir.ule");
-  Instance* bitnot = def->addInstance(iname + "_not","coreir.bitnot");
+  Instance* bitnot = def->addInstance(iname + "_not","corebit.not");
   def->connect(ule->sel("out"),bitnot->sel("in"));
   
   //Isolate the instance
@@ -43,7 +43,7 @@ bool ULTReplacement(Instance* gt) {
   string iname = gt->getInstname();
   //Add the ule + not instances
   Instance* uge = def->addInstance(iname+"_uge","coreir.uge");
-  Instance* bitnot = def->addInstance(iname + "_not","coreir.bitnot");
+  Instance* bitnot = def->addInstance(iname + "_not","corebit.not");
   def->connect(uge->sel("out"),bitnot->sel("in"));
   
   //Isolate the instance

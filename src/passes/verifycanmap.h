@@ -15,30 +15,26 @@ std::string MapperPasses::VerifyCanMap::ID = "verifycanmap";
 bool MapperPasses::VerifyCanMap::runOnInstance(Instance* inst) {
   Context* c = this->getContext();
   
-  auto iref = inst->getInstantiableRef();
+  auto mref = inst->getModuleRef();
+  string mrefname = mref->getRefName();
+  ASSERT(mrefname != "coreir.slice","NYI Slice");
+  ASSERT(mrefname != "coreir.concat","NYI Concat");
   
-  //TODO write this better
   bool isLeaf = false;
-  if (iref == c->getInstantiable("commonlib.LinebufferMem") ) {
+  if (mrefname == "commonlib.LinebufferMem" ) {
     isLeaf = true;
   }
-  else if (iref == c->getInstantiable("commonlib.smax") ) {
+  else if (mrefname == "commonlib.smax") {
     isLeaf = true;
   }
-  else if( iref == c->getInstantiable("coreir.reg")) {
-    Values genargs = inst->getGenArgs();
-    ASSERT(genargs["en"]->get<bool>()==false,"NYI registers with en");
-    ASSERT(genargs["clr"]->get<bool>()==false,"NYI registers with en");
+  else if (mref->getNamespace() == c->getNamespace("coreir")) {
     isLeaf = true;
   }
-  else if (iref->getNamespace() == c->getNamespace("coreir")) {
-    ASSERT(iref != c->getInstantiable("coreir.slice"),"NYI Slice");
-    ASSERT(iref != c->getInstantiable("coreir.concat"),"NYI Concat");
+  else if (mref->getNamespace() == c->getNamespace("corebit")) {
     isLeaf = true;
   }
   else {
-    ASSERT(isa<Module>(iref),"Do not know how to map: " + iref->getRefName());
-    ASSERT(cast<Module>(iref)->hasDef(),"DO not know how to map: " + iref->getRefName());
+    ASSERT(mref->hasDef(),"NYI, Do not know how to map: " + mrefname);
   }
 
   //If it is a leaf then verify that there are no selects on the ports

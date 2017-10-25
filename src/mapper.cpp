@@ -132,7 +132,9 @@ int main(int argc, char *argv[]){
 
   c->getPassManager()->setVerbosity(true);
 
-  c->runPasses({"rungenerators","verifyconnectivity-onlyinputs-noclkrst","removebulkconnections"},{"global"});
+  LoadDefinition_LinebufferMem(c); //Load the definitions first
+  
+  c->runPasses({"rungenerators","verifyconnectivity-onlyinputs-noclkrst","removebulkconnections"});
 
   //load last verification
   c->addPass(new MapperPasses::VerifyCanMap);
@@ -143,15 +145,17 @@ int main(int argc, char *argv[]){
   //Pre-Technolog Mapping steps
   c->addPass(new MapperPasses::OpSubstitution);
   c->addPass(new MapperPasses::BitOp2Lut);
-  c->runPasses({"opsubstitution","bitop2lut"});
+  c->runPasses({"opsubstitution","bitop2lut"},{"global","coreir","corebit","mantle","commonlib"});
 
   //Tech mapping
   //Link in LBMem def
-  LoadDefinition_LinebufferMem(c);
   addIOs(c,top);
   c->addPass(new MapperPasses::TechMapping);
   c->addPass(new MapperPasses::VerifyTechMapping);
-  c->runPasses({"techmapping","cullgraph","verifytechmapping"});
+  c->runPasses({"techmapping"},{"global","coreir","corebit","mantle","commonlib"});
+  c->runPasses({"cullgraph"}); //TODO why am I passing each of these namespaces
+  //c->runPasses({"printer"},{"global","coreir","corebit","mantle","commonlib"});
+  c->runPasses({"verifytechmapping"});
   
 
   ////Fold constants and registers into PEs
