@@ -9,7 +9,7 @@
         }],
         "instances":{
           "_286_pt":{
-            "genref":"_.passthrough",
+            "genref":"mantle.wire",
             "genargs":{"type":["CoreIRType",["Array",16,"Bit"]]}
           },
           "add_285_289_290":{

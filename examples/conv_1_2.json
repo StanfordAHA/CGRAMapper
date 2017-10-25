@@ -9,11 +9,11 @@
         }],
         "instances":{
           "_306_pt":{
-            "genref":"_.passthrough",
+            "genref":"mantle.wire",
             "genargs":{"type":["CoreIRType",["Array",16,"Bit"]]}
           },
           "_311_pt":{
-            "genref":"_.passthrough",
+            "genref":"mantle.wire",
             "genargs":{"type":["CoreIRType",["Array",16,"Bit"]]}
           },
           "add_305_309_310":{
