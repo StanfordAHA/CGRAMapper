@@ -15,7 +15,6 @@ bool MapperPasses::VerifyTechMapping::runOnInstanceGraphNode(InstanceGraphNode& 
   Context* c = this->getContext();
   Instantiable* i = node.getInstantiable();
   Module* m = cast<Module>(i);
-  m->print();
   //This needs to be either:
   //  coreir.const
   //  coreir.reg
