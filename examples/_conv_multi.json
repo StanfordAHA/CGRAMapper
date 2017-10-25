@@ -18,6 +18,7 @@
           },
           "_466_pt":{
             "genref":"mantle.wire",
+
             "genargs":{"type":["CoreIRType",["Array",16,"Bit"]]}
           },
           "_p4_clamped_stencil1_mux3_0":{
