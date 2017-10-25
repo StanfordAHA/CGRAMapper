@@ -130,7 +130,7 @@ bool bitconstReplacement(Instance* inst) {
   Context* c = inst->getContext();
   ModuleDef* def = inst->getContainer();
   string iname = inst->getInstname();
-  uint val = inst->getModArgs().at("value")->get<int>();
+  uint val = inst->getModArgs().at("value")->get<bool>();
   ASSERT(val==0 || val==1,"invalid val for " + iname + ": " + to_string(val));
   //Add the Lut
   Instance* lut = def->addInstance(iname+"_lut","commonlib.lutN",Values(),{{"init",Const::make(c,8,val)}});
@@ -152,10 +152,10 @@ bool bitconstReplacement(Instance* inst) {
 std::string MapperPasses::BitOp2Lut::ID = "bitop2lut";
 void MapperPasses::BitOp2Lut::setVisitorInfo() {
   Context* c = this->getContext();
-  addVisitorFunction(c->getInstantiable("coreir.bitnot"),bitnotReplacement);
-  addVisitorFunction(c->getInstantiable("coreir.bitand"),bitandReplacement);
-  addVisitorFunction(c->getInstantiable("coreir.bitor"),bitorReplacement);
-  addVisitorFunction(c->getInstantiable("coreir.bitxor"),bitxorReplacement);
-  addVisitorFunction(c->getInstantiable("coreir.bitmux"),bitmuxReplacement);
-  addVisitorFunction(c->getInstantiable("coreir.bitconst"),bitconstReplacement);
+  addVisitorFunction(c->getInstantiable("corebit.not"),bitnotReplacement);
+  addVisitorFunction(c->getInstantiable("corebit.and"),bitandReplacement);
+  addVisitorFunction(c->getInstantiable("corebit.or"),bitorReplacement);
+  addVisitorFunction(c->getInstantiable("corebit.xor"),bitxorReplacement);
+  addVisitorFunction(c->getInstantiable("corebit.mux"),bitmuxReplacement);
+  addVisitorFunction(c->getInstantiable("corebit.const"),bitconstReplacement);
 }

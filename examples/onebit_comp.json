@@ -9,7 +9,7 @@
         }],
         "instances":{
           "_147_pt":{
-            "genref":"coreir.passthrough",
+            "genref":"mantle.wire",
             "genargs":{"type":["CoreIRType",["Array",16,"Bit"]]}
           },
           "const15__148":{
@@ -18,7 +18,7 @@
             "modargs":{"value":[["BitVector",16],15]}
           },
           "neq_147_148_149":{
-            "genref":"commonlib.neq",
+            "genref":"coreir.neq",
             "genargs":{"width":["Int",16]}
           }
         },

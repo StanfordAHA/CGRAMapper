@@ -9,7 +9,7 @@
         }],
         "instances":{
           "_316_pt":{
-            "genref":"coreir.passthrough",
+            "genref":"mantle.wire",
             "genargs":{"type":["CoreIRType",["Array",16,"Bit"]]}
           },
           "const0_0":{

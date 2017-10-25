@@ -41,7 +41,7 @@ def test_load_core(libs, files):
             elif inst_type == 'reg':
                 modules[inst_name]['type'] = 'Reg'
                 modules[inst_name]['conf'] = None
-            elif inst_type == 'bitreg':
+            elif inst_type == 'dff':
                 modules[inst_name]['type'] = 'BitReg'
                 modules[inst_name]['conf'] = None
 
@@ -57,9 +57,6 @@ def test_load_core(libs, files):
                 }
 
             elif inst_type == 'const':
-                modules[inst_name]['type'] = 'Const'
-                modules[inst_name]['conf'] = inst.config['value'].value
-            elif inst_type == 'bitconst':
                 modules[inst_name]['type'] = 'Const'
                 modules[inst_name]['conf'] = inst.config['value'].value
 

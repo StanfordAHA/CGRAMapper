@@ -259,10 +259,10 @@
         }],
         "instances":{
           "inst0":{
-            "modref":"coreir.bitand"
+            "modref":"corebit.and"
           },
           "inst1":{
-            "modref":"coreir.bitor"
+            "modref":"corebit.or"
           }
         },
         "connections":[
