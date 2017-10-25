@@ -141,7 +141,7 @@ std::string MapperPasses::TechMapping::ID = "techmapping";
 void MapperPasses::TechMapping::setVisitorInfo() {
   Context* c = this->getContext();
   addVisitorFunction(c->getInstantiable("commonlib.lutN"),lutReplacement);
-  for (auto str : {"uge","ule","eq"}) {
+  for (auto str : {"uge","ule","eq","neq"}) {
     addVisitorFunction(c->getInstantiable("coreir."+string(str)),compOpReplacement);
   }
   

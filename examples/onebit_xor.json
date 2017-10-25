@@ -9,11 +9,10 @@
         }],
         "instances":{
           "xor1":{
-            "modref":"coreir.bitxor"
+            "modref":"corebit.xor"
           },
           "reg1":{
-            "genref":"coreir.bitreg",
-            "genargs":{}
+            "modref":"corebit.dff"
           }
         },
         "connections":[
