@@ -8,24 +8,24 @@
           "out":["Array",16,"Bit"]
         }],
         "instances":{
-          "0const0_":{
-            "genref":"coreir.const",
-            "genargs":{"width":["Int",16]},
-            "modargs":{"value":[["BitVector",16],-1328021504]}
-          },
-          "40const40_":{
-            "genref":"coreir.const",
-            "genargs":{"width":["Int",16]},
-            "modargs":{"value":[["BitVector",16],-1328021464]}
-          },
           "_316_pt":{
-            "genref":"coreir.passthrough",
+            "genref":"mantle.wire",
             "genargs":{"type":["CoreIRType",["Array",16,"Bit"]]}
           },
-          "_317const5_":{
+          "const0_0":{
             "genref":"coreir.const",
             "genargs":{"width":["Int",16]},
-            "modargs":{"value":[["BitVector",16],-1328021499]}
+            "modargs":{"value":[["BitVector",16],0]}
+          },
+          "const40_40":{
+            "genref":"coreir.const",
+            "genargs":{"width":["Int",16]},
+            "modargs":{"value":[["BitVector",16],40]}
+          },
+          "const5__317":{
+            "genref":"coreir.const",
+            "genargs":{"width":["Int",16]},
+            "modargs":{"value":[["BitVector",16],5]}
           },
           "eq_316_317_318":{
             "genref":"coreir.eq",
@@ -37,11 +37,11 @@
           }
         },
         "connections":[
-          ["0const0_.out","mux_318400.in1"],
-          ["40const40_.out","mux_318400.in0"],
           ["_316_pt.in","self.in.0"],
           ["_316_pt.out","eq_316_317_318.in0"],
-          ["_317const5_.out","eq_316_317_318.in1"],
+          ["const0_0.out","mux_318400.in1"],
+          ["const40_40.out","mux_318400.in0"],
+          ["const5__317.out","eq_316_317_318.in1"],
           ["eq_316_317_318.out","mux_318400.sel"],
           ["mux_318400.out","self.out"]
         ]
