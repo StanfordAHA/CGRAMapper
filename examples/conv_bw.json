@@ -8,135 +8,135 @@
           "out":["Array",16,"Bit"]
         }],
         "instances":{
-          "0const0_":{
-            "genref":"coreir.const",
-            "genargs":{"width":["Int",16]},
-            "modargs":{"value":[["BitVector",16],53739520]}
-          },
-          "11const11_":{
-            "genref":"coreir.const",
-            "genargs":{"width":["Int",16]},
-            "modargs":{"value":[["BitVector",16],-697171957]}
-          },
-          "12const12_":{
-            "genref":"coreir.const",
-            "genargs":{"width":["Int",16]},
-            "modargs":{"value":[["BitVector",16],-697171956]}
-          },
-          "13const13_":{
-            "genref":"coreir.const",
-            "genargs":{"width":["Int",16]},
-            "modargs":{"value":[["BitVector",16],-697171955]}
-          },
-          "14const14_":{
-            "genref":"coreir.const",
-            "genargs":{"width":["Int",16]},
-            "modargs":{"value":[["BitVector",16],-697171954]}
-          },
-          "15const15_":{
-            "genref":"coreir.const",
-            "genargs":{"width":["Int",16]},
-            "modargs":{"value":[["BitVector",16],-697171953]}
-          },
-          "16const16_":{
-            "genref":"coreir.const",
-            "genargs":{"width":["Int",16]},
-            "modargs":{"value":[["BitVector",16],-697171952]}
-          },
-          "17const17_":{
-            "genref":"coreir.const",
-            "genargs":{"width":["Int",16]},
-            "modargs":{"value":[["BitVector",16],-697171951]}
-          },
-          "18const18_":{
-            "genref":"coreir.const",
-            "genargs":{"width":["Int",16]},
-            "modargs":{"value":[["BitVector",16],-697171950]}
-          },
-          "19const19_":{
-            "genref":"coreir.const",
-            "genargs":{"width":["Int",16]},
-            "modargs":{"value":[["BitVector",16],-697171949]}
-          },
           "_458_pt":{
-            "genref":"coreir.passthrough",
+            "genref":"_.passthrough",
             "genargs":{"type":["CoreIRType",["Array",16,"Bit"]]}
           },
           "_462_pt":{
-            "genref":"coreir.passthrough",
+            "genref":"_.passthrough",
             "genargs":{"type":["CoreIRType",["Array",16,"Bit"]]}
           },
           "_466_pt":{
-            "genref":"coreir.passthrough",
+            "genref":"_.passthrough",
             "genargs":{"type":["CoreIRType",["Array",16,"Bit"]]}
           },
           "_470_pt":{
-            "genref":"coreir.passthrough",
+            "genref":"_.passthrough",
             "genargs":{"type":["CoreIRType",["Array",16,"Bit"]]}
           },
           "_474_pt":{
-            "genref":"coreir.passthrough",
+            "genref":"_.passthrough",
             "genargs":{"type":["CoreIRType",["Array",16,"Bit"]]}
           },
           "_478_pt":{
-            "genref":"coreir.passthrough",
+            "genref":"_.passthrough",
             "genargs":{"type":["CoreIRType",["Array",16,"Bit"]]}
           },
           "_482_pt":{
-            "genref":"coreir.passthrough",
+            "genref":"_.passthrough",
             "genargs":{"type":["CoreIRType",["Array",16,"Bit"]]}
           },
           "_486_pt":{
-            "genref":"coreir.passthrough",
+            "genref":"_.passthrough",
             "genargs":{"type":["CoreIRType",["Array",16,"Bit"]]}
           },
           "_490_pt":{
-            "genref":"coreir.passthrough",
+            "genref":"_.passthrough",
             "genargs":{"type":["CoreIRType",["Array",16,"Bit"]]}
           },
           "add_457_460_461":{
             "genref":"coreir.add",
-            "genargs":{"has_cin":["Bool",false], "has_cout":["Bool",false], "width":["Int",16]}
+            "genargs":{"width":["Int",16]}
           },
           "add_457_464_465":{
             "genref":"coreir.add",
-            "genargs":{"has_cin":["Bool",false], "has_cout":["Bool",false], "width":["Int",16]}
+            "genargs":{"width":["Int",16]}
           },
           "add_457_468_469":{
             "genref":"coreir.add",
-            "genargs":{"has_cin":["Bool",false], "has_cout":["Bool",false], "width":["Int",16]}
+            "genargs":{"width":["Int",16]}
           },
           "add_457_472_473":{
             "genref":"coreir.add",
-            "genargs":{"has_cin":["Bool",false], "has_cout":["Bool",false], "width":["Int",16]}
+            "genargs":{"width":["Int",16]}
           },
           "add_457_476_477":{
             "genref":"coreir.add",
-            "genargs":{"has_cin":["Bool",false], "has_cout":["Bool",false], "width":["Int",16]}
+            "genargs":{"width":["Int",16]}
           },
           "add_457_480_481":{
             "genref":"coreir.add",
-            "genargs":{"has_cin":["Bool",false], "has_cout":["Bool",false], "width":["Int",16]}
+            "genargs":{"width":["Int",16]}
           },
           "add_457_484_485":{
             "genref":"coreir.add",
-            "genargs":{"has_cin":["Bool",false], "has_cout":["Bool",false], "width":["Int",16]}
+            "genargs":{"width":["Int",16]}
           },
           "add_457_488_489":{
             "genref":"coreir.add",
-            "genargs":{"has_cin":["Bool",false], "has_cout":["Bool",false], "width":["Int",16]}
+            "genargs":{"width":["Int",16]}
           },
           "add_457_492_493":{
             "genref":"coreir.add",
-            "genargs":{"has_cin":["Bool",false], "has_cout":["Bool",false], "width":["Int",16]}
+            "genargs":{"width":["Int",16]}
+          },
+          "const0_0":{
+            "genref":"coreir.const",
+            "genargs":{"width":["Int",16]},
+            "modargs":{"value":[["BitVector",16],0]}
+          },
+          "const11_11":{
+            "genref":"coreir.const",
+            "genargs":{"width":["Int",16]},
+            "modargs":{"value":[["BitVector",16],11]}
+          },
+          "const12_12":{
+            "genref":"coreir.const",
+            "genargs":{"width":["Int",16]},
+            "modargs":{"value":[["BitVector",16],12]}
+          },
+          "const13_13$1":{
+            "genref":"coreir.const",
+            "genargs":{"width":["Int",16]},
+            "modargs":{"value":[["BitVector",16],13]}
+          },
+          "const14_14":{
+            "genref":"coreir.const",
+            "genargs":{"width":["Int",16]},
+            "modargs":{"value":[["BitVector",16],14]}
+          },
+          "const15_15":{
+            "genref":"coreir.const",
+            "genargs":{"width":["Int",16]},
+            "modargs":{"value":[["BitVector",16],15]}
+          },
+          "const16_16":{
+            "genref":"coreir.const",
+            "genargs":{"width":["Int",16]},
+            "modargs":{"value":[["BitVector",16],16]}
+          },
+          "const17_17":{
+            "genref":"coreir.const",
+            "genargs":{"width":["Int",16]},
+            "modargs":{"value":[["BitVector",16],17]}
+          },
+          "const18_18":{
+            "genref":"coreir.const",
+            "genargs":{"width":["Int",16]},
+            "modargs":{"value":[["BitVector",16],18]}
+          },
+          "const19_19":{
+            "genref":"coreir.const",
+            "genargs":{"width":["Int",16]},
+            "modargs":{"value":[["BitVector",16],19]}
           },
           "lb_p4_clamped_stencil_update_stream":{
             "genref":"commonlib.Linebuffer",
             "genargs":{"bitwidth":["Int",16], "image_width":["Int",64], "stencil_height":["Int",3], "stencil_width":["Int",3]}
           },
           "lb_p4_clamped_stencil_update_stream_wen":{
-            "modref":"coreir.bitconst",
-            "modargs":{"value":["Int",1]}
+            "modref":"corebit.const",
+            "modargs":{"value":["Bool",true]}
           },
           "mul_45911_460":{
             "genref":"coreir.mul",
@@ -176,16 +176,6 @@
           }
         },
         "connections":[
-          ["0const0_.out","add_457_460_461.in0"],
-          ["11const11_.out","mul_45911_460.in1"],
-          ["12const12_.out","mul_47112_472.in1"],
-          ["13const13_.out","mul_48313_484.in1"],
-          ["14const14_.out","mul_46314_464.in1"],
-          ["15const15_.out","mul_47515_476.in1"],
-          ["16const16_.out","mul_48716_488.in1"],
-          ["17const17_.out","mul_46717_468.in1"],
-          ["18const18_.out","mul_47918_480.in1"],
-          ["19const19_.out","mul_49119_492.in1"],
           ["_458_pt.in","lb_p4_clamped_stencil_update_stream.out.0.0"],
           ["_458_pt.out","mul_45911_460.in0"],
           ["_462_pt.in","lb_p4_clamped_stencil_update_stream.out.0.1"],
@@ -204,6 +194,7 @@
           ["_486_pt.out","mul_48716_488.in0"],
           ["_490_pt.in","lb_p4_clamped_stencil_update_stream.out.2.2"],
           ["_490_pt.out","mul_49119_492.in0"],
+          ["add_457_460_461.in0","const0_0.out"],
           ["add_457_460_461.in1","mul_45911_460.out"],
           ["add_457_460_461.out","add_457_464_465.in0"],
           ["add_457_464_465.in1","mul_46314_464.out"],
@@ -222,6 +213,15 @@
           ["add_457_488_489.out","add_457_492_493.in0"],
           ["add_457_492_493.in1","mul_49119_492.out"],
           ["add_457_492_493.out","self.out"],
+          ["const11_11.out","mul_45911_460.in1"],
+          ["const12_12.out","mul_47112_472.in1"],
+          ["const13_13$1.out","mul_48313_484.in1"],
+          ["const14_14.out","mul_46314_464.in1"],
+          ["const15_15.out","mul_47515_476.in1"],
+          ["const16_16.out","mul_48716_488.in1"],
+          ["const17_17.out","mul_46717_468.in1"],
+          ["const18_18.out","mul_47918_480.in1"],
+          ["const19_19.out","mul_49119_492.in1"],
           ["lb_p4_clamped_stencil_update_stream.in","self.in.0"],
           ["lb_p4_clamped_stencil_update_stream.wen","lb_p4_clamped_stencil_update_stream_wen.out"]
         ]

@@ -9,13 +9,13 @@
         }],
         "instances":{
           "_147_pt":{
-            "genref":"coreir.passthrough",
+            "genref":"_.passthrough",
             "genargs":{"type":["CoreIRType",["Array",16,"Bit"]]}
           },
-          "_148const15_":{
+          "const15__148":{
             "genref":"coreir.const",
             "genargs":{"width":["Int",16]},
-            "modargs":{"value":[["BitVector",16],-909705201]}
+            "modargs":{"value":[["BitVector",16],15]}
           },
           "neq_147_148_149":{
             "genref":"commonlib.neq",
@@ -25,7 +25,7 @@
         "connections":[
           ["_147_pt.in","self.in.0"],
           ["_147_pt.out","neq_147_148_149.in0"],
-          ["_148const15_.out","neq_147_148_149.in1"],
+          ["const15__148.out","neq_147_148_149.in1"],
           ["neq_147_148_149.out","self.out"]
         ]
       }

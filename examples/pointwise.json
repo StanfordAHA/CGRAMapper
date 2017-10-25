@@ -9,13 +9,13 @@
         }],
         "instances":{
           "_347_pt":{
-            "genref":"coreir.passthrough",
+            "genref":"_.passthrough",
             "genargs":{"type":["CoreIRType",["Array",16,"Bit"]]}
           },
-          "_348const2_":{
+          "const2__348":{
             "genref":"coreir.const",
             "genargs":{"width":["Int",16]},
-            "modargs":{"value":[["BitVector",16],-1480261630]}
+            "modargs":{"value":[["BitVector",16],2]}
           },
           "mul_347_348_349":{
             "genref":"coreir.mul",
@@ -25,7 +25,7 @@
         "connections":[
           ["_347_pt.in","self.in.0"],
           ["_347_pt.out","mul_347_348_349.in0"],
-          ["_348const2_.out","mul_347_348_349.in1"],
+          ["const2__348.out","mul_347_348_349.in1"],
           ["mul_347_348_349.out","self.out"]
         ]
       }
