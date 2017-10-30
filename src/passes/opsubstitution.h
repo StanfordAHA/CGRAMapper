@@ -88,8 +88,8 @@ bool NegReplacement(Instance* neg) {
 std::string MapperPasses::OpSubstitution::ID = "opsubstitution";
 void MapperPasses::OpSubstitution::setVisitorInfo() {
   Context* c = this->getContext();
-  addVisitorFunction(c->getInstantiable("coreir.ugt"),UGTReplacement);
-  addVisitorFunction(c->getInstantiable("coreir.ult"),ULTReplacement);
-  addVisitorFunction(c->getInstantiable("coreir.neg"),NegReplacement);
+  addVisitorFunction(c->getGenerator("coreir.ugt"),UGTReplacement);
+  addVisitorFunction(c->getGenerator("coreir.ult"),ULTReplacement);
+  addVisitorFunction(c->getGenerator("coreir.neg"),NegReplacement);
 
 }

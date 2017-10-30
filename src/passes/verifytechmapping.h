@@ -13,8 +13,7 @@ class VerifyTechMapping : public InstanceGraphPass {
 std::string MapperPasses::VerifyTechMapping::ID = "verifytechmapping";
 bool MapperPasses::VerifyTechMapping::runOnInstanceGraphNode(InstanceGraphNode& node) {
   Context* c = this->getContext();
-  Instantiable* i = node.getInstantiable();
-  Module* m = cast<Module>(i);
+  Module* m = node.getModule();
   //This needs to be either:
   //  coreir.const
   //  coreir.reg
@@ -24,8 +23,7 @@ bool MapperPasses::VerifyTechMapping::runOnInstanceGraphNode(InstanceGraphNode& 
   if (m->getRefName() == "coreir.const") return false;
   if (m->getRefName() == "coreir.reg") return false;
   if (m->getRefName() == "corebit.dff") return false;
-  ASSERT(isa<Module>(i),"NYI mapping " +i->toString() + ". Needs to be a module with def!");
-  ASSERT(cast<Module>(i)->hasDef(),"NYI mapping " +i->toString() + ". Needs to be a module with def!");
+  ASSERT(m->hasDef(),"NYI mapping primitive " +m->getRefName() + ". Needs to be a module with def!");
   return false;
 }
 

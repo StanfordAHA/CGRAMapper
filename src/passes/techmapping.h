@@ -43,7 +43,7 @@ bool binaryOpReplacement(Instance* inst) {
   ModuleDef* def = inst->getContainer();
   string iname = inst->getInstname();
   //For now just use the coreir lib name as the op
-  string opstr = inst->getInstantiableRef()->getName();
+  string opstr = inst->getModuleRef()->getName();
   Values dataPEArgs({{"alu_op",Const::make(c,opstr)}});
   Instance* dataPE = def->addInstance(iname+"_PE","cgralib.PE",{{"op_kind",Const::make(c,"alu")}},dataPEArgs);
 
@@ -69,7 +69,7 @@ bool compOpReplacement(Instance* inst) {
   ModuleDef* def = inst->getContainer();
   string iname = inst->getInstname();
   //For now just use the coreir lib name as the op
-  string opstr = inst->getInstantiableRef()->getName();
+  string opstr = inst->getModuleRef()->getName();
   Values PEArgs({{"alu_op",Const::make(c,opstr)}});
   Instance* PE = def->addInstance(iname+"_PE","cgralib.PE",{{"op_kind",Const::make(c,"combined")}},PEArgs);
 
@@ -95,7 +95,7 @@ bool muxOpReplacement(Instance* inst) {
   ModuleDef* def = inst->getContainer();
   string iname = inst->getInstname();
   //For now just use the coreir lib name as the op
-  string opstr = inst->getInstantiableRef()->getName();
+  string opstr = inst->getModuleRef()->getName();
   Values PEArgs({{"alu_op",Const::make(c,"mux")}});
   Instance* PE = def->addInstance(iname+"_PE","cgralib.PE",{{"op_kind",Const::make(c,"combined")}},PEArgs);
 
@@ -140,20 +140,18 @@ std::string MapperPasses::TechMapping::ID = "techmapping";
 
 void MapperPasses::TechMapping::setVisitorInfo() {
   Context* c = this->getContext();
-  addVisitorFunction(c->getInstantiable("commonlib.lutN"),lutReplacement);
+  addVisitorFunction(c->getGenerator("commonlib.lutN"),lutReplacement);
   for (auto str : {"uge","ule","eq","neq"}) {
-    addVisitorFunction(c->getInstantiable("coreir."+string(str)),compOpReplacement);
+    addVisitorFunction(c->getGenerator("coreir."+string(str)),compOpReplacement);
   }
   
-  addVisitorFunction(c->getInstantiable("coreir.mux"),muxOpReplacement);
-  addVisitorFunction(c->getInstantiable("coreir.term"),removeInstance);
-  addVisitorFunction(c->getInstantiable("corebit.term"),removeInstance);
-  //addVisitorFunction(c->getInstantiable("commonlib.LinebufferMem"),rungenAndReplace);
-  //addVisitorFunction(c->getInstantiable("commonlib.smax"),rungenAndReplace);
+  addVisitorFunction(c->getGenerator("coreir.mux"),muxOpReplacement);
+  addVisitorFunction(c->getGenerator("coreir.term"),removeInstance);
+  addVisitorFunction(c->getModule("corebit.term"),removeInstance);
   
   //TODO what about dlshl
   for (auto str : {"add","sub","shl","ashr","mul","or","and","xor"}) {
-    addVisitorFunction(c->getInstantiable("coreir." + string(str)),binaryOpReplacement);
+    addVisitorFunction(c->getGenerator("coreir." + string(str)),binaryOpReplacement);
   }
 
 
