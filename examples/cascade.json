@@ -130,56 +130,6 @@
             "genargs":{"width":["Int",16]},
             "modargs":{"value":[["BitVector",16],19]}
           },
-          "const0_0":{
-            "genref":"coreir.const",
-            "genargs":{"width":["Int",16]},
-            "modargs":{"value":[["BitVector",16],0]}
-          },
-          "const11_11":{
-            "genref":"coreir.const",
-            "genargs":{"width":["Int",16]},
-            "modargs":{"value":[["BitVector",16],11]}
-          },
-          "const12_12":{
-            "genref":"coreir.const",
-            "genargs":{"width":["Int",16]},
-            "modargs":{"value":[["BitVector",16],12]}
-          },
-          "const13_13$1":{
-            "genref":"coreir.const",
-            "genargs":{"width":["Int",16]},
-            "modargs":{"value":[["BitVector",16],13]}
-          },
-          "const14_14":{
-            "genref":"coreir.const",
-            "genargs":{"width":["Int",16]},
-            "modargs":{"value":[["BitVector",16],14]}
-          },
-          "const15_15":{
-            "genref":"coreir.const",
-            "genargs":{"width":["Int",16]},
-            "modargs":{"value":[["BitVector",16],15]}
-          },
-          "const16_16":{
-            "genref":"coreir.const",
-            "genargs":{"width":["Int",16]},
-            "modargs":{"value":[["BitVector",16],16]}
-          },
-          "const17_17":{
-            "genref":"coreir.const",
-            "genargs":{"width":["Int",16]},
-            "modargs":{"value":[["BitVector",16],17]}
-          },
-          "const18_18":{
-            "genref":"coreir.const",
-            "genargs":{"width":["Int",16]},
-            "modargs":{"value":[["BitVector",16],18]}
-          },
-          "const19_19":{
-            "genref":"coreir.const",
-            "genargs":{"width":["Int",16]},
-            "modargs":{"value":[["BitVector",16],19]}
-          },
           "lb_p4_clamped_stencil_update_stream":{
             "genref":"commonlib.Linebuffer",
             "genargs":{"bitwidth":["Int",16], "image_width":["Int",64], "stencil_height":["Int",3], "stencil_width":["Int",3]}

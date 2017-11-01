@@ -26,16 +26,6 @@
             "genargs":{"width":["Int",16]},
             "modargs":{"value":[["BitVector",16],3]}
           },
-          "const0__284":{
-            "genref":"coreir.const",
-            "genargs":{"width":["Int",16]},
-            "modargs":{"value":[["BitVector",16],0]}
-          },
-          "const3__288":{
-            "genref":"coreir.const",
-            "genargs":{"width":["Int",16]},
-            "modargs":{"value":[["BitVector",16],3]}
-          },
           "mul_287_288_289":{
             "genref":"coreir.mul",
             "genargs":{"width":["Int",16]}

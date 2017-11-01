@@ -42,21 +42,6 @@
             "genargs":{"width":["Int",16]},
             "modargs":{"value":[["BitVector",16],50]}
           },
-          "const10__152":{
-            "genref":"coreir.const",
-            "genargs":{"width":["Int",16]},
-            "modargs":{"value":[["BitVector",16],10]}
-          },
-          "const20__150":{
-            "genref":"coreir.const",
-            "genargs":{"width":["Int",16]},
-            "modargs":{"value":[["BitVector",16],20]}
-          },
-          "const50__148":{
-            "genref":"coreir.const",
-            "genargs":{"width":["Int",16]},
-            "modargs":{"value":[["BitVector",16],50]}
-          },
           "ule_148_147_149":{
             "genref":"coreir.ule",
             "genargs":{"width":["Int",16]}

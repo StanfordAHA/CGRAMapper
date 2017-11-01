@@ -52,26 +52,6 @@
             "genargs":{"width":["Int",16]},
             "modargs":{"value":[["BitVector",16],7]}
           },
-          "const0_0":{
-            "genref":"coreir.const",
-            "genargs":{"width":["Int",16]},
-            "modargs":{"value":[["BitVector",16],0]}
-          },
-          "const3_3":{
-            "genref":"coreir.const",
-            "genargs":{"width":["Int",16]},
-            "modargs":{"value":[["BitVector",16],3]}
-          },
-          "const5_5":{
-            "genref":"coreir.const",
-            "genargs":{"width":["Int",16]},
-            "modargs":{"value":[["BitVector",16],5]}
-          },
-          "const7_7":{
-            "genref":"coreir.const",
-            "genargs":{"width":["Int",16]},
-            "modargs":{"value":[["BitVector",16],7]}
-          },
           "lb_p4_clamped_stencil_update_stream":{
             "genref":"commonlib.Linebuffer",
             "genargs":{"bitwidth":["Int",16], "image_width":["Int",10], "stencil_height":["Int",3], "stencil_width":["Int",1]}
