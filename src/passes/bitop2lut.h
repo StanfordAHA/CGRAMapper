@@ -152,10 +152,10 @@ bool bitconstReplacement(Instance* inst) {
 std::string MapperPasses::BitOp2Lut::ID = "bitop2lut";
 void MapperPasses::BitOp2Lut::setVisitorInfo() {
   Context* c = this->getContext();
-  addVisitorFunction(c->getInstantiable("corebit.not"),bitnotReplacement);
-  addVisitorFunction(c->getInstantiable("corebit.and"),bitandReplacement);
-  addVisitorFunction(c->getInstantiable("corebit.or"),bitorReplacement);
-  addVisitorFunction(c->getInstantiable("corebit.xor"),bitxorReplacement);
-  addVisitorFunction(c->getInstantiable("corebit.mux"),bitmuxReplacement);
-  addVisitorFunction(c->getInstantiable("corebit.const"),bitconstReplacement);
+  addVisitorFunction(c->getModule("corebit.not"),bitnotReplacement);
+  addVisitorFunction(c->getModule("corebit.and"),bitandReplacement);
+  addVisitorFunction(c->getModule("corebit.or"),bitorReplacement);
+  addVisitorFunction(c->getModule("corebit.xor"),bitxorReplacement);
+  addVisitorFunction(c->getModule("corebit.mux"),bitmuxReplacement);
+  addVisitorFunction(c->getModule("corebit.const"),bitconstReplacement);
 }

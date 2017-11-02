@@ -25,7 +25,7 @@ travis:
 	$(MAKE) clean
 	$(MAKE) all
 	$(MAKE) test
-	$(MAKE) pytest
+	. env/bin/activate && $(MAKE) pytest
 
 .PHONY: clean
 clean:
