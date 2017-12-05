@@ -163,10 +163,10 @@ int main(int argc, char *argv[]){
   //c->runPasses({"constduplication"});
 
   //Flatten
-  c->runPasses({"flatten"});
+  //c->runPasses({"flatten"});
   c->getPassManager()->printLog();
   cout << "Trying to save" << endl;
-  c->runPasses({"coreirjson"});
+  c->runPasses({"coreirjson"},{"global","commonlib","mantle"});
   auto jpass = static_cast<Passes::CoreIRJson*>(c->getPassManager()->getAnalysisPass("coreirjson"));
   //Create file here.
   std::ofstream file(postmap);
