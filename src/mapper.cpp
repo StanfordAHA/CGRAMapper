@@ -163,7 +163,8 @@ int main(int argc, char *argv[]){
   //c->runPasses({"constduplication"});
 
   //Flatten
-  //c->runPasses({"flatten"});
+  c->runPasses({"flatten"});
+  c->runPasses({"cullgraph"});
   c->getPassManager()->printLog();
   cout << "Trying to save" << endl;
   c->runPasses({"coreirjson"},{"global","commonlib","mantle"});
