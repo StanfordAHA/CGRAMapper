@@ -3,7 +3,7 @@ using namespace CoreIR;
 
 //Assumes common has been loaded
 void LoadDefinition_LinebufferMem(Context* c) {
-  Generator* lbmem = c->getGenerator("commonlib.LinebufferMem");
+  Generator* lbmem = c->getGenerator("memory.rowbuffer");
   lbmem->setGeneratorDefFromFun([](Context* c, Values args, ModuleDef* def) {
     uint width = args.at("width")->get<int>();
     uint depth = args.at("depth")->get<int>();
