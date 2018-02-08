@@ -14,7 +14,7 @@ $(BIN):
 test: $(MAPPED_FILES)
 
 $(MAPPED_FILES): $(BIN)
-	$(BIN) examples/$(@F) $(@)
+	$(BIN) examples/$(@F) $(@) || exit 1
 
 .PHONY: pytest
 pytest:
