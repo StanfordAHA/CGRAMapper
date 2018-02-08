@@ -4,14 +4,10 @@
     "modules":{
       "DesignTop":{
         "type":["Record",{
-          "in":["Array",1,["Array",16,"BitIn"]],
-          "out":["Array",16,"Bit"]
+          "in":["Record",{"arg_1":["Array",1,["Array",1,["Array",16,"BitIn"]]]}],
+          "out":["Array",1,["Array",1,["Array",16,"Bit"]]]
         }],
         "instances":{
-          "_347_pt":{
-            "genref":"mantle.wire",
-            "genargs":{"type":["CoreIRType",["Array",16,"Bit"]]}
-          },
           "const2__348":{
             "genref":"coreir.const",
             "genargs":{"width":["Int",16]},
@@ -20,13 +16,17 @@
           "mul_347_348_349":{
             "genref":"coreir.mul",
             "genargs":{"width":["Int",16]}
+          },
+          "pt_hw_output_2_stencil":{
+            "genref":"mantle.wire",
+            "genargs":{"type":["CoreIRType",["Array",1,["Array",1,["Array",16,"Bit"]]]]}
           }
         },
         "connections":[
-          ["_347_pt.in","self.in.0"],
-          ["_347_pt.out","mul_347_348_349.in0"],
           ["const2__348.out","mul_347_348_349.in1"],
-          ["mul_347_348_349.out","self.out"]
+          ["mul_347_348_349.in0","self.in.arg_1.0.0"],
+          ["mul_347_348_349.out","pt_hw_output_2_stencil.in.0.0"],
+          ["pt_hw_output_2_stencil.out","self.out"]
         ]
       }
     }
