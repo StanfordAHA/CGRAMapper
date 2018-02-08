@@ -4,14 +4,10 @@
     "modules":{
       "DesignTop":{
         "type":["Record",{
-          "in":["Array",1,["Array",16,"BitIn"]],
-          "out":"Bit"
+          "in":["Record",{"arg_1":["Array",1,["Array",1,["Array",16,"BitIn"]]]}],
+          "out":["Array",1,["Array",1,"Bit"]]
         }],
         "instances":{
-          "_147_pt":{
-            "genref":"mantle.wire",
-            "genargs":{"type":["CoreIRType",["Array",16,"Bit"]]}
-          },
           "const15__148":{
             "genref":"coreir.const",
             "genargs":{"width":["Int",16]},
@@ -20,13 +16,17 @@
           "neq_147_148_149":{
             "genref":"coreir.neq",
             "genargs":{"width":["Int",16]}
+          },
+          "pt_hw_output_1_stencil":{
+            "genref":"mantle.wire",
+            "genargs":{"type":["CoreIRType",["Array",1,["Array",1,"Bit"]]]}
           }
         },
         "connections":[
-          ["_147_pt.in","self.in.0"],
-          ["_147_pt.out","neq_147_148_149.in0"],
           ["const15__148.out","neq_147_148_149.in1"],
-          ["neq_147_148_149.out","self.out"]
+          ["neq_147_148_149.in0","self.in.arg_1.0.0"],
+          ["neq_147_148_149.out","pt_hw_output_1_stencil.in.0.0"],
+          ["pt_hw_output_1_stencil.out","self.out"]
         ]
       }
     }

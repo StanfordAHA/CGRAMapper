@@ -21,7 +21,7 @@ bool MapperPasses::VerifyCanMap::runOnInstance(Instance* inst) {
   ASSERT(mrefname != "coreir.concat","NYI Concat");
   
   bool isLeaf = false;
-  if (mrefname == "commonlib.LinebufferMem" ) {
+  if (mrefname == "memory.rowbuffer" ) {
     isLeaf = true;
   }
   else if (mrefname == "commonlib.smax") {
