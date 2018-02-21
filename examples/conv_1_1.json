@@ -3,10 +3,10 @@
   "global":{
     "modules":{
       "DesignTop":{
-        "type":["Record",{
-          "in":["Record",{"arg_1":["Array",1,["Array",1,["Array",16,"BitIn"]]]}],
-          "out":["Array",1,["Array",1,["Array",16,"Bit"]]]
-        }],
+        "type":["Record",[
+          ["in",["Record",[["arg_1",["Array",1,["Array",1,["Array",16,"BitIn"]]]]]]],
+          ["out",["Array",1,["Array",1,["Array",16,"Bit"]]]]
+        ]],
         "instances":{
           "add_285_289_290":{
             "genref":"coreir.add",
@@ -15,12 +15,12 @@
           "const0__284":{
             "genref":"coreir.const",
             "genargs":{"width":["Int",16]},
-            "modargs":{"value":[["BitVector",16],0]}
+            "modargs":{"value":[["BitVector",16],"16'h000000000000"]}
           },
           "const3__288":{
             "genref":"coreir.const",
             "genargs":{"width":["Int",16]},
-            "modargs":{"value":[["BitVector",16],3]}
+            "modargs":{"value":[["BitVector",16],"16'h000000000003"]}
           },
           "mul_287_288_289":{
             "genref":"coreir.mul",

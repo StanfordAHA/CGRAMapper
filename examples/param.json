@@ -3,10 +3,10 @@
   "global":{
     "modules":{
       "DesignTop":{
-        "type":["Record",{
-          "in":["Record",{"arg_0":["Array",1,["Array",1,["Array",16,"BitIn"]]], "arg_2":["Array",16,"BitIn"]}],
-          "out":["Array",1,["Array",1,["Array",16,"Bit"]]]
-        }],
+        "type":["Record",[
+          ["in",["Record",[["arg_0",["Array",1,["Array",1,["Array",16,"BitIn"]]]],["arg_2",["Array",16,"BitIn"]]]]],
+          ["out",["Array",1,["Array",1,["Array",16,"Bit"]]]]
+        ]],
         "instances":{
           "add_277_offset_278":{
             "genref":"coreir.add",
@@ -19,7 +19,7 @@
           "tap_offset":{
             "genref":"coreir.const",
             "genargs":{"width":["Int",16]},
-            "modargs":{"value":[["BitVector",16],0]},
+            "modargs":{"value":[["BitVector",16],"16'h000000000000"]},
             "metadata":{"tap":"This constant is expected to be changed as a tap value."}
           }
         },
