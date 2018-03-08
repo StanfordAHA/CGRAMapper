@@ -6,7 +6,6 @@ pip install -r requirements.txt
 if [ "$TRAVIS_BRANCH" != "master" ]; then
     git clone -b dev https://github.com/rdaly525/coreir.git;
     cd coreir;
-    export COREIRCONFIG="g++-4.9";
     make -j
     sudo make -j install
     cd ..
