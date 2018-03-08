@@ -15,6 +15,6 @@ def test_add():
             "build/test_add16.json", "gold/test_add16.json")
 
     dir_path = os.path.dirname(os.path.realpath(__file__))
-    delegator.run("../../bin/cgra-mapper build/test_add16.json build/test_add16_mapped.json", cwd=dir_path)
+    assert not delegator.run("../../bin/cgra-mapper build/test_add16.json build/test_add16_mapped.json", cwd=dir_path).return_code
     assert check_files_equal(__file__,
             "build/test_add16_mapped.json", "gold/test_add16_mapped.json")
