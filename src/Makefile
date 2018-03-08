@@ -14,6 +14,7 @@ all: build/mapper
 build/mapper: build/mapper.o 
 	$(CXX) $(LDFLAGS) -o $@ $< $(LIBS)
 	cp build/mapper ../bin/.
+	cp build/mapper ../bin/cgra-mapper
 
 build/%.o: %.cpp 
 	$(CXX) $(CXXFLAGS) -c $^ -o $@
