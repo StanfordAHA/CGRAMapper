@@ -11,7 +11,7 @@
           "const2__348":{
             "genref":"coreir.const",
             "genargs":{"width":["Int",16]},
-            "modargs":{"value":[["BitVector",16],"16'h000000000002"]}
+            "modargs":{"value":[["BitVector",16],"16'h0002"]}
           },
           "mul_347_348_349":{
             "genref":"coreir.mul",
