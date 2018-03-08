@@ -16,14 +16,8 @@ before_install:
   - wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh;
   - bash miniconda.sh -b -p $HOME/miniconda
   - export PATH="$HOME/miniconda/bin:$PATH"
-  - git clone -b dev https://github.com/rdaly525/coreir.git
   - export COREIRCONFIG="g++-4.9";
-  - pip install -r requirements.txt  
-  - cd coreir
-  - make -j
-  - sudo make -j install
-  - cd -
-  - pip install coreir
+  - ./.travis/install_coreir.sh
   - make -j
 
 script:

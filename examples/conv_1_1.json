@@ -15,12 +15,12 @@
           "const0__284":{
             "genref":"coreir.const",
             "genargs":{"width":["Int",16]},
-            "modargs":{"value":[["BitVector",16],"16'h000000000000"]}
+            "modargs":{"value":[["BitVector",16],"16'h0000"]}
           },
           "const3__288":{
             "genref":"coreir.const",
             "genargs":{"width":["Int",16]},
-            "modargs":{"value":[["BitVector",16],"16'h000000000003"]}
+            "modargs":{"value":[["BitVector",16],"16'h0003"]}
           },
           "mul_287_288_289":{
             "genref":"coreir.mul",
