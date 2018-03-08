@@ -20,6 +20,12 @@ before_install:
   - ./.travis/install_coreir.sh
   - make -j
 
+  # Dependences for mantle tests
+  - pip install delegator.py
+  - pip install git+git://github.com/phanrahan/magma.git
+  - pip install git+git://github.com/phanrahan/mantle.git
+
+
 script:
   - make test
   - make pytest
