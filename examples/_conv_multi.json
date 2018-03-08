@@ -3,10 +3,10 @@
   "global":{
     "modules":{
       "DesignTop":{
-        "type":["Record",{
-          "in":["Record",{"arg_1":["Array",1,["Array",1,["Array",16,"BitIn"]]]}],
-          "out":["Array",1,["Array",1,["Array",16,"Bit"]]]
-        }],
+        "type":["Record",[
+          ["in",["Record",[["arg_1",["Array",1,["Array",1,["Array",16,"BitIn"]]]]]]],
+          ["out",["Array",1,["Array",1,["Array",16,"Bit"]]]]
+        ]],
         "instances":{
           "_kernel_2a17_mux3":{
             "genref":"commonlib.muxn",
@@ -55,92 +55,92 @@
           "const0_0":{
             "genref":"coreir.const",
             "genargs":{"width":["Int",16]},
-            "modargs":{"value":[["BitVector",16],0]}
+            "modargs":{"value":[["BitVector",16],"16'h0000"]}
           },
           "const0_0$1":{
             "genref":"coreir.const",
             "genargs":{"width":["Int",16]},
-            "modargs":{"value":[["BitVector",16],0]}
+            "modargs":{"value":[["BitVector",16],"16'h0000"]}
           },
           "const0_0$2":{
             "genref":"coreir.const",
             "genargs":{"width":["Int",16]},
-            "modargs":{"value":[["BitVector",16],0]}
+            "modargs":{"value":[["BitVector",16],"16'h0000"]}
           },
           "const11_11":{
             "genref":"coreir.const",
             "genargs":{"width":["Int",16]},
-            "modargs":{"value":[["BitVector",16],11]}
+            "modargs":{"value":[["BitVector",16],"16'h000b"]}
           },
           "const12_12":{
             "genref":"coreir.const",
             "genargs":{"width":["Int",16]},
-            "modargs":{"value":[["BitVector",16],12]}
+            "modargs":{"value":[["BitVector",16],"16'h000c"]}
           },
           "const13_13":{
             "genref":"coreir.const",
             "genargs":{"width":["Int",16]},
-            "modargs":{"value":[["BitVector",16],13]}
+            "modargs":{"value":[["BitVector",16],"16'h000d"]}
           },
           "const14_14":{
             "genref":"coreir.const",
             "genargs":{"width":["Int",16]},
-            "modargs":{"value":[["BitVector",16],14]}
+            "modargs":{"value":[["BitVector",16],"16'h000e"]}
           },
           "const15_15":{
             "genref":"coreir.const",
             "genargs":{"width":["Int",16]},
-            "modargs":{"value":[["BitVector",16],15]}
+            "modargs":{"value":[["BitVector",16],"16'h000f"]}
           },
           "const16_16":{
             "genref":"coreir.const",
             "genargs":{"width":["Int",16]},
-            "modargs":{"value":[["BitVector",16],16]}
+            "modargs":{"value":[["BitVector",16],"16'h0010"]}
           },
           "const17_17":{
             "genref":"coreir.const",
             "genargs":{"width":["Int",16]},
-            "modargs":{"value":[["BitVector",16],17]}
+            "modargs":{"value":[["BitVector",16],"16'h0011"]}
           },
           "const18_18":{
             "genref":"coreir.const",
             "genargs":{"width":["Int",16]},
-            "modargs":{"value":[["BitVector",16],18]}
+            "modargs":{"value":[["BitVector",16],"16'h0012"]}
           },
           "const19_19":{
             "genref":"coreir.const",
             "genargs":{"width":["Int",16]},
-            "modargs":{"value":[["BitVector",16],19]}
+            "modargs":{"value":[["BitVector",16],"16'h0013"]}
           },
           "const1_1":{
             "genref":"coreir.const",
             "genargs":{"width":["Int",16]},
-            "modargs":{"value":[["BitVector",16],1]}
+            "modargs":{"value":[["BitVector",16],"16'h0001"]}
           },
           "const2_2":{
             "genref":"coreir.const",
             "genargs":{"width":["Int",16]},
-            "modargs":{"value":[["BitVector",16],2]}
+            "modargs":{"value":[["BitVector",16],"16'h0002"]}
           },
           "const2_2$1":{
             "genref":"coreir.const",
             "genargs":{"width":["Int",16]},
-            "modargs":{"value":[["BitVector",16],2]}
+            "modargs":{"value":[["BitVector",16],"16'h0002"]}
           },
           "const3_3":{
             "genref":"coreir.const",
             "genargs":{"width":["Int",16]},
-            "modargs":{"value":[["BitVector",16],3]}
+            "modargs":{"value":[["BitVector",16],"16'h0003"]}
           },
           "const3_3$1":{
             "genref":"coreir.const",
             "genargs":{"width":["Int",16]},
-            "modargs":{"value":[["BitVector",16],3]}
+            "modargs":{"value":[["BitVector",16],"16'h0003"]}
           },
           "const3_3$2":{
             "genref":"coreir.const",
             "genargs":{"width":["Int",16]},
-            "modargs":{"value":[["BitVector",16],3]}
+            "modargs":{"value":[["BitVector",16],"16'h0003"]}
           },
           "count__conv1_2_s1_p4_win_y":{
             "genref":"commonlib.counter",
