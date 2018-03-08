@@ -3,7 +3,7 @@
 set -e
 
 pip install -r requirements.txt
-if [ "$TRAVIS_BRANCH" != "master" || $TRAVIS_PULL_REQUEST]; then
+if [ "$TRAVIS_BRANCH" != "master"]; then
     git clone -b dev https://github.com/rdaly525/coreir.git;
     cd coreir;
     make -j
