@@ -35,7 +35,7 @@ travis:
 	$(MAKE) clean
 	$(MAKE) all
 	$(MAKE) test
-	. env/bin/activate && $(MAKE) pytest
+	. env/bin/activate && source .travis/install_coreir.sh && $(MAKE) pytest
 
 .PHONY: clean
 clean:
