@@ -19,7 +19,7 @@
           "tap_offset":{
             "genref":"coreir.const",
             "genargs":{"width":["Int",16]},
-            "modargs":{"value":[["BitVector",16],"16'h000000000000"]},
+            "modargs":{"value":[["BitVector",16],"16'h0000"]},
             "metadata":{"tap":"This constant is expected to be changed as a tap value."}
           }
         },

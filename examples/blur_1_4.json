@@ -31,42 +31,42 @@
           "const0_0":{
             "genref":"coreir.const",
             "genargs":{"width":["Int",16]},
-            "modargs":{"value":[["BitVector",16],"16'h000000000000"]}
+            "modargs":{"value":[["BitVector",16],"16'h0000"]}
           },
           "const159_159":{
             "genref":"coreir.const",
             "genargs":{"width":["Int",16]},
-            "modargs":{"value":[["BitVector",16],"16'h00000000009f"]}
+            "modargs":{"value":[["BitVector",16],"16'h009f"]}
           },
           "const3_3":{
             "genref":"coreir.const",
             "genargs":{"width":["Int",16]},
-            "modargs":{"value":[["BitVector",16],"16'h000000000003"]}
+            "modargs":{"value":[["BitVector",16],"16'h0003"]}
           },
           "const3_3$1":{
             "genref":"coreir.const",
             "genargs":{"width":["Int",16]},
-            "modargs":{"value":[["BitVector",16],"16'h000000000003"]}
+            "modargs":{"value":[["BitVector",16],"16'h0003"]}
           },
           "const4__395":{
             "genref":"coreir.const",
             "genargs":{"width":["Int",16]},
-            "modargs":{"value":[["BitVector",16],"16'h000000000004"]}
+            "modargs":{"value":[["BitVector",16],"16'h0004"]}
           },
           "const5_5":{
             "genref":"coreir.const",
             "genargs":{"width":["Int",16]},
-            "modargs":{"value":[["BitVector",16],"16'h000000000005"]}
+            "modargs":{"value":[["BitVector",16],"16'h0005"]}
           },
           "const5_5$1":{
             "genref":"coreir.const",
             "genargs":{"width":["Int",16]},
-            "modargs":{"value":[["BitVector",16],"16'h000000000005"]}
+            "modargs":{"value":[["BitVector",16],"16'h0005"]}
           },
           "const9_9":{
             "genref":"coreir.const",
             "genargs":{"width":["Int",16]},
-            "modargs":{"value":[["BitVector",16],"16'h000000000009"]}
+            "modargs":{"value":[["BitVector",16],"16'h0009"]}
           },
           "lb_p3_clamped_stencil_update_stream":{
             "genref":"commonlib.linebuffer2d",
