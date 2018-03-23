@@ -13,7 +13,7 @@ using namespace std;
 #include "passes/opsubstitution.h"
 #include "passes/bitop2lut.h"
 
-#include "definitions/linebuffermem.h"
+#include "definitions/cgralib_def.h"
 #include "passes/techmapping.h"
 #include "passes/verifytechmapping.h"
 //#include "passes/constregduplication.h"
@@ -67,28 +67,28 @@ void addIOs(Context* c, Module* top) {
   Instance* pt = addPassthrough(mdef->getInterface(),"_self");
   for (auto path : iopaths.IO16) {
     string ioname = "io16in_" + join(++path.begin(),path.end(),string("_"));
-    mdef->addInstance(ioname,"cgralib.IO",aWidth,{{"mode",Const::make(c,"i")}});
+    mdef->addInstance(ioname,"cgralib.IO",aWidth,{{"mode",Const::make(c,"in")}});
     path[0] = "in";
     path.insert(path.begin(),"_self");
     mdef->connect({ioname,"out"},path);
   }
   for (auto path : iopaths.IO16in) {
     string ioname = "io16_" + join(++path.begin(),path.end(),string("_"));
-    mdef->addInstance(ioname,"cgralib.IO",aWidth,{{"mode",Const::make(c,"o")}});
+    mdef->addInstance(ioname,"cgralib.IO",aWidth,{{"mode",Const::make(c,"out")}});
     path[0] = "in";
     path.insert(path.begin(),"_self");
     mdef->connect({ioname,"in"},path);
   }
   for (auto path : iopaths.IO1) {
     string ioname = "io1in_" + join(++path.begin(),path.end(),string("_"));
-    mdef->addInstance(ioname,"cgralib.BitIO",{{"mode",Const::make(c,"i")}});
+    mdef->addInstance(ioname,"cgralib.BitIO",{{"mode",Const::make(c,"in")}});
     path[0] = "in";
     path.insert(path.begin(),"_self");
     mdef->connect({ioname,"out"},path);
   }
   for (auto path : iopaths.IO1in) {
     string ioname = "io1_" + join(++path.begin(),path.end(),string("_"));
-    mdef->addInstance(ioname,"cgralib.BitIO",{{"mode",Const::make(c,"o")}});
+    mdef->addInstance(ioname,"cgralib.BitIO",{{"mode",Const::make(c,"out")}});
     path[0] = "in";
     path.insert(path.begin(),"_self");
     mdef->connect({ioname,"in"},path);
@@ -132,7 +132,7 @@ int main(int argc, char *argv[]){
 
   c->getPassManager()->setVerbosity(true);
 
-  LoadDefinition_LinebufferMem(c); //Load the definitions first
+  LoadDefinition_cgralib(c); //Load the definitions first
   
   c->runPasses({"rungenerators","verifyconnectivity-onlyinputs-noclkrst","removebulkconnections"});
 
@@ -153,7 +153,7 @@ int main(int argc, char *argv[]){
   c->addPass(new MapperPasses::TechMapping);
   c->addPass(new MapperPasses::VerifyTechMapping);
   c->runPasses({"techmapping"},{"global","coreir","corebit","mantle","commonlib"});
-  c->runPasses({"cullgraph"}); //TODO why am I passing each of these namespaces
+  c->runPasses({"cullgraph"}); 
   //c->runPasses({"printer"},{"global","coreir","corebit","mantle","commonlib"});
   c->runPasses({"verifytechmapping"});
   
