@@ -9,7 +9,7 @@ void LoadDefinition_cgralib(Context* c) {
     uint depth = args.at("depth")->get<int>();
     ASSERT(width==16,"NYI Non 16 bit width");
     ASSERT(depth<=1024,"NYI using mutliple memories");
-    Values rbGenargs({{"width",Const::make(c,width)},{"depth",Const::make(c,1024)}});
+    Values rbGenargs({{"width",Const::make(c,width)},{"total_depth",Const::make(c,1024)}});
     def->addInstance("cgramem","cgralib.Mem",
       rbGenargs,
       {{"mode",Const::make(c,"linebuffer")},{"depth",Const::make(c,depth)}});

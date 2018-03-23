@@ -153,7 +153,7 @@ int main(int argc, char *argv[]){
   c->addPass(new MapperPasses::TechMapping);
   c->addPass(new MapperPasses::VerifyTechMapping);
   c->runPasses({"techmapping"},{"global","coreir","corebit","mantle","commonlib"});
-  c->runPasses({"cullgraph"}); //TODO why am I passing each of these namespaces
+  c->runPasses({"cullgraph"}); 
   //c->runPasses({"printer"},{"global","coreir","corebit","mantle","commonlib"});
   c->runPasses({"verifytechmapping"});
   

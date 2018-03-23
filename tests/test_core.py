@@ -51,7 +51,7 @@ def test_load_core(libs, files):
                 conf = {
                     'mode'        :: ('linebuffer', 'fifo', 'ram')
                     'depth'       :: INT
-                    'full_count'  :: INT
+                    'almost_count'  :: INT
                     'tile_en'     :: 1
                     'chain_enable :: 0
                 }
@@ -61,13 +61,13 @@ def test_load_core(libs, files):
                 modules[inst_name]['conf'] = conf = {
                         'mode'         : inst.config['mode'].value,
                         'depth'        : inst.config['depth'].value,
-                        'full_count'   : inst.config['full_count'].value,
+                        'almost_count'   : inst.config['almost_count'].value,
                         'tile_en'      : inst.config['tile_en'].value,
                         'chain_enable' : inst.config['chain_enable'].value,
                 }
                 assert conf['mode'] in ('linebuffer', 'fifo', 'ram')
                 assert isinstance(conf['depth'], int)
-                assert isinstance(conf['full_count'], int)
+                assert isinstance(conf['almost_count'], int)
                 assert conf['tile_en'] == 1
                 assert conf['chain_enable'] == 0
 
@@ -140,10 +140,11 @@ _PORT_TRANSLATION = {
         'rdata'  : 'mem_out',
         'addr'   : 'ain',
         'ren'    : 'ren',
-        'empty'  : 'valid',
+        'almost_empty'  : 'almost_empty',
         'wdata'  : 'din',
         'wen'    : 'wen',
-        'full'   : 'almost_full',
+        'almost_full'   : 'almost_full',
+        'cg_en'   : 'cg_en',
     },
 }
 
