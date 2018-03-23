@@ -7,13 +7,12 @@ CXXFLAGS+=-std=c++11 -Wall -fPIC -g
 SRC=$(wildcard [^_]*.cpp)
 OBJ=$(patsubst %.cpp, build/%.o, $(SRC))
 
-LIBS= -lcoreir-cgralib -lcoreir-commonlib -lcoreir
+LIBS= -lcoreir-commonlib -lcoreir
 
 all: build/mapper
 
-build/mapper: build/mapper.o 
-	$(CXX) $(LDFLAGS) -o $@ $< $(LIBS)
-	cp build/mapper ../bin/.
+build/mapper: build/mapper.o build/cgralib.o
+	$(CXX) $(LDFLAGS) -o $@ $^ $(LIBS)
 	cp build/mapper ../bin/cgra-mapper
 
 build/%.o: %.cpp 

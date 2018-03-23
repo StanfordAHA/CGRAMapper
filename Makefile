@@ -23,6 +23,7 @@ $(BIN):
 .PHONY: test
 test: $(MAPPED_FILES)
 
+
 $(MAPPED_FILES): $(BIN)
 	$(BIN) examples/$(@F) $(@) || exit 1
 

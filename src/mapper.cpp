@@ -1,6 +1,6 @@
 #include "coreir.h"
 
-#include "coreir/libs/cgralib.h"
+#include "cgralib.h"
 #include "coreir/libs/commonlib.h"
 #include "coreir/passes/analysis/coreirjson.h"
 
