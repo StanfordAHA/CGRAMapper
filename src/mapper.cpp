@@ -13,7 +13,7 @@ using namespace std;
 #include "passes/opsubstitution.h"
 #include "passes/bitop2lut.h"
 
-#include "definitions/linebuffermem.h"
+#include "definitions/cgralib_def.h"
 #include "passes/techmapping.h"
 #include "passes/verifytechmapping.h"
 //#include "passes/constregduplication.h"
