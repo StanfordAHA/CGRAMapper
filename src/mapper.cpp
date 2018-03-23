@@ -67,28 +67,28 @@ void addIOs(Context* c, Module* top) {
   Instance* pt = addPassthrough(mdef->getInterface(),"_self");
   for (auto path : iopaths.IO16) {
     string ioname = "io16in_" + join(++path.begin(),path.end(),string("_"));
-    mdef->addInstance(ioname,"cgralib.IO",aWidth,{{"mode",Const::make(c,"i")}});
+    mdef->addInstance(ioname,"cgralib.IO",aWidth,{{"mode",Const::make(c,"in")}});
     path[0] = "in";
     path.insert(path.begin(),"_self");
     mdef->connect({ioname,"out"},path);
   }
   for (auto path : iopaths.IO16in) {
     string ioname = "io16_" + join(++path.begin(),path.end(),string("_"));
-    mdef->addInstance(ioname,"cgralib.IO",aWidth,{{"mode",Const::make(c,"o")}});
+    mdef->addInstance(ioname,"cgralib.IO",aWidth,{{"mode",Const::make(c,"out")}});
     path[0] = "in";
     path.insert(path.begin(),"_self");
     mdef->connect({ioname,"in"},path);
   }
   for (auto path : iopaths.IO1) {
     string ioname = "io1in_" + join(++path.begin(),path.end(),string("_"));
-    mdef->addInstance(ioname,"cgralib.BitIO",{{"mode",Const::make(c,"i")}});
+    mdef->addInstance(ioname,"cgralib.BitIO",{{"mode",Const::make(c,"in")}});
     path[0] = "in";
     path.insert(path.begin(),"_self");
     mdef->connect({ioname,"out"},path);
   }
   for (auto path : iopaths.IO1in) {
     string ioname = "io1_" + join(++path.begin(),path.end(),string("_"));
-    mdef->addInstance(ioname,"cgralib.BitIO",{{"mode",Const::make(c,"o")}});
+    mdef->addInstance(ioname,"cgralib.BitIO",{{"mode",Const::make(c,"out")}});
     path[0] = "in";
     path.insert(path.begin(),"_self");
     mdef->connect({ioname,"in"},path);
@@ -132,7 +132,7 @@ int main(int argc, char *argv[]){
 
   c->getPassManager()->setVerbosity(true);
 
-  LoadDefinition_LinebufferMem(c); //Load the definitions first
+  LoadDefinition_cgralib(c); //Load the definitions first
   
   c->runPasses({"rungenerators","verifyconnectivity-onlyinputs-noclkrst","removebulkconnections"});
 
