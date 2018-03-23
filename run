@@ -10,4 +10,5 @@ if [[ -n $1 &&  "$1" -eq '-memcheck' ]]; then
   for file in build/*; do valgrind --error-exitcode=1 $file; done
 else
   for file in `ls examples | grep -v ^_`; do ./bin/map examples/$file mapped/mapped_$file; done
+  for file in `ls unit_tests | grep -v ^_`; do ./bin/map unit_tests/$file mapped/unit_mapped_$file; done
 fi
