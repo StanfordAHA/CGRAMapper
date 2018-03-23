@@ -1,2 +1,6 @@
 py==1.4.34
 pytest==3.2.3
+delegator.py
+git+git://github.com/phanrahan/magma.git
+git+git://github.com/phanrahan/mantle.git
+coreir

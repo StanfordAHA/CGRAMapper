@@ -20,17 +20,17 @@
           "io16_O":{
             "genref":"cgralib.IO",
             "genargs":{"width":["Int",16]},
-            "modargs":{"mode":["String","o"]}
+            "modargs":{"mode":["String","out"]}
           },
           "io16in_I0":{
             "genref":"cgralib.IO",
             "genargs":{"width":["Int",16]},
-            "modargs":{"mode":["String","i"]}
+            "modargs":{"mode":["String","in"]}
           },
           "io16in_I1":{
             "genref":"cgralib.IO",
             "genargs":{"width":["Int",16]},
-            "modargs":{"mode":["String","i"]}
+            "modargs":{"mode":["String","in"]}
           }
         },
         "connections":[
