@@ -1,51 +1,7 @@
 
+#include "../headers/config.h"
+
 using namespace CoreIR;
-
-namespace {
-
-uint flag_sel_size = 4;
-enum PE_flag_sel {
-  F_EQ=0,
-  F_NE=1,
-  F_CS=2,
-  F_CC=3,
-  F_MI=4,
-  F_PL=5,
-  F_VS=6,
-  F_VC=7,
-  F_HI=8,
-  F_LS=9,
-  F_GE=10,
-  F_LT=11,
-  F_GT=12,
-  F_LE=13,
-  F_LUT=14,
-  F_PRED=15,
-};
-
-uint op_size = 6;
-enum PE_op {
-  OP_ADD=0,
-  OP_SUB=1,
-  OP_ABS=3,
-  OP_GTE_MAX=4,
-  OP_LTE_MIN=5,
-  OP_EQ=6,
-  OP_SEL=8,
-  OP_RSHIFT=0xF,
-  OP_LSHIFT=0x11,
-  OP_MULT_0=0xB,
-  OP_MULT_1=0xC,
-  OP_MULT_2=0xD,
-  OP_RELU=0xE,
-  OP_OR=0x12,
-  OP_AND=0x13,
-  OP_XOR=0x14,
-  OP_INV=0x15,
-  OP_CNTR=0x18
-};
-}
-
 
 //Assumes common has been loaded
 void load_mem_ext(Context* c) {
@@ -104,7 +60,6 @@ void load_opsubstitution(Context* c) {
     for (auto op : ops) {
       string from = "coreir." + string(sign)+op.first;
       string to = "coreir." + string(sign)+op.second;
-      cout << "from:" <<from << " to:" << to << endl;
       Module* mod = c->getGenerator(from)->getModule({{"width",Const::make(c,16)}});
       ModuleDef* def = mod->newModuleDef();
       def->addInstance("comp",to);
@@ -195,7 +150,6 @@ void laod_cgramapping(Context* c) {
       string opstr = std::get<0>(op);
       uint alu_op = std::get<1>(op);
       bool is_signed = std::get<2>(op);
-      cout << "adding to " << opstr << endl;
       Module* mod = c->getGenerator("coreir."+opstr)->getModule({{"width",Const::make(c,16)}});
       ModuleDef* def = mod->newModuleDef();
       Values dataPEArgs({{"alu_op",Const::make(c,op_size,alu_op)},{"signed",Const::make(c,is_signed)}});
@@ -222,7 +176,6 @@ void laod_cgramapping(Context* c) {
       string opstr = std::get<0>(op);
       uint alu_op = std::get<1>(op);
       bool is_signed = std::get<2>(op);
-      cout << "adding to " << opstr << endl;
       Module* mod = c->getGenerator("coreir."+opstr)->getModule({{"width",Const::make(c,16)}});
       ModuleDef* def = mod->newModuleDef();
       Values dataPEArgs({{"alu_op",Const::make(c,op_size,alu_op)},{"signed",Const::make(c,is_signed)}});
@@ -265,7 +218,6 @@ void laod_cgramapping(Context* c) {
       uint alu_op = std::get<1>(op);
       uint flag_sel = std::get<2>(op);
       bool is_signed = std::get<3>(op);
-      cout << "adding def to " << opstr << endl;
       Module* mod = c->getGenerator("coreir."+opstr)->getModule({{"width",Const::make(c,16)}});
       ModuleDef* def = mod->newModuleDef();
       Values PEArgs({
