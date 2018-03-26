@@ -35,6 +35,7 @@ void load_commonlib_ext(Context* c) {
     ASSERT(width==16,"NYI non 16");
     Values PEArgs({
       {"alu_op",Const::make(c,op_size,OP_GTE_MAX)},
+      {"alu_op_debug",Const::make(c,"gte_max")},
       {"flag_sel",Const::make(c,flag_sel_size,F_PRED)},
       {"signed",Const::make(c,true)}
     });
@@ -152,7 +153,10 @@ void laod_cgramapping(Context* c) {
       bool is_signed = std::get<2>(op);
       Module* mod = c->getGenerator("coreir."+opstr)->getModule({{"width",Const::make(c,16)}});
       ModuleDef* def = mod->newModuleDef();
-      Values dataPEArgs({{"alu_op",Const::make(c,op_size,alu_op)},{"signed",Const::make(c,is_signed)}});
+      Values dataPEArgs({
+        {"alu_op",Const::make(c,op_size,alu_op)},
+        {"alu_op_debug",Const::make(c,opstr)},
+        {"signed",Const::make(c,is_signed)}});
       def->addInstance("binop","cgralib.PE",{{"op_kind",Const::make(c,"alu")}},dataPEArgs);
     
       def->connect("self.in","binop.data.in.0");
@@ -178,7 +182,10 @@ void laod_cgramapping(Context* c) {
       bool is_signed = std::get<2>(op);
       Module* mod = c->getGenerator("coreir."+opstr)->getModule({{"width",Const::make(c,16)}});
       ModuleDef* def = mod->newModuleDef();
-      Values dataPEArgs({{"alu_op",Const::make(c,op_size,alu_op)},{"signed",Const::make(c,is_signed)}});
+      Values dataPEArgs({
+        {"alu_op",Const::make(c,op_size,alu_op)},
+        {"alu_op_debug",Const::make(c,opstr)},
+        {"signed",Const::make(c,is_signed)}});
       def->addInstance("binop","cgralib.PE",{{"op_kind",Const::make(c,"alu")}},dataPEArgs);
     
       def->connect("self.in0","binop.data.in.0");
@@ -193,6 +200,7 @@ void laod_cgramapping(Context* c) {
     ModuleDef* def = mod->newModuleDef();
     Values PEArgs({
       {"alu_op",Const::make(c,op_size,OP_SEL)},
+      {"alu_op_debug",Const::make(c,"mux")},
       {"flag_sel",Const::make(c,flag_sel_size,F_PRED)},
       {"signed",Const::make(c,false)}
     });
@@ -222,6 +230,7 @@ void laod_cgramapping(Context* c) {
       ModuleDef* def = mod->newModuleDef();
       Values PEArgs({
         {"alu_op",Const::make(c,op_size,alu_op)},
+        {"alu_op_debug",Const::make(c,opstr)},
         {"flag_sel",Const::make(c,flag_sel_size,flag_sel)},
         {"signed",Const::make(c,is_signed)}
       });

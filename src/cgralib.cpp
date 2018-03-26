@@ -43,6 +43,7 @@ Namespace* CoreIRLoadLibrary_cgralib(Context* c) {
     }
     if (op_kind == "alu" || op_kind == "combined") {
       p["alu_op"] = c->BitVector(6);
+      p["alu_op_debug"] = c->String();
       p["signed"] = c->Bool();
       //d["signed"] = Const::make(c,false);
      for (int i=0; i<numdataports; ++i) {
