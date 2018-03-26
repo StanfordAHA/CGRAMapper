@@ -130,7 +130,7 @@ void load_corebit2lut(Context* c) {
   }
 
 }
-void laod_cgramapping(Context* c) {
+void load_cgramapping(Context* c) {
   //commonlib.lut def
   {
     Module* mod = c->getGenerator("commonlib.lutN")->getModule({{"N",Const::make(c,3)}});
@@ -144,9 +144,9 @@ void laod_cgramapping(Context* c) {
   }
   {
     //unary op width)->width
-    std::vector<std::tuple<string,uint,bool>> unops({
-      {"not",OP_INV,false},
-    });
+    std::vector<std::tuple<string,uint,bool>> unops = {
+        std::make_tuple("not",OP_INV,false),
+    };
     for (auto op : unops) {
       string opstr = std::get<0>(op);
       uint alu_op = std::get<1>(op);
@@ -167,14 +167,14 @@ void laod_cgramapping(Context* c) {
   {
     //binary op (width,width)->width
     std::vector<std::tuple<string,uint,bool>> binops({
-      {"add",OP_ADD,false},
-      {"sub",OP_SUB,false},
-      {"mul",OP_MULT_0,false},
-      {"or",OP_OR,false},
-      {"and",OP_AND,false},
-      {"xor",OP_XOR,false},
-      {"ashr",OP_RSHIFT,false},
-      {"shl",OP_LSHIFT,false},
+      std::make_tuple("add",OP_ADD,false),
+      std::make_tuple("sub",OP_SUB,false),
+      std::make_tuple("mul",OP_MULT_0,false),
+      std::make_tuple("or",OP_OR,false),
+      std::make_tuple("and",OP_AND,false),
+      std::make_tuple("xor",OP_XOR,false),
+      std::make_tuple("ashr",OP_RSHIFT,false),
+      std::make_tuple("shl",OP_LSHIFT,false),
     });
     for (auto op : binops) {
       string opstr = std::get<0>(op);
@@ -214,12 +214,12 @@ void laod_cgramapping(Context* c) {
   {
     //comp op (width,width)->bit
     std::vector<std::tuple<string,uint,uint,bool>> compops({
-      {"eq",OP_SUB,F_EQ,false},
-      {"neq",OP_SUB,F_NE,false},
-      {"sge",OP_GTE_MAX,F_PRED,true},
-      {"uge",OP_GTE_MAX,F_PRED,false},
-      {"sle",OP_LTE_MIN,F_PRED,true},
-      {"ule",OP_LTE_MIN,F_PRED,false},
+      std::make_tuple("eq",OP_SUB,F_EQ,false),
+      std::make_tuple("neq",OP_SUB,F_NE,false),
+      std::make_tuple("sge",OP_GTE_MAX,F_PRED,true),
+      std::make_tuple("uge",OP_GTE_MAX,F_PRED,false),
+      std::make_tuple("sle",OP_LTE_MIN,F_PRED,true),
+      std::make_tuple("ule",OP_LTE_MIN,F_PRED,false),
     });
     for (auto op : compops) {
       string opstr = std::get<0>(op);
@@ -266,7 +266,7 @@ void LoadDefinition_cgralib(Context* c) {
   load_commonlib_ext(c);
   load_opsubstitution(c);
   load_corebit2lut(c);
-  laod_cgramapping(c);
+  load_cgramapping(c);
 
 }
 
