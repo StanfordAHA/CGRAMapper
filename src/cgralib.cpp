@@ -37,11 +37,15 @@ Namespace* CoreIRLoadLibrary_cgralib(Context* c) {
     int numbitports = genargs.at("numbitports")->get<int>();
     int numdataports = genargs.at("numdataports")->get<int>();
     int width = genargs.at("width")->get<int>();
+    if (op_kind == "combined") {
+      p["flag_sel"] = c->BitVector(4);
+      //d["flag_sel"] = Const::make(c,4,0xF); //TODO hardcoding for now
+    }
     if (op_kind == "alu" || op_kind == "combined") {
-      p["alu_op"] = c->String();
+      p["alu_op"] = c->BitVector(6);
       p["signed"] = c->Bool();
-      d["signed"] = Const::make(c,false);
-      for (int i=0; i<numdataports; ++i) {
+      //d["signed"] = Const::make(c,false);
+     for (int i=0; i<numdataports; ++i) {
         string mode = "data"+to_string(i)+"_mode";
         p[mode] = c->String();
         d[mode] = Const::make(c,"BYPASS");
@@ -53,7 +57,6 @@ Namespace* CoreIRLoadLibrary_cgralib(Context* c) {
     if (op_kind == "bit" || op_kind == "combined") {
       p["lut_value"] = c->BitVector(1<<numbitports);
       d["lut_value"] = Const::make(c,BitVector(1<<numbitports,0));
-      // cout << "LUTVAL=" << d["lut_value"]->toString() << endl;
       for (int i=0; i<numbitports; ++i) {
         string mode = "bit"+to_string(i)+"_mode";
         p[mode] = c->String();
@@ -66,17 +69,6 @@ Namespace* CoreIRLoadLibrary_cgralib(Context* c) {
     return {p,d};
   };
  
-//Will produce something like this for combined
-//    {"alu_op",c->String()}, //add,sub,shl,etc
-//    {"lut_value",c->BitVector(8)}, //LUT for the optype=Bit (or combined)
-//    {"data0_mode",c->String()},//TODO
-//    {"data0_value",c->Int()}, //Value for constant
-//    {"data1_mode",c->String()},
-//    {"data1_value",c->Int()},
-//    {"bit0_mode",c->String()},
-//    {"bit0_value",c->Bool()},
-  
-  
   Generator* PE = cgralib->newGeneratorDecl("PE",cgralib->getTypeGen("PEType"),PEGenParams);
   PE->addDefaultGenArgs({{"width",Const::make(c,16)},{"numdataports",Const::make(c,2)},{"numbitports",Const::make(c,3)}});
   PE->setModParamsGen(PEModParamFun);
