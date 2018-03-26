@@ -11,7 +11,7 @@ if [ "$TRAVIS_BRANCH" != "master" ]; then
     make -j
     sudo make -j install
     cd ..
-    pip install git+git://github.com/leonardt/pycoreir.git@dev;
+    pip install git+git://github.com/leonardt/pycoreir.git@rmcgra;
 else
     wget https://github.com/rdaly525/coreir/releases/download/v0.0.9/coreir.tar.gz
     mkdir coreir_release 
