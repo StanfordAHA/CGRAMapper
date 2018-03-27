@@ -1,5 +1,10 @@
 #include "cgralib.h"
 
+#include "headers/config.h"
+
+int flag_sel_size = 4;
+int op_size = 6;
+
 COREIR_GEN_C_API_DEFINITION_FOR_LIBRARY(cgralib);
 
 using namespace std;
@@ -37,15 +42,10 @@ Namespace* CoreIRLoadLibrary_cgralib(Context* c) {
     int numbitports = genargs.at("numbitports")->get<int>();
     int numdataports = genargs.at("numdataports")->get<int>();
     int width = genargs.at("width")->get<int>();
-    if (op_kind == "combined") {
-      p["flag_sel"] = c->BitVector(4);
-      //d["flag_sel"] = Const::make(c,4,0xF); //TODO hardcoding for now
-    }
     if (op_kind == "alu" || op_kind == "combined") {
       p["alu_op"] = c->BitVector(6);
       p["alu_op_debug"] = c->String();
-      p["signed"] = c->Bool();
-      //d["signed"] = Const::make(c,false);
+      p["signed"] = c->BitVector(1);
      for (int i=0; i<numdataports; ++i) {
         string mode = "data"+to_string(i)+"_mode";
         p[mode] = c->String();
@@ -56,6 +56,7 @@ Namespace* CoreIRLoadLibrary_cgralib(Context* c) {
       }
     }
     if (op_kind == "bit" || op_kind == "combined") {
+      p["flag_sel"] = c->BitVector(4);
       p["lut_value"] = c->BitVector(1<<numbitports);
       d["lut_value"] = Const::make(c,BitVector(1<<numbitports,0));
       for (int i=0; i<numbitports; ++i) {
@@ -66,6 +67,9 @@ Namespace* CoreIRLoadLibrary_cgralib(Context* c) {
         p[value] = c->Bool();
         d[value] = Const::make(c,false);
       }
+    }
+    if (op_kind == "bit") {
+      d["flag_sel"] = Const::make(c,4,F_LUT);
     }
     return {p,d};
   };
