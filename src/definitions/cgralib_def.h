@@ -129,6 +129,9 @@ void load_corebit2lut(Context* c) {
     mod->setDef(def);
   }
 
+#undef B0
+#undef B1
+#undef B2
 }
 
 void load_cgramapping(Context* c) {
