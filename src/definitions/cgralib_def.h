@@ -130,6 +130,7 @@ void load_corebit2lut(Context* c) {
   }
 
 }
+
 void load_cgramapping(Context* c) {
   //commonlib.lut def
   {
