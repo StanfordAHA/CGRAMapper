@@ -10,7 +10,7 @@ LIBS= -lcoreir-commonlib -lcoreir -lcoreir-cgralib
 all: build/mapper
 
 build/mapper: build/mapper.o
-	$(MAKE) -C libs dylib
+	$(MAKE) -C libs $(TARGET)
 	$(CXX) $(LDFLAGS) -o $@ $^ $(LPATH) $(LIBS)
 	cp build/mapper ../bin/cgra-mapper
 

@@ -19,6 +19,7 @@ CXXFLAGS+=-std=c++11 -Wall -fPIC -g -Wfatal-errors
 TEST_FILES=$(wildcard examples/[^_]*.json)
 MAPPED_FILES=$(patsubst examples/%, mapped/%, $(TEST_FILES))
 
+export TARGET
 export CXX
 export CFLAGS
 export CXXFLAGS
