@@ -1,9 +1,9 @@
-#include "cgralib.h"
+#include "coreir/libs/cgralib.h"
 
-#include "headers/config.h"
+#include "../headers/config.h"
 
-int flag_sel_size = 4;
-int op_size = 6;
+//int flag_sel_size = 4;
+//int op_size = 6;
 
 COREIR_GEN_C_API_DEFINITION_FOR_LIBRARY(cgralib);
 

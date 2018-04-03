@@ -1,7 +1,6 @@
 #ifndef CONFIG_H_
 #define CONFIG_H_
 
-extern int flag_sel_size;
 enum PE_flag_sel {
   F_EQ=0,
   F_NE=1,
@@ -21,7 +20,10 @@ enum PE_flag_sel {
   F_PRED=15,
 };
 
-extern int op_size;
+namespace {
+  int op_size = 6;
+  int flag_sel_size = 4;
+}
 enum PE_op {
   OP_ADD=0,
   OP_SUB=1,

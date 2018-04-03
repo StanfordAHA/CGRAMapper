@@ -1,6 +1,6 @@
 #include "coreir.h"
 
-#include "cgralib.h"
+#include "coreir/libs/cgralib.h"
 #include "coreir/libs/commonlib.h"
 #include "coreir/passes/analysis/coreirjson.h"
 
@@ -112,7 +112,9 @@ int main(int argc, char *argv[]){
     return 1;
   }
 
-  cout << "Loading " << premap << endl;
+  //cout << "Loading " << premap << endl;
+  //deleteContext(c); exit(0);
+  
   Module* top = nullptr;
   if (!loadFromFile(c,premap,&top)) {
     c->die();

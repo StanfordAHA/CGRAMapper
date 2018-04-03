@@ -1,22 +1,21 @@
-CXX?=g++
-ifeq ($(COREIRCONFIG),g++-4.9)
-CXX=g++-4.9
-endif
-CXXFLAGS+=-std=c++11 -Wall -fPIC -g -Wfatal-errors
+HOME = ..
+LPATH = -L$(HOME)/lib
+INCS = -I$(HOME)/include -I.
 
 SRC=$(wildcard [^_]*.cpp)
 OBJ=$(patsubst %.cpp, build/%.o, $(SRC))
 
-LIBS= -lcoreir-commonlib -lcoreir
+LIBS= -lcoreir-commonlib -lcoreir -lcoreir-cgralib
 
 all: build/mapper
 
-build/mapper: build/mapper.o build/cgralib.o
-	$(CXX) $(LDFLAGS) -o $@ $^ $(LIBS)
+build/mapper: build/mapper.o
+	$(MAKE) -C libs dylib
+	$(CXX) $(LDFLAGS) -o $@ $^ $(LPATH) $(LIBS)
 	cp build/mapper ../bin/cgra-mapper
 
 build/%.o: %.cpp 
-	$(CXX) $(CXXFLAGS) -c $^ -o $@
+	$(CXX) $(CXXFLAGS) $(INCS) -c $^ -o $@
 
 .PHONY: clean
 clean:
