@@ -33,28 +33,43 @@ def test_load_core(libs, files):
 
             elif inst_type == 'IO':
                 modules[inst_name]['type'] = 'IO'
-                modules[inst_name]['conf'] = inst.config['mode'].value
+                modules[inst_name]['conf'] = conf = inst.config['mode'].value
+                assert conf in ('in', 'out') 
             elif inst_type == 'BitIO':
                 modules[inst_name]['type'] = 'BitIO'
-                modules[inst_name]['conf'] = inst.config['mode'].value
-
+                modules[inst_name]['conf'] = conf =  inst.config['mode'].value
+                assert conf in ('in', 'out') 
             elif inst_type == 'reg':
                 modules[inst_name]['type'] = 'Reg'
                 modules[inst_name]['conf'] = None
             elif inst_type == 'dff':
                 modules[inst_name]['type'] = 'BitReg'
                 modules[inst_name]['conf'] = None
-
             elif inst_type == 'Mem':
-                modules[inst_name]['type'] = 'Mem'
-                assert inst.config['mode'].value in ('linebuffer', 'fifo', 'ram')
-                modules[inst_name]['conf'] = {
-                        'mode'              : inst.config['mode'].value,
-                        'fifo_depth'        : inst.config['fifo_depth'].value,
-                        'almost_full_count' : inst.config['almost_full_cnt'].value,
-                        'chain_enable'      : '0', #HACK
-                        'tile_en'           : '1', #HACK
+                ''' 
+                expected memory conf
+                conf = {
+                    'mode'        :: ('linebuffer', 'fifo', 'ram')
+                    'depth'       :: INT
+                    'almost_count'  :: INT
+                    'tile_en'     :: 1
+                    'chain_enable :: 0
                 }
+                '''
+                    
+                modules[inst_name]['type'] = 'Mem'
+                modules[inst_name]['conf'] = conf = {
+                        'mode'         : inst.config['mode'].value,
+                        'depth'        : inst.config['depth'].value,
+                        'almost_count'   : inst.config['almost_count'].value,
+                        'tile_en'      : inst.config['tile_en'].value,
+                        'chain_enable' : inst.config['chain_enable'].value,
+                }
+                assert conf['mode'] in ('linebuffer', 'fifo', 'ram')
+                assert isinstance(conf['depth'], int)
+                assert isinstance(conf['almost_count'], int)
+                assert conf['tile_en'] == 1
+                assert conf['chain_enable'] == 0
 
             elif inst_type == 'const':
                 modules[inst_name]['type'] = 'Const'
@@ -125,10 +140,11 @@ _PORT_TRANSLATION = {
         'rdata'  : 'mem_out',
         'addr'   : 'ain',
         'ren'    : 'ren',
-        'empty'  : 'valid',
+        'almost_empty'  : 'almost_empty',
         'wdata'  : 'din',
         'wen'    : 'wen',
-        'full'   : 'almost_full',
+        'almost_full'   : 'almost_full',
+        'cg_en'   : 'cg_en',
     },
 }
 
