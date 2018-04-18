@@ -24,6 +24,9 @@ bool MapperPasses::VerifyTechMapping::runOnInstanceGraphNode(InstanceGraphNode& 
   if (m->getRefName() == "coreir.reg") return false;
   if (m->getRefName() == "corebit.const") return false;
   if (m->getRefName() == "corebit.reg") return false;
+  if (!m->hasDef()) {
+    m->print();
+  }
   ASSERT(m->hasDef(),"NYI mapping primitive " +m->getRefName() + ". Needs to be a module with def!");
   return false;
 }

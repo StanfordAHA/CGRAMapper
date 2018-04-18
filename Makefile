@@ -10,8 +10,20 @@ endif
 
 BIN=bin/cgra-mapper
 
+CXX?=g++
+ifeq ($(COREIRCONFIG),g++-4.9)
+CXX=g++-4.9
+endif
+CXXFLAGS+=-std=c++11 -Wall -fPIC -g -Wfatal-errors
+
 TEST_FILES=$(wildcard examples/[^_]*.json)
 MAPPED_FILES=$(patsubst examples/%, mapped/%, $(TEST_FILES))
+
+export TARGET
+export CXX
+export CFLAGS
+export CXXFLAGS
+
 
 all: $(BIN)
 
@@ -22,6 +34,7 @@ $(BIN):
 
 .PHONY: test
 test: $(MAPPED_FILES)
+
 
 $(MAPPED_FILES): $(BIN)
 	$(BIN) examples/$(@F) $(@) || exit 1
@@ -40,10 +53,22 @@ travis:
 .PHONY: clean
 clean:
 	$(MAKE) -C src clean
-	-rm -f bin/*
+	-rm -rf bin/*
 	-rm -f mapped/*
 	-rm -f _*.json
 
+.PHONY: install
 install: $(BIN)
 	install $< $(prefix)/bin
+	install lib/libcoreir-cgra* $(prefix)/lib
+	install -d $(prefix)/include/coreir/libs
+	install include/coreir/libs/cgra*.h $(prefix)/include/coreir/libs
+
+.PHONY: uninstall
+uninstall:
+	-rm $(prefix)/bin/cgra-mapper
+	-rm $(prefix)/lib/libcoreir-cgra*
+	-rm $(prefix)/include/coreir/libs/cgra*
+
+
 
