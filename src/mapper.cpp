@@ -36,8 +36,8 @@ void getAllIOPaths(Wireable* w, IOpaths& paths) {
       paths.IO16in.push_back(w->getSelectPath());
     }
     else {
-      for (auto sw : w->getSelects()) {
-        getAllIOPaths(sw.second,paths);
+      for (auto selstr : t->getSelects()) {
+        getAllIOPaths(w->sel(selstr),paths);
       }
     }
   }
