@@ -20,3 +20,4 @@ build/%.o: %.cpp
 .PHONY: clean
 clean:
 	-rm -rf build/*
+	$(MAKE) -C libs clean

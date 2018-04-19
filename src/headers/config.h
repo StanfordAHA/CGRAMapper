@@ -1,29 +1,42 @@
 #ifndef CONFIG_H_
 #define CONFIG_H_
 
-enum PE_flag_sel {
-  F_EQ=0,
-  F_NE=1,
-  F_CS=2,
-  F_CC=3,
-  F_MI=4,
-  F_PL=5,
-  F_VS=6,
-  F_VC=7,
-  F_HI=8,
-  F_LS=9,
-  F_GE=10,
-  F_LT=11,
-  F_GT=12,
-  F_LE=13,
-  F_LUT=14,
-  F_PRED=15,
+
+#define PE_FLAG_SEL_LIST\
+  _X(F_EQ,0)\
+  _X(F_NE,1)\
+  _X(F_CS,2)\
+  _X(F_CC,3)\
+  _X(F_MI,4)\
+  _X(F_PL,5)\
+  _X(F_VS,6)\
+  _X(F_VC,7)\
+  _X(F_HI,8)\
+  _X(F_LS,9)\
+  _X(F_GE,10)\
+  _X(F_LT,11)\
+  _X(F_GT,12)\
+  _X(F_LE,13)\
+  _X(F_LUT,14)\
+  _X(F_PRED,15)
+
+const char* PE_flag_sel_str[] = {
+  #define _X(name, idx) #name,
+  PE_FLAG_SEL_LIST
+  #undef _X
 };
+
+enum PE_flag_sel {
+  #define _X(name, idx) name = idx,
+  PE_FLAG_SEL_LIST
+  #undef _X
+}; 
 
 namespace {
   int op_size = 6;
   int flag_sel_size = 4;
 }
+
 enum PE_op {
   OP_ADD=0,
   OP_SUB=1,
