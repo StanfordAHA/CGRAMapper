@@ -40,7 +40,7 @@ bool MapperPasses::VerifyCanMap::runOnInstance(Instance* inst) {
   //If it is a leaf then verify that there are no selects on the ports
   if (!isLeaf) return false;
   for (auto wsel : inst->getSelects()) {
-    ASSERT(wsel.second->getSelects().size()==0,"NYI: subselecting from a primitive");
+    ASSERT(wsel.second->getSelects().size()==0,"NYI: subselecting from a primitive" + mrefname);
   }
   return false;
 }
