@@ -16,21 +16,24 @@ namespace {
 
 
 bool ConstReplace(Instance* cnst) {
-  cout << "cnstreplace" << endl;
-  cout << toString(cnst) << endl;
+  //cout << "cnstreplace" << endl;
+  //cout << toString(cnst) << endl;
   Context* c = cnst->getContext();
   auto conns = cnst->sel("out")->getConnectedWireables();
+  //cout << "Connections=" << conns.size() << endl;
   if (conns.size()==0) {
     return false;
   }
   ASSERT(conns.size()==1,"size: " + to_string(conns.size()));
   for (auto conn : conns) {
     if (auto conInst = dyn_cast<Instance>(conn->getTopParent())) {
-      if (conInst->getModuleRef()->getRefName() != "cgralib.Mem" || conInst->getSelectPath().back()!="wen") {
+      //cout << "  coninst= " << toString(conInst) << endl;
+      if (conInst->getModuleRef()->getRefName() != "cgralib.Mem" || conn->getSelectPath().back()!="wen") {
         return false;
       }
     }
   }
+  //cout << "REPLACING!" << endl;
   ModuleDef* def = cnst->getContainer();
   uint val = cnst->getModArgs().at("value")->get<bool>() ? 63 : 0;
   Values bitPEArgs({{"lut_value",Const::make(c,8,val)}});
