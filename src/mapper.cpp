@@ -156,7 +156,6 @@ int main(int argc, char *argv[]){
   //Flatten
   c->runPasses({"flatten"});
   cout << "after flatten" << endl;
-  c->runPasses({"deletedeadinstances"});
   c->addPass(new MapperPasses::ConstDuplication);
   c->runPasses({"constduplication"});
   c->addPass(new MapperPasses::MemConst);

@@ -20,6 +20,9 @@ bool ConstReplace(Instance* cnst) {
   cout << toString(cnst) << endl;
   Context* c = cnst->getContext();
   auto conns = cnst->sel("out")->getConnectedWireables();
+  if (conns.size()==0) {
+    return false;
+  }
   ASSERT(conns.size()==1,"size: " + to_string(conns.size()));
   for (auto conn : conns) {
     if (auto conInst = dyn_cast<Instance>(conn->getTopParent())) {
