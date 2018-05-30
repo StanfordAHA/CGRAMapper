@@ -18,10 +18,9 @@ namespace {
 bool ConstReplace(Instance* cnst) {
   cout << "cnstreplace" << endl;
   cout << toString(cnst) << endl;
-  assert(cnst->getModuleRef()->getRefName()=="corebit.const");
   Context* c = cnst->getContext();
-
   auto conns = cnst->sel("out")->getConnectedWireables();
+  ASSERT(conns.size()==1,"size: " + to_string(conns.size()));
   for (auto conn : conns) {
     if (auto conInst = dyn_cast<Instance>(conn->getTopParent())) {
       if (conInst->getModuleRef()->getRefName() != "cgralib.Mem" || conInst->getSelectPath().back()!="wen") {
@@ -29,7 +28,6 @@ bool ConstReplace(Instance* cnst) {
       }
     }
   }
-  ASSERT(conns.size()==1,"size: " + to_string(conns.size()));
   ModuleDef* def = cnst->getContainer();
   uint val = cnst->getModArgs().at("value")->get<bool>() ? 63 : 0;
   Values bitPEArgs({{"lut_value",Const::make(c,8,val)}});
