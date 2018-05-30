@@ -27,13 +27,15 @@ bool ConstReplace(Instance* cnst) {
   ASSERT(conns.size()==1,"size: " + to_string(conns.size()));
   for (auto conn : conns) {
     if (auto conInst = dyn_cast<Instance>(conn->getTopParent())) {
-      //cout << "  coninst= " << toString(conInst) << endl;
-      if (conInst->getModuleRef()->getRefName() != "cgralib.Mem" || conn->getSelectPath().back()!="wen") {
+      cout << "  coninst= " << toString(conInst) << endl;
+      cout << "  conn= " << toString(conn->getSelectPath()) << endl;
+      //if (conInst->getModuleRef()->getRefName() != "cgralib.Mem" || conn->getSelectPath().back()!="wen") {
+      if (conInst->getModuleRef()->getRefName() != "cgralib.Mem") {
         return false;
       }
     }
   }
-  //cout << "REPLACING!" << endl;
+  cout << "REPLACING!" << endl;
   ModuleDef* def = cnst->getContainer();
   uint val = cnst->getModArgs().at("value")->get<bool>() ? 63 : 0;
   Values bitPEArgs({{"lut_value",Const::make(c,8,val)}});
