@@ -13,6 +13,8 @@ using namespace std;
 
 #include "definitions/cgralib_def.h"
 #include "passes/verifytechmapping.h"
+#include "passes/memconst.h"
+#include "passes/constdup.h"
 //#include "passes/constregduplication.h"
 
 
@@ -140,6 +142,7 @@ int main(int argc, char *argv[]){
 
   //DO any normal optimizations
 
+  c->runPasses({"deletedeadinstances"});
   addIOs(c,top);
   c->runPasses({"cullgraph"}); 
   c->addPass(new MapperPasses::VerifyTechMapping);
@@ -152,6 +155,11 @@ int main(int argc, char *argv[]){
 
   //Flatten
   c->runPasses({"flatten"});
+  cout << "after flatten" << endl;
+  c->addPass(new MapperPasses::ConstDuplication);
+  c->runPasses({"constduplication"});
+  c->addPass(new MapperPasses::MemConst);
+  c->runPasses({"memconst"});
   c->runPasses({"cullgraph"});
   c->getPassManager()->printLog();
   cout << "Trying to save" << endl;
