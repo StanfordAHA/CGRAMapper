@@ -19,7 +19,7 @@ before_install:
   - export COREIRCONFIG="g++-4.9";
   - ./.travis/install_coreir.sh
   - make -j
-  - make install
+  - sudo make install
 
   # Dependences for mantle tests
   - pip install delegator.py
