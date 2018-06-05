@@ -17,11 +17,12 @@ void load_mem_ext(Context* c) {
       rbGenargs,
       {{"mode",Const::make(c,"linebuffer")},{"depth",Const::make(c,depth)}});
     def->addInstance("c1","corebit.const",{{"value",Const::make(c,true)}});
+    def->addInstance("c0","corebit.const",{{"value",Const::make(c,false)}});
     def->connect("self.wdata","cgramem.wdata");
     def->connect("self.wen","cgramem.wen");
     def->connect("self.rdata","cgramem.rdata");
     def->connect("self.valid","cgramem.valid");
-    def->connect("c1.out","cgramem.cg_en");
+    def->connect("c0.out","cgramem.cg_en");
     def->connect("c1.out","cgramem.ren");
 
   });
