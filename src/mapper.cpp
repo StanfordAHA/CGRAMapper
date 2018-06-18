@@ -10,12 +10,11 @@
 using namespace std;
 
 #include "passes/verifycanmap.h"
-#include "passes/opsubstitution.h"
-#include "passes/bitop2lut.h"
 
 #include "definitions/cgralib_def.h"
-#include "passes/techmapping.h"
 #include "passes/verifytechmapping.h"
+#include "passes/memconst.h"
+#include "passes/constdup.h"
 //#include "passes/constregduplication.h"
 
 
@@ -39,8 +38,8 @@ void getAllIOPaths(Wireable* w, IOpaths& paths) {
       paths.IO16in.push_back(w->getSelectPath());
     }
     else {
-      for (auto sw : w->getSelects()) {
-        getAllIOPaths(sw.second,paths);
+      for (auto selstr : t->getSelects()) {
+        getAllIOPaths(w->sel(selstr),paths);
       }
     }
   }
@@ -115,7 +114,9 @@ int main(int argc, char *argv[]){
     return 1;
   }
 
-  cout << "Loading " << premap << endl;
+  //cout << "Loading " << premap << endl;
+  //deleteContext(c); exit(0);
+  
   Module* top = nullptr;
   if (!loadFromFile(c,premap,&top)) {
     c->die();
@@ -133,7 +134,6 @@ int main(int argc, char *argv[]){
   c->getPassManager()->setVerbosity(true);
 
   LoadDefinition_cgralib(c); //Load the definitions first
-  
   c->runPasses({"rungenerators","verifyconnectivity-onlyinputs-noclkrst","removebulkconnections"});
 
   //load last verification
@@ -142,19 +142,10 @@ int main(int argc, char *argv[]){
 
   //DO any normal optimizations
 
-  //Pre-Technolog Mapping steps
-  c->addPass(new MapperPasses::OpSubstitution);
-  c->addPass(new MapperPasses::BitOp2Lut);
-  c->runPasses({"opsubstitution","bitop2lut"},{"global","coreir","corebit","mantle","commonlib"});
-
-  //Tech mapping
-  //Link in LBMem def
+  c->runPasses({"deletedeadinstances"});
   addIOs(c,top);
-  c->addPass(new MapperPasses::TechMapping);
-  c->addPass(new MapperPasses::VerifyTechMapping);
-  c->runPasses({"techmapping"},{"global","coreir","corebit","mantle","commonlib"});
   c->runPasses({"cullgraph"}); 
-  //c->runPasses({"printer"},{"global","coreir","corebit","mantle","commonlib"});
+  c->addPass(new MapperPasses::VerifyTechMapping);
   c->runPasses({"verifytechmapping"});
   
 
@@ -164,6 +155,11 @@ int main(int argc, char *argv[]){
 
   //Flatten
   c->runPasses({"flatten"});
+  cout << "after flatten" << endl;
+  c->addPass(new MapperPasses::ConstDuplication);
+  c->runPasses({"constduplication"});
+  c->addPass(new MapperPasses::MemConst);
+  c->runPasses({"memconst"});
   c->runPasses({"cullgraph"});
   c->getPassManager()->printLog();
   cout << "Trying to save" << endl;
@@ -173,10 +169,6 @@ int main(int argc, char *argv[]){
   std::ofstream file(postmap);
   jpass->writeToStream(file,top->getRefName());
  
-  
-  //if (saveToFile(m->getNamespace(),postmap,m)) {
-  //  c->die();
-  //}
 
   deleteContext(c);
   return 0;
