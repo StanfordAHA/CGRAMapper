@@ -7,6 +7,10 @@ class VerifyTechMapping : public InstanceGraphPass {
     static std::string ID;
     VerifyTechMapping() : InstanceGraphPass(ID,"Verifies all external links are cgra") {}
     bool runOnInstanceGraphNode(InstanceGraphNode& node) override;
+    void setAnalysisInfo() override {
+      onlyTop = true;
+    }
+
 };
 }
 

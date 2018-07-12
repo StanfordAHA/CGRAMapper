@@ -136,13 +136,16 @@ int main(int argc, char *argv[]){
   LoadDefinition_cgralib(c); //Load the definitions first
   c->runPasses({"rungenerators","verifyconnectivity-onlyinputs-noclkrst","removebulkconnections"});
 
+
   //load last verification
   c->addPass(new MapperPasses::VerifyCanMap);
   c->runPasses({"verifycanmap"});
 
   //DO any normal optimizations
 
+
   c->runPasses({"deletedeadinstances"});
+  c->runPasses({"removewires"});
   addIOs(c,top);
   c->runPasses({"cullgraph"}); 
   c->addPass(new MapperPasses::VerifyTechMapping);
