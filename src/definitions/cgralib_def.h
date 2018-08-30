@@ -47,6 +47,25 @@ void load_commonlib_ext(Context* c) {
     def->connect("self.out","cgramax.data.out");
 
   });
+  
+  Generator* umax = c->getGenerator("commonlib.umax");
+  umax->setGeneratorDefFromFun([](Context* c, Values args, ModuleDef* def) {
+    uint width = args.at("width")->get<int>();
+    ASSERT(width==16,"NYI non 16");
+    Values PEArgs({
+      {"alu_op",Const::make(c,op_size,OP_GTE_MAX)},
+      {"alu_op_debug",Const::make(c,"max")},
+      {"flag_sel",Const::make(c,flag_sel_size,F_PRED)},
+      {"flag_sel_debug",Const::make(c,PE_flag_sel_str[F_PRED])},
+      {"signed",Const::make(c,1,0)}
+    });
+    def->addInstance("cgramax","cgralib.PE",{{"op_kind",Const::make(c,"combined")}},PEArgs);
+    def->connect("self.in0","cgramax.data.in.0");
+    def->connect("self.in1","cgramax.data.in.1");
+    def->connect("self.out","cgramax.data.out");
+
+  });
+
 }
 
 void load_opsubstitution(Context* c) {
@@ -179,7 +198,8 @@ void load_cgramapping(Context* c) {
       std::make_tuple("or",OP_OR,0),
       std::make_tuple("and",OP_AND,0),
       std::make_tuple("xor",OP_XOR,0),
-      std::make_tuple("ashr",OP_RSHIFT,0),
+      std::make_tuple("ashr",OP_RSHIFT,1),
+      std::make_tuple("lshr",OP_RSHIFT,0),
       std::make_tuple("shl",OP_LSHIFT,0),
     });
     for (auto op : binops) {
