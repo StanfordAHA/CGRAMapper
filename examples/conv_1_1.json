@@ -40,14 +40,14 @@
           }
         },
         "connections":[
-          ["add_285_289_290.in0","pt_conv1_2_stencil.out.0.0"],
-          ["add_285_289_290.in1","mul_287_288_289.out"],
-          ["add_285_289_290.out","pt_conv1_2_stencil$1.in.0.0"],
-          ["const0__284.out","pt_conv1_2_stencil.in.0.0"],
-          ["const3__288.out","mul_287_288_289.in1"],
-          ["mul_287_288_289.in0","self.in.arg_1.0.0"],
-          ["pt_hw_output_2_stencil.out","self.out"],
-          ["pt_conv1_2_stencil$1.out.0.0","pt_hw_output_2_stencil.in.0.0"]
+          ["pt_conv1_2_stencil.out.0.0","add_285_289_290.in0"],
+          ["mul_287_288_289.out","add_285_289_290.in1"],
+          ["pt_conv1_2_stencil$1.in.0.0","add_285_289_290.out"],
+          ["pt_conv1_2_stencil.in.0.0","const0__284.out"],
+          ["mul_287_288_289.in1","const3__288.out"],
+          ["self.in.arg_1.0.0","mul_287_288_289.in0"],
+          ["pt_hw_output_2_stencil.in.0.0","pt_conv1_2_stencil$1.out.0.0"],
+          ["self.out","pt_hw_output_2_stencil.out"]
         ]
       }
     }

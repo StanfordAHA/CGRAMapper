@@ -8,25 +8,25 @@
           ["out",["Array",1,["Array",1,"Bit"]]]
         ]],
         "instances":{
-          "const15__148":{
+          "const15__316":{
             "genref":"coreir.const",
             "genargs":{"width":["Int",16]},
             "modargs":{"value":[["BitVector",16],"16'h000f"]}
           },
-          "neq_147_148_149":{
+          "neq_315_316_317":{
             "genref":"coreir.neq",
             "genargs":{"width":["Int",16]}
           },
-          "pt_hw_output_1_stencil":{
+          "pt_hw_output_2_stencil":{
             "genref":"mantle.wire",
             "genargs":{"type":["CoreIRType",["Array",1,["Array",1,"Bit"]]]}
           }
         },
         "connections":[
-          ["const15__148.out","neq_147_148_149.in1"],
-          ["neq_147_148_149.in0","self.in.arg_1.0.0"],
-          ["neq_147_148_149.out","pt_hw_output_1_stencil.in.0.0"],
-          ["pt_hw_output_1_stencil.out","self.out"]
+          ["neq_315_316_317.in1","const15__316.out"],
+          ["self.in.arg_1.0.0","neq_315_316_317.in0"],
+          ["pt_hw_output_2_stencil.in.0.0","neq_315_316_317.out"],
+          ["self.out","pt_hw_output_2_stencil.out"]
         ]
       }
     }

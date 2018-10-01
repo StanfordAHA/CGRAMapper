@@ -24,10 +24,10 @@
           }
         },
         "connections":[
-          ["add_277_offset_278.in0","self.in.arg_0.0.0"],
-          ["add_277_offset_278.in1","tap_offset.out"],
-          ["add_277_offset_278.out","pt_hw_output_2_stencil.in.0.0"],
-          ["pt_hw_output_2_stencil.out","self.out"]
+          ["self.in.arg_0.0.0","add_277_offset_278.in0"],
+          ["tap_offset.out","add_277_offset_278.in1"],
+          ["pt_hw_output_2_stencil.in.0.0","add_277_offset_278.out"],
+          ["self.out","pt_hw_output_2_stencil.out"]
         ]
       }
     }
