@@ -134,7 +134,7 @@ int main(int argc, char *argv[]){
   c->getPassManager()->setVerbosity(true);
 
   LoadDefinition_cgralib(c); //Load the definitions first
-  c->runPasses({"rungenerators","verifyconnectivity-onlyinputs-noclkrst","removebulkconnections"});
+  c->runPasses({"rungenerators","verifyconnectivity --onlyinputs --noclkrst","removebulkconnections"});
 
 
   //load last verification
