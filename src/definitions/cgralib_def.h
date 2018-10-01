@@ -11,20 +11,31 @@ void load_mem_ext(Context* c) {
     uint width = args.at("width")->get<int>();
     uint depth = args.at("depth")->get<int>();
     ASSERT(width==16,"NYI Non 16 bit width");
-    ASSERT(depth<=1024,"NYI using mutliple memories");
     Values rbGenargs({{"width",Const::make(c,width)},{"total_depth",Const::make(c,1024)}});
-    def->addInstance("cgramem","cgralib.Mem",
-      rbGenargs,
-      {{"mode",Const::make(c,"linebuffer")},{"depth",Const::make(c,depth)}});
     def->addInstance("c1","corebit.const",{{"value",Const::make(c,true)}});
     def->addInstance("c0","corebit.const",{{"value",Const::make(c,false)}});
-    def->connect("self.wdata","cgramem.wdata");
-    def->connect("self.wen","cgramem.wen");
-    def->connect("self.rdata","cgramem.rdata");
-    def->connect("self.valid","cgramem.valid");
-    def->connect("c0.out","cgramem.cg_en");
-    def->connect("c1.out","cgramem.ren");
-
+    if (depth <=1024) {
+      def->addInstance("cgramem","cgralib.Mem",
+        rbGenargs,
+        {{"mode",Const::make(c,"linebuffer")},{"depth",Const::make(c,depth)}});
+      def->connect("self.wdata","cgramem.wdata");
+      def->connect("self.wen","cgramem.wen");
+      def->connect("self.rdata","cgramem.rdata");
+      def->connect("self.valid","cgramem.valid");
+      def->connect("c0.out","cgramem.cg_en");
+      def->connect("c1.out","cgramem.ren");
+    }
+    //else {
+    //  int num_mems = depth/1024;
+    //  vector<Instance*> mems;
+    //  Wireable* self = def->sel("self");
+    //  for (int i=0; i<num_mems; ++i) {
+    //    Instance* inst = def->addInstance("mem"+to_string(i),"cgralib.Mem",rbGenargs,{{"mode",Const::make(c,"linebuffer")},{"depth",Const::make(c,depth)}});
+    //    def->connect(inst->sel("wdata"),self->sel("wdata"));
+    //    def->connect(inst->sel("wdata"),self->sel("wdata"));
+    //    mems.push_back(
+    //  }
+    //}
   });
 
 }
