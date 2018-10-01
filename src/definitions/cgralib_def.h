@@ -84,6 +84,18 @@ void load_opsubstitution(Context* c) {
     def->connect("sub.out","self.out");
   });
 
+  //coreir operators that have 1 bit width should be swapped with their corebit counterparts
+  for (string op : {"and", "or", "xor"}) {
+
+    Module* m = c->getGenerator("coreir." + op)->getModule({{"width",Const::make(c,1)}});
+    ModuleDef* def = m->newModuleDef();
+    def->addInstance("inst", "corebit." + op);
+    def->connect("self.in0.0","inst.in0");
+    def->connect("self.in1.0","inst.in1");
+    def->connect("self.out.0","inst.out");
+    m->setDef(def);
+  }
+
 }
 
 void load_corebit2lut(Context* c) {
