@@ -32,8 +32,8 @@
             "modargs":{"value":[["BitVector",16],"16'h0007"]}
           },
           "lb_p4_clamped_stencil_update_stream":{
-            "genref":"commonlib.linebuffer2d",
-            "genargs":{"bitwidth":["Int",16], "image_width":["Int",10], "stencil_height":["Int",2], "stencil_width":["Int",1]}
+            "genref":"commonlib.linebuffer",
+            "genargs":{"has_valid":["Bool",false], "image_type":["CoreIRType",["Array",10,["Array",10,["Array",16,"Bit"]]]], "input_type":["CoreIRType",["Array",1,["Array",1,["Array",16,"BitIn"]]]], "is_last_lb":["Bool",true], "output_type":["CoreIRType",["Array",2,["Array",1,["Array",16,"Bit"]]]]}
           },
           "lb_p4_clamped_stencil_update_stream_wen":{
             "modref":"corebit.const",
@@ -65,21 +65,21 @@
           }
         },
         "connections":[
-          ["add_335_339_340.in0","pt_conv1_2_stencil.out.0.0"],
-          ["add_335_339_340.in1","mul_337_338_339.out"],
-          ["add_335_339_340.out","pt_conv1_2_stencil$1.in.0.0"],
-          ["add_341_345_346.in0","pt_conv1_2_stencil$1.out.0.0"],
-          ["add_341_345_346.in1","mul_343_344_345.out"],
-          ["add_341_345_346.out","pt_conv1_2_stencil$2.in.0.0"],
-          ["const0__334.out","pt_conv1_2_stencil.in.0.0"],
-          ["const7__338.out","mul_337_338_339.in1"],
-          ["const7__344.out","mul_343_344_345.in1"],
-          ["lb_p4_clamped_stencil_update_stream.in","self.in.arg_1.0.0"],
-          ["lb_p4_clamped_stencil_update_stream.wen","lb_p4_clamped_stencil_update_stream_wen.out"],
+          ["pt_conv1_2_stencil.out.0.0","add_335_339_340.in0"],
+          ["mul_337_338_339.out","add_335_339_340.in1"],
+          ["pt_conv1_2_stencil$1.in.0.0","add_335_339_340.out"],
+          ["pt_conv1_2_stencil$1.out.0.0","add_341_345_346.in0"],
+          ["mul_343_344_345.out","add_341_345_346.in1"],
+          ["pt_conv1_2_stencil$2.in.0.0","add_341_345_346.out"],
+          ["pt_conv1_2_stencil.in.0.0","const0__334.out"],
+          ["mul_337_338_339.in1","const7__338.out"],
+          ["mul_343_344_345.in1","const7__344.out"],
+          ["self.in.arg_1","lb_p4_clamped_stencil_update_stream.in"],
           ["mul_337_338_339.in0","lb_p4_clamped_stencil_update_stream.out.0.0"],
           ["mul_343_344_345.in0","lb_p4_clamped_stencil_update_stream.out.1.0"],
-          ["pt_hw_output_2_stencil.out","self.out"],
-          ["pt_conv1_2_stencil$2.out.0.0","pt_hw_output_2_stencil.in.0.0"]
+          ["lb_p4_clamped_stencil_update_stream_wen.out","lb_p4_clamped_stencil_update_stream.wen"],
+          ["pt_hw_output_2_stencil.in.0.0","pt_conv1_2_stencil$2.out.0.0"],
+          ["self.out","pt_hw_output_2_stencil.out"]
         ]
       }
     }

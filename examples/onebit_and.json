@@ -23,10 +23,10 @@
           }
         },
         "connections":[
-          ["and_315_316_317.in0","self.in.arg_1.0.0"],
-          ["and_315_316_317.in1","const5__316.out"],
-          ["and_315_316_317.out","pt_hw_output_2_stencil.in.0.0"],
-          ["pt_hw_output_2_stencil.out","self.out"]
+          ["self.in.arg_1.0.0","and_315_316_317.in0"],
+          ["const5__316.out","and_315_316_317.in1"],
+          ["pt_hw_output_2_stencil.in.0.0","and_315_316_317.out"],
+          ["self.out","pt_hw_output_2_stencil.out"]
         ]
       }
     }

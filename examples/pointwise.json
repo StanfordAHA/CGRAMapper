@@ -23,10 +23,10 @@
           }
         },
         "connections":[
-          ["const2__348.out","mul_347_348_349.in1"],
-          ["mul_347_348_349.in0","self.in.arg_1.0.0"],
-          ["mul_347_348_349.out","pt_hw_output_2_stencil.in.0.0"],
-          ["pt_hw_output_2_stencil.out","self.out"]
+          ["mul_347_348_349.in1","const2__348.out"],
+          ["self.in.arg_1.0.0","mul_347_348_349.in0"],
+          ["pt_hw_output_2_stencil.in.0.0","mul_347_348_349.out"],
+          ["self.out","pt_hw_output_2_stencil.out"]
         ]
       }
     }
