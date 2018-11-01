@@ -224,8 +224,8 @@ void load_cgramapping(Context* c) {
       {"signed",Const::make(c,1,0)}
     });
     def->addInstance("mux","cgralib.PE",{{"op_kind",Const::make(c,"combined")}},PEArgs);
-    def->connect("self.in0","mux.data.in.0");
-    def->connect("self.in1","mux.data.in.1");
+    def->connect("self.in0","mux.data.in.1");
+    def->connect("self.in1","mux.data.in.0");
     def->connect("self.sel","mux.bit.in.0");
     def->connect("mux.data.out","self.out");
     mod->setDef(def);
