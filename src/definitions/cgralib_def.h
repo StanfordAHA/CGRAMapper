@@ -36,7 +36,7 @@ void load_commonlib_ext(Context* c) {
     ASSERT(width==16,"NYI non 16");
     Values PEArgs({
       {"alu_op",Const::make(c,"gte_max")},
-      {"flag_sel",Const::make(c,flag_sel_size,"pe")},
+      {"flag_sel",Const::make(c,"pe")},
       {"signed",Const::make(c,true)}
     });
     def->addInstance("cgramax","cgralib.PE",{{"op_kind",Const::make(c,"combined")}},PEArgs);
@@ -212,12 +212,12 @@ void load_cgramapping(Context* c) {
     });
     for (auto op : binops) {
       string opstr = std::get<0>(op);
-      uint alu_op = std::get<1>(op);
+      string alu_op = std::get<1>(op);
       uint is_signed = std::get<2>(op);
       Module* mod = c->getGenerator("coreir."+opstr)->getModule({{"width",Const::make(c,16)}});
       ModuleDef* def = mod->newModuleDef();
       Values dataPEArgs({
-        {"alu_op",Const::make(c,op_size,alu_op)},
+        {"alu_op",Const::make(c,alu_op)},
         {"signed",Const::make(c,(bool) is_signed)}});
       def->addInstance("binop","cgralib.PE",{{"op_kind",Const::make(c,"alu")}},dataPEArgs);
     
@@ -245,7 +245,7 @@ void load_cgramapping(Context* c) {
   }
   {
     //comp op (width,width)->bit
-    std::vector<std::tuple<string,uint,uint,uint>> compops({
+    std::vector<std::tuple<string,string,string,uint>> compops({
       std::make_tuple("eq","sub","eq",0),
       std::make_tuple("neq","sub","ne",0),
       std::make_tuple("sge","gte_max","pe",1),
@@ -255,8 +255,8 @@ void load_cgramapping(Context* c) {
     });
     for (auto op : compops) {
       string opstr = std::get<0>(op);
-      uint alu_op = std::get<1>(op);
-      uint flag_sel = std::get<2>(op);
+      string alu_op = std::get<1>(op);
+      string flag_sel = std::get<2>(op);
       uint is_signed = std::get<3>(op);
       Module* mod = c->getGenerator("coreir."+opstr)->getModule({{"width",Const::make(c,16)}});
       ModuleDef* def = mod->newModuleDef();

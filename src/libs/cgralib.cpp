@@ -55,7 +55,7 @@ Namespace* CoreIRLoadLibrary_cgralib(Context* c) {
       }
     }
     if (op_kind == "bit" || op_kind == "combined") {
-      p["flag_sel"] = c->String()
+      p["flag_sel"] = c->String();
       p["lut_value"] = c->BitVector(1<<numbitports);
       d["lut_value"] = Const::make(c,BitVector(1<<numbitports,0));
       for (int i=0; i<numbitports; ++i) {
@@ -68,7 +68,7 @@ Namespace* CoreIRLoadLibrary_cgralib(Context* c) {
       }
     }
     if (op_kind == "bit") {
-      d["flag_sel"] = Const::make(c,4,F_LUT);
+      d["flag_sel"] = Const::make(c,"lut");
     }
     return {p,d};
   };
