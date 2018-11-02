@@ -5,9 +5,10 @@
       "DesignTop":{
         "type":["Record",[
           ["in",["Record",[["arg_1",["Array",1,["Array",1,["Array",16,"BitIn"]]]]]]],
-          ["out",["Array",1,["Array",1,"Bit"]]]
+          ["out",["Array",1,["Array",1,["Array",16,"Bit"]]]]
         ]],
         "instances":{
+<<<<<<< HEAD
           "bitand_330_328_331":{
             "modref":"corebit.and"
           },
@@ -24,24 +25,69 @@
             "modref":"corebit.xor"
           },
           "const10__329":{
+=======
+          "bitand_332_330_333":{
+            "modref":"corebit.and"
+          },
+          "bitmux_336_336_328":{
+            "modref":"corebit.mux"
+          },
+          "bitnot_335":{
+            "modref":"corebit.not"
+          },
+          "bitor_333_334_335":{
+            "modref":"corebit.or"
+          },
+          "bitxor_328_330_334":{
+            "modref":"corebit.xor"
+          },
+          "const0_0":{
+            "genref":"coreir.const",
+            "genargs":{"width":["Int",16]},
+            "modargs":{"value":[["BitVector",16],"16'h0000"]}
+          },
+          "const10__331":{
+>>>>>>> bfda7cd2d79883c24102b5f9f41eb0a22a93e39e
             "genref":"coreir.const",
             "genargs":{"width":["Int",16]},
             "modargs":{"value":[["BitVector",16],"16'h000a"]}
           },
+<<<<<<< HEAD
           "const20__327":{
+=======
+          "const1_1":{
+            "genref":"coreir.const",
+            "genargs":{"width":["Int",16]},
+            "modargs":{"value":[["BitVector",16],"16'h0001"]}
+          },
+          "const20__329":{
+>>>>>>> bfda7cd2d79883c24102b5f9f41eb0a22a93e39e
             "genref":"coreir.const",
             "genargs":{"width":["Int",16]},
             "modargs":{"value":[["BitVector",16],"16'h0014"]}
           },
+<<<<<<< HEAD
           "const50__325":{
+=======
+          "const50__327":{
+>>>>>>> bfda7cd2d79883c24102b5f9f41eb0a22a93e39e
             "genref":"coreir.const",
             "genargs":{"width":["Int",16]},
             "modargs":{"value":[["BitVector",16],"16'h0032"]}
           },
+<<<<<<< HEAD
           "pt_hw_output_2_stencil":{
-            "genref":"mantle.wire",
-            "genargs":{"type":["CoreIRType",["Array",1,["Array",1,"Bit"]]]}
+=======
+          "mux_33710":{
+            "genref":"coreir.mux",
+            "genargs":{"width":["Int",16]}
           },
+          "pt_hw_output_2_stencil_p1":{
+>>>>>>> bfda7cd2d79883c24102b5f9f41eb0a22a93e39e
+            "genref":"mantle.wire",
+            "genargs":{"type":["CoreIRType",["Array",1,["Array",1,["Array",16,"Bit"]]]]}
+          },
+<<<<<<< HEAD
           "ule_325_324_326":{
             "genref":"coreir.ule",
             "genargs":{"width":["Int",16]}
@@ -51,11 +97,23 @@
             "genargs":{"width":["Int",16]}
           },
           "ult_329_324_330":{
+=======
+          "ule_327_326_328":{
+            "genref":"coreir.ule",
+            "genargs":{"width":["Int",16]}
+          },
+          "ult_326_329_330":{
+            "genref":"coreir.ult",
+            "genargs":{"width":["Int",16]}
+          },
+          "ult_331_326_332":{
+>>>>>>> bfda7cd2d79883c24102b5f9f41eb0a22a93e39e
             "genref":"coreir.ult",
             "genargs":{"width":["Int",16]}
           }
         },
         "connections":[
+<<<<<<< HEAD
           ["ult_329_324_330.out","bitand_330_328_331.in0"],
           ["ult_324_327_328.out","bitand_330_328_331.in1"],
           ["bitor_331_332_333.in0","bitand_330_328_331.out"],
@@ -74,6 +132,29 @@
           ["ule_325_324_326.in1","self.in.arg_1.0.0"],
           ["ult_324_327_328.in0","self.in.arg_1.0.0"],
           ["ult_329_324_330.in1","self.in.arg_1.0.0"]
+=======
+          ["ult_331_326_332.out","bitand_332_330_333.in0"],
+          ["ult_326_329_330.out","bitand_332_330_333.in1"],
+          ["bitor_333_334_335.in0","bitand_332_330_333.out"],
+          ["ule_327_326_328.out","bitmux_336_336_328.in0"],
+          ["bitnot_335.out","bitmux_336_336_328.in1"],
+          ["mux_33710.sel","bitmux_336_336_328.out"],
+          ["bitnot_335.out","bitmux_336_336_328.sel"],
+          ["bitor_333_334_335.out","bitnot_335.in"],
+          ["bitxor_328_330_334.out","bitor_333_334_335.in1"],
+          ["ule_327_326_328.out","bitxor_328_330_334.in0"],
+          ["ult_326_329_330.out","bitxor_328_330_334.in1"],
+          ["mux_33710.in0","const0_0.out"],
+          ["ult_331_326_332.in0","const10__331.out"],
+          ["mux_33710.in1","const1_1.out"],
+          ["ult_326_329_330.in1","const20__329.out"],
+          ["ule_327_326_328.in0","const50__327.out"],
+          ["pt_hw_output_2_stencil_p1.in.0.0","mux_33710.out"],
+          ["self.out","pt_hw_output_2_stencil_p1.out"],
+          ["ule_327_326_328.in1","self.in.arg_1.0.0"],
+          ["ult_326_329_330.in0","self.in.arg_1.0.0"],
+          ["ult_331_326_332.in1","self.in.arg_1.0.0"]
+>>>>>>> bfda7cd2d79883c24102b5f9f41eb0a22a93e39e
         ]
       }
     }
