@@ -177,25 +177,25 @@ void load_cgramapping(Context* c) {
   }
   {
     //TODO not specified in the PE spec
-    ////unary op width)->width
-    //std::vector<std::tuple<string,uint,uint>> unops = {
-    //    std::make_tuple("not",OP_INV,0),
-    //};
-    //for (auto op : unops) {
-    //  string opstr = std::get<0>(op);
-    //  uint alu_op = std::get<1>(op);
-    //  uint is_signed = std::get<2>(op);
-    //  Module* mod = c->getGenerator("coreir."+opstr)->getModule({{"width",Const::make(c,16)}});
-    //  ModuleDef* def = mod->newModuleDef();
-    //  Values dataPEArgs({
-    //    {"alu_op",Const::make(c,alu_op)},
-    //    {"signed",Const::make(c,1,is_signed)}});
-    //  def->addInstance("binop","cgralib.PE",{{"op_kind",Const::make(c,"alu")}},dataPEArgs);
-    //
-    //  def->connect("self.in","binop.data.in.0");
-    //  def->connect("self.out","binop.data.out");
-    //  mod->setDef(def);
-    //}
+    //unary op width)->width
+    std::vector<std::tuple<string,string,uint>> unops = {
+        std::make_tuple("not","inv",0),
+    };
+    for (auto op : unops) {
+      string opstr = std::get<0>(op);
+      string alu_op = std::get<1>(op);
+      uint is_signed = std::get<2>(op);
+      Module* mod = c->getGenerator("coreir."+opstr)->getModule({{"width",Const::make(c,16)}});
+      ModuleDef* def = mod->newModuleDef();
+      Values dataPEArgs({
+        {"alu_op",Const::make(c,alu_op)},
+        {"signed",Const::make(c,(bool) is_signed)}});
+      def->addInstance("binop","cgralib.PE",{{"op_kind",Const::make(c,"alu")}},dataPEArgs);
+    
+      def->connect("self.in","binop.data.in.0");
+      def->connect("self.out","binop.data.out");
+      mod->setDef(def);
+    }
   }
   {
     //binary op (width,width)->width
