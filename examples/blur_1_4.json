@@ -69,8 +69,8 @@
             "modargs":{"value":[["BitVector",16],"16'h0009"]}
           },
           "lb_p3_clamped_stencil_update_stream":{
-            "genref":"commonlib.linebuffer2d",
-            "genargs":{"bitwidth":["Int",16], "image_width":["Int",13], "stencil_height":["Int",1], "stencil_width":["Int",4]}
+            "genref":"commonlib.linebuffer",
+            "genargs":{"has_valid":["Bool",false], "image_type":["CoreIRType",["Array",16,["Array",16,["Array",16,"Bit"]]]], "input_type":["CoreIRType",["Array",1,["Array",1,["Array",16,"BitIn"]]]], "is_last_lb":["Bool",true], "output_type":["CoreIRType",["Array",1,["Array",4,["Array",16,"Bit"]]]]}
           },
           "lb_p3_clamped_stencil_update_stream_wen":{
             "modref":"corebit.const",
@@ -120,44 +120,44 @@
             "genref":"mantle.wire",
             "genargs":{"type":["CoreIRType",["Array",1,["Array",1,["Array",16,"Bit"]]]]}
           },
-          "ult159_393_394":{
-            "genref":"coreir.ult",
+          "slt159_393_394":{
+            "genref":"coreir.slt",
             "genargs":{"width":["Int",16]}
           }
         },
         "connections":[
-          ["add_373_376_377.in0","pt_conv_2_stencil.out.0.0"],
-          ["add_373_376_377.in1","mul_3753_376.out"],
-          ["add_373_376_377.out","pt_conv_2_stencil$1.in.0.0"],
-          ["add_378_381_382.in0","pt_conv_2_stencil$1.out.0.0"],
-          ["add_378_381_382.in1","mul_3805_381.out"],
-          ["add_378_381_382.out","pt_conv_2_stencil$2.in.0.0"],
-          ["add_383_386_387.in0","pt_conv_2_stencil$2.out.0.0"],
-          ["add_383_386_387.in1","mul_3855_386.out"],
-          ["add_383_386_387.out","pt_conv_2_stencil$3.in.0.0"],
-          ["add_388_391_392.in0","pt_conv_2_stencil$3.out.0.0"],
-          ["add_388_391_392.in1","mul_3903_391.out"],
-          ["add_388_391_392.out","pt_conv_2_stencil$4.in.0.0"],
-          ["ashr_393_395_396.in0","pt_conv_2_stencil$4.out.0.0"],
-          ["ashr_393_395_396.in1","const4__395.out"],
-          ["ashr_393_395_396.out","mux_3949_396.in1"],
-          ["const0_0.out","pt_conv_2_stencil.in.0.0"],
-          ["const159_159.out","ult159_393_394.in0"],
-          ["const3_3.out","mul_3753_376.in1"],
-          ["const3_3$1.out","mul_3903_391.in1"],
-          ["const5_5.out","mul_3805_381.in1"],
-          ["const5_5$1.out","mul_3855_386.in1"],
-          ["const9_9.out","mux_3949_396.in0"],
-          ["lb_p3_clamped_stencil_update_stream.in","self.in.arg_1.0.0"],
-          ["lb_p3_clamped_stencil_update_stream.wen","lb_p3_clamped_stencil_update_stream_wen.out"],
+          ["pt_conv_2_stencil.out.0.0","add_373_376_377.in0"],
+          ["mul_3753_376.out","add_373_376_377.in1"],
+          ["pt_conv_2_stencil$1.in.0.0","add_373_376_377.out"],
+          ["pt_conv_2_stencil$1.out.0.0","add_378_381_382.in0"],
+          ["mul_3805_381.out","add_378_381_382.in1"],
+          ["pt_conv_2_stencil$2.in.0.0","add_378_381_382.out"],
+          ["pt_conv_2_stencil$2.out.0.0","add_383_386_387.in0"],
+          ["mul_3855_386.out","add_383_386_387.in1"],
+          ["pt_conv_2_stencil$3.in.0.0","add_383_386_387.out"],
+          ["pt_conv_2_stencil$3.out.0.0","add_388_391_392.in0"],
+          ["mul_3903_391.out","add_388_391_392.in1"],
+          ["pt_conv_2_stencil$4.in.0.0","add_388_391_392.out"],
+          ["pt_conv_2_stencil$4.out.0.0","ashr_393_395_396.in0"],
+          ["const4__395.out","ashr_393_395_396.in1"],
+          ["mux_3949_396.in0","ashr_393_395_396.out"],
+          ["pt_conv_2_stencil.in.0.0","const0_0.out"],
+          ["slt159_393_394.in0","const159_159.out"],
+          ["mul_3903_391.in1","const3_3$1.out"],
+          ["mul_3753_376.in1","const3_3.out"],
+          ["mul_3855_386.in1","const5_5$1.out"],
+          ["mul_3805_381.in1","const5_5.out"],
+          ["mux_3949_396.in1","const9_9.out"],
+          ["self.in.arg_1","lb_p3_clamped_stencil_update_stream.in"],
           ["mul_3753_376.in0","lb_p3_clamped_stencil_update_stream.out.0.0"],
           ["mul_3805_381.in0","lb_p3_clamped_stencil_update_stream.out.0.1"],
           ["mul_3855_386.in0","lb_p3_clamped_stencil_update_stream.out.0.2"],
           ["mul_3903_391.in0","lb_p3_clamped_stencil_update_stream.out.0.3"],
-          ["mux_3949_396.out","pt_hw_output_2_stencil.in.0.0"],
-          ["mux_3949_396.sel","ult159_393_394.out"],
-          ["pt_hw_output_2_stencil.out","self.out"],
-          ["ult159_393_394.in1","pt_conv_2_stencil$4.out.0.0"]
+          ["lb_p3_clamped_stencil_update_stream_wen.out","lb_p3_clamped_stencil_update_stream.wen"],
+          ["pt_hw_output_2_stencil.in.0.0","mux_3949_396.out"],
+          ["slt159_393_394.out","mux_3949_396.sel"],
+          ["slt159_393_394.in1","pt_conv_2_stencil$4.out.0.0"],
+          ["self.out","pt_hw_output_2_stencil.out"]
         ]
       }
     }
