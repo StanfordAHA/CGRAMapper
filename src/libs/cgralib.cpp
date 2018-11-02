@@ -43,9 +43,8 @@ Namespace* CoreIRLoadLibrary_cgralib(Context* c) {
     int numdataports = genargs.at("numdataports")->get<int>();
     int width = genargs.at("width")->get<int>();
     if (op_kind == "alu" || op_kind == "combined") {
-      p["alu_op"] = c->BitVector(6);
-      p["alu_op_debug"] = c->String();
-      p["signed"] = c->BitVector(1);
+      p["alu_op"] = c->String();
+      p["signed"] = c->Bool();
      for (int i=0; i<numdataports; ++i) {
         string mode = "data"+to_string(i)+"_mode";
         p[mode] = c->String();
@@ -56,8 +55,7 @@ Namespace* CoreIRLoadLibrary_cgralib(Context* c) {
       }
     }
     if (op_kind == "bit" || op_kind == "combined") {
-      p["flag_sel"] = c->BitVector(4);
-      p["flag_sel_debug"] = c->String();
+      p["flag_sel"] = c->String()
       p["lut_value"] = c->BitVector(1<<numbitports);
       d["lut_value"] = Const::make(c,BitVector(1<<numbitports,0));
       for (int i=0; i<numbitports; ++i) {
@@ -71,7 +69,6 @@ Namespace* CoreIRLoadLibrary_cgralib(Context* c) {
     }
     if (op_kind == "bit") {
       d["flag_sel"] = Const::make(c,4,F_LUT);
-      d["flag_sel_debug"] = Const::make(c,PE_flag_sel_str[F_LUT]);
     }
     return {p,d};
   };
