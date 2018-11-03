@@ -5,7 +5,9 @@
       "DesignTop":{
         "type":["Record",[
           ["in",["Record",[["arg_1",["Array",1,["Array",1,["Array",16,"BitIn"]]]]]]],
-          ["out",["Array",1,["Array",1,["Array",16,"Bit"]]]]
+          ["reset","BitIn"],
+          ["out",["Array",1,["Array",1,["Array",16,"Bit"]]]],
+          ["valid","Bit"]
         ]],
         "instances":{
           "add_335_339_340":{
@@ -33,11 +35,7 @@
           },
           "lb_p4_clamped_stencil_update_stream":{
             "genref":"commonlib.linebuffer",
-            "genargs":{"has_valid":["Bool",false], "image_type":["CoreIRType",["Array",10,["Array",10,["Array",16,"Bit"]]]], "input_type":["CoreIRType",["Array",1,["Array",1,["Array",16,"BitIn"]]]], "output_type":["CoreIRType",["Array",2,["Array",1,["Array",16,"Bit"]]]]}
-          },
-          "lb_p4_clamped_stencil_update_stream_reset":{
-            "modref":"corebit.const",
-            "modargs":{"value":["Bool",false]}
+            "genargs":{"has_valid":["Bool",true], "image_type":["CoreIRType",["Array",10,["Array",10,["Array",16,"Bit"]]]], "input_type":["CoreIRType",["Array",1,["Array",1,["Array",16,"BitIn"]]]], "output_type":["CoreIRType",["Array",2,["Array",1,["Array",16,"Bit"]]]]}
           },
           "lb_p4_clamped_stencil_update_stream_wen":{
             "modref":"corebit.const",
@@ -81,7 +79,8 @@
           ["self.in.arg_1","lb_p4_clamped_stencil_update_stream.in"],
           ["mul_337_338_339.in0","lb_p4_clamped_stencil_update_stream.out.0.0"],
           ["mul_343_344_345.in0","lb_p4_clamped_stencil_update_stream.out.1.0"],
-          ["lb_p4_clamped_stencil_update_stream_reset.out","lb_p4_clamped_stencil_update_stream.reset"],
+          ["self.reset","lb_p4_clamped_stencil_update_stream.reset"],
+          ["self.valid","lb_p4_clamped_stencil_update_stream.valid"],
           ["lb_p4_clamped_stencil_update_stream_wen.out","lb_p4_clamped_stencil_update_stream.wen"],
           ["pt_hw_output_2_stencil_p7.in.0.0","pt_conv1_2_stencil_p5.out.0.0"],
           ["self.out","pt_hw_output_2_stencil_p7.out"]
