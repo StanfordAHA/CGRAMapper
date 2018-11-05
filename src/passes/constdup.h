@@ -24,7 +24,7 @@ bool ConstDup(Instance* cnst) {
   vector<Wireable*> conns(connSet.begin(),connSet.end());
 
   ModuleDef* def = cnst->getContainer();
-  for (int i=1; i< conns.size(); ++i) {
+  for (uint i=1; i< conns.size(); ++i) {
     Wireable* conn = conns[i];
     cout << "replacing connection to : " << conn->toString() << endl;
     Instance* newconst = def->addInstance(cnst->getInstname() + to_string(i),modRef,cnst->getModArgs());
