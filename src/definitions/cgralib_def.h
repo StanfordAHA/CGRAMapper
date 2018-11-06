@@ -206,7 +206,7 @@ void load_cgramapping(Context* c) {
       std::make_tuple("or","or",0),
       std::make_tuple("and","and",0),
       std::make_tuple("xor","xor",0),
-      std::make_tuple("ashr","rshft",1),
+      std::make_tuple("ashr","ashr",1),
       std::make_tuple("lshr","rshft",0),
       std::make_tuple("shl","lshft",0),
     });
