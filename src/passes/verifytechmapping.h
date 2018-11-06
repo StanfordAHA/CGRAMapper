@@ -8,7 +8,7 @@ class VerifyTechMapping : public InstanceGraphPass {
     VerifyTechMapping() : InstanceGraphPass(ID,"Verifies all external links are cgra") {}
     bool runOnInstanceGraphNode(InstanceGraphNode& node) override;
     void setAnalysisInfo() override {
-      onlyTop = true;
+      this->onlyTop = true;
     }
 
 };
