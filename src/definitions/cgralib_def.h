@@ -35,7 +35,7 @@ void load_commonlib_ext(Context* c) {
     uint width = args.at("width")->get<int>();
     ASSERT(width==16,"NYI non 16");
     Values PEArgs({
-      {"alu_op",Const::make(c,"gte_max")},
+      {"alu_op",Const::make(c,"smax")},
       {"flag_sel",Const::make(c,"pe")},
       {"signed",Const::make(c,true)}
     });
@@ -51,7 +51,7 @@ void load_commonlib_ext(Context* c) {
     uint width = args.at("width")->get<int>();
     ASSERT(width==16,"NYI non 16");
     Values PEArgs({
-      {"alu_op",Const::make(c,"gte_max")},
+      {"alu_op",Const::make(c,"umax")},
       {"flag_sel",Const::make(c,"pe")},
       {"signed",Const::make(c,true)}
     });
@@ -248,10 +248,10 @@ void load_cgramapping(Context* c) {
     std::vector<std::tuple<string,string,string,uint>> compops({
       std::make_tuple("eq","sub","eq",0),
       std::make_tuple("neq","sub","ne",0),
-      std::make_tuple("sge","gte_max","pe",1),
-      std::make_tuple("uge","gte_max","pe",0),
-      std::make_tuple("sle","lte_min","pe",1),
-      std::make_tuple("ule","lte_min","pe",0),
+      std::make_tuple("sge","sge","pe",1),
+      std::make_tuple("uge","uge","pe",0),
+      std::make_tuple("sle","sle","pe",1),
+      std::make_tuple("ule","ule","pe",0),
     });
     for (auto op : compops) {
       string opstr = std::get<0>(op);
