@@ -1,5 +1,5 @@
 
-#include "../headers/config.h"
+//#include "../headers/config.h"
 
 using namespace CoreIR;
 
@@ -35,11 +35,9 @@ void load_commonlib_ext(Context* c) {
     uint width = args.at("width")->get<int>();
     ASSERT(width==16,"NYI non 16");
     Values PEArgs({
-      {"alu_op",Const::make(c,op_size,OP_GTE_MAX)},
-      {"alu_op_debug",Const::make(c,"max")},
-      {"flag_sel",Const::make(c,flag_sel_size,F_PRED)},
-      {"flag_sel_debug",Const::make(c,PE_flag_sel_str[F_PRED])},
-      {"signed",Const::make(c,1,1)}
+      {"alu_op",Const::make(c,"gte_max")},
+      {"flag_sel",Const::make(c,"pe")},
+      {"signed",Const::make(c,true)}
     });
     def->addInstance("cgramax","cgralib.PE",{{"op_kind",Const::make(c,"combined")}},PEArgs);
     def->connect("self.in0","cgramax.data.in.0");
@@ -53,11 +51,9 @@ void load_commonlib_ext(Context* c) {
     uint width = args.at("width")->get<int>();
     ASSERT(width==16,"NYI non 16");
     Values PEArgs({
-      {"alu_op",Const::make(c,op_size,OP_GTE_MAX)},
-      {"alu_op_debug",Const::make(c,"max")},
-      {"flag_sel",Const::make(c,flag_sel_size,F_PRED)},
-      {"flag_sel_debug",Const::make(c,PE_flag_sel_str[F_PRED])},
-      {"signed",Const::make(c,1,0)}
+      {"alu_op",Const::make(c,"gte_max")},
+      {"flag_sel",Const::make(c,"pe")},
+      {"signed",Const::make(c,true)}
     });
     def->addInstance("cgramax","cgralib.PE",{{"op_kind",Const::make(c,"combined")}},PEArgs);
     def->connect("self.in0","cgramax.data.in.0");
@@ -180,20 +176,20 @@ void load_cgramapping(Context* c) {
     mod->setDef(def);
   }
   {
+    //TODO not specified in the PE spec
     //unary op width)->width
-    std::vector<std::tuple<string,uint,uint>> unops = {
-        std::make_tuple("not",OP_INV,0),
+    std::vector<std::tuple<string,string,uint>> unops = {
+        std::make_tuple("not","inv",0),
     };
     for (auto op : unops) {
       string opstr = std::get<0>(op);
-      uint alu_op = std::get<1>(op);
+      string alu_op = std::get<1>(op);
       uint is_signed = std::get<2>(op);
       Module* mod = c->getGenerator("coreir."+opstr)->getModule({{"width",Const::make(c,16)}});
       ModuleDef* def = mod->newModuleDef();
       Values dataPEArgs({
-        {"alu_op",Const::make(c,op_size,alu_op)},
-        {"alu_op_debug",Const::make(c,opstr)},
-        {"signed",Const::make(c,1,is_signed)}});
+        {"alu_op",Const::make(c,alu_op)},
+        {"signed",Const::make(c,(bool) is_signed)}});
       def->addInstance("binop","cgralib.PE",{{"op_kind",Const::make(c,"alu")}},dataPEArgs);
     
       def->connect("self.in","binop.data.in.0");
@@ -203,27 +199,26 @@ void load_cgramapping(Context* c) {
   }
   {
     //binary op (width,width)->width
-    std::vector<std::tuple<string,uint,uint>> binops({
-      std::make_tuple("add",OP_ADD,0),
-      std::make_tuple("sub",OP_SUB,0),
-      std::make_tuple("mul",OP_MULT_0,0),
-      std::make_tuple("or",OP_OR,0),
-      std::make_tuple("and",OP_AND,0),
-      std::make_tuple("xor",OP_XOR,0),
-      std::make_tuple("ashr",OP_RSHIFT,1),
-      std::make_tuple("lshr",OP_RSHIFT,0),
-      std::make_tuple("shl",OP_LSHIFT,0),
+    std::vector<std::tuple<string,string,uint>> binops({
+      std::make_tuple("add","add",0),
+      std::make_tuple("sub","sub",0),
+      std::make_tuple("mul","mult_0",0),
+      std::make_tuple("or","or",0),
+      std::make_tuple("and","and",0),
+      std::make_tuple("xor","xor",0),
+      std::make_tuple("ashr","rshft",1),
+      std::make_tuple("lshr","rshft",0),
+      std::make_tuple("shl","lshft",0),
     });
     for (auto op : binops) {
       string opstr = std::get<0>(op);
-      uint alu_op = std::get<1>(op);
+      string alu_op = std::get<1>(op);
       uint is_signed = std::get<2>(op);
       Module* mod = c->getGenerator("coreir."+opstr)->getModule({{"width",Const::make(c,16)}});
       ModuleDef* def = mod->newModuleDef();
       Values dataPEArgs({
-        {"alu_op",Const::make(c,op_size,alu_op)},
-        {"alu_op_debug",Const::make(c,opstr)},
-        {"signed",Const::make(c,1,is_signed)}});
+        {"alu_op",Const::make(c,alu_op)},
+        {"signed",Const::make(c,(bool) is_signed)}});
       def->addInstance("binop","cgralib.PE",{{"op_kind",Const::make(c,"alu")}},dataPEArgs);
     
       def->connect("self.in0","binop.data.in.0");
@@ -237,42 +232,38 @@ void load_cgramapping(Context* c) {
     Module* mod = c->getGenerator("coreir.mux")->getModule({{"width",Const::make(c,16)}});
     ModuleDef* def = mod->newModuleDef();
     Values PEArgs({
-      {"alu_op",Const::make(c,op_size,OP_SEL)},
-      {"alu_op_debug",Const::make(c,"mux")},
-      {"flag_sel",Const::make(c,flag_sel_size,F_PRED)},
-      {"flag_sel_debug",Const::make(c,PE_flag_sel_str[F_PRED])},
-      {"signed",Const::make(c,1,0)}
+      {"alu_op",Const::make(c,"sel")},
+      {"flag_sel",Const::make(c,"pe")},
+      {"signed",Const::make(c,false)}
     });
     def->addInstance("mux","cgralib.PE",{{"op_kind",Const::make(c,"combined")}},PEArgs);
-    def->connect("self.in0","mux.data.in.0");
-    def->connect("self.in1","mux.data.in.1");
+    def->connect("self.in0","mux.data.in.1");
+    def->connect("self.in1","mux.data.in.0");
     def->connect("self.sel","mux.bit.in.0");
     def->connect("mux.data.out","self.out");
     mod->setDef(def);
   }
   {
     //comp op (width,width)->bit
-    std::vector<std::tuple<string,uint,uint,uint>> compops({
-      std::make_tuple("eq",OP_SUB,F_EQ,0),
-      std::make_tuple("neq",OP_SUB,F_NE,0),
-      std::make_tuple("sge",OP_GTE_MAX,F_PRED,1),
-      std::make_tuple("uge",OP_GTE_MAX,F_PRED,0),
-      std::make_tuple("sle",OP_LTE_MIN,F_PRED,1),
-      std::make_tuple("ule",OP_LTE_MIN,F_PRED,0),
+    std::vector<std::tuple<string,string,string,uint>> compops({
+      std::make_tuple("eq","sub","eq",0),
+      std::make_tuple("neq","sub","ne",0),
+      std::make_tuple("sge","gte_max","pe",1),
+      std::make_tuple("uge","gte_max","pe",0),
+      std::make_tuple("sle","lte_min","pe",1),
+      std::make_tuple("ule","lte_min","pe",0),
     });
     for (auto op : compops) {
       string opstr = std::get<0>(op);
-      uint alu_op = std::get<1>(op);
-      uint flag_sel = std::get<2>(op);
+      string alu_op = std::get<1>(op);
+      string flag_sel = std::get<2>(op);
       uint is_signed = std::get<3>(op);
       Module* mod = c->getGenerator("coreir."+opstr)->getModule({{"width",Const::make(c,16)}});
       ModuleDef* def = mod->newModuleDef();
       Values PEArgs({
-        {"alu_op",Const::make(c,op_size,alu_op)},
-        {"alu_op_debug",Const::make(c,opstr)},
-        {"flag_sel",Const::make(c,flag_sel_size,flag_sel)},
-        {"flag_sel_debug",Const::make(c,PE_flag_sel_str[flag_sel])},
-        {"signed",Const::make(c,1,is_signed)}
+        {"alu_op",Const::make(c,alu_op)},
+        {"flag_sel",Const::make(c,flag_sel)},
+        {"signed",Const::make(c,(bool) is_signed)}
       });
       def->addInstance("compop","cgralib.PE",{{"op_kind",Const::make(c,"combined")}},PEArgs);
     
@@ -287,14 +278,14 @@ void load_cgramapping(Context* c) {
   {
     Module* mod = c->getGenerator("coreir.term")->getModule({{"width",Const::make(c,16)}});
     ModuleDef* def = mod->newModuleDef();
-    mod->setDef(def); //TODO is this even valid?
+    mod->setDef(def); 
   }
 
   //bitterm
   {
     Module* mod = c->getModule("corebit.term");
     ModuleDef* def = mod->newModuleDef();
-    mod->setDef(def); //TODO is this even valid?
+    mod->setDef(def);
   }
 
 

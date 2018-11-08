@@ -17,7 +17,7 @@
             "genref":"coreir.neq",
             "genargs":{"width":["Int",16]}
           },
-          "pt_hw_output_2_stencil":{
+          "pt_hw_output_2_stencil_p1":{
             "genref":"mantle.wire",
             "genargs":{"type":["CoreIRType",["Array",1,["Array",1,"Bit"]]]}
           }
@@ -25,8 +25,8 @@
         "connections":[
           ["neq_315_316_317.in1","const15__316.out"],
           ["self.in.arg_1.0.0","neq_315_316_317.in0"],
-          ["pt_hw_output_2_stencil.in.0.0","neq_315_316_317.out"],
-          ["self.out","pt_hw_output_2_stencil.out"]
+          ["pt_hw_output_2_stencil_p1.in.0.0","neq_315_316_317.out"],
+          ["self.out","pt_hw_output_2_stencil_p1.out"]
         ]
       }
     }
