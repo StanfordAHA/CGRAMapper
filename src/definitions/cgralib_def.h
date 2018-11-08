@@ -175,27 +175,35 @@ void load_cgramapping(Context* c) {
     def->connect("lut.bit.out","self.out");
     mod->setDef(def);
   }
-  {
-    //TODO not specified in the PE spec
-    //unary op width)->width
-    std::vector<std::tuple<string,string,uint>> unops = {
-        std::make_tuple("not","inv",0),
-    };
-    for (auto op : unops) {
-      string opstr = std::get<0>(op);
-      string alu_op = std::get<1>(op);
-      uint is_signed = std::get<2>(op);
-      Module* mod = c->getGenerator("coreir."+opstr)->getModule({{"width",Const::make(c,16)}});
-      ModuleDef* def = mod->newModuleDef();
-      Values dataPEArgs({
-        {"alu_op",Const::make(c,alu_op)},
-        {"signed",Const::make(c,(bool) is_signed)}});
-      def->addInstance("binop","cgralib.PE",{{"op_kind",Const::make(c,"alu")}},dataPEArgs);
+  { //For not
+    Module* mod = c->getGenerator("coreir.not")->getModule({{"width",Const::make(c,16)}});
+    ModuleDef* def = mod->newModuleDef();
+    Values dataPEArgs({
+      {"alu_op",Const::make(c,"xor")},
+      {"signed",Const::make(c,false)},
+      {"data1_mode",Const::make(c,"CONST")},
+      {"data1_value",Const::make(c,BitVector(16,~0))}
+    });
+    def->addInstance("unop","cgralib.PE",{{"op_kind",Const::make(c,"alu")}},dataPEArgs);
+  
+    def->connect("self.in","unop.data.in.0");
+    def->connect("self.out","unop.data.out");
+    mod->setDef(def);
+  }
+  { //For neg 
+    Module* mod = c->getGenerator("coreir.neg")->getModule({{"width",Const::make(c,16)}});
+    ModuleDef* def = mod->newModuleDef();
+    Values dataPEArgs({
+      {"alu_op",Const::make(c,"sub")},
+      {"signed",Const::make(c,false)},
+      {"data0_mode",Const::make(c,"CONST")},
+      {"data0_value",Const::make(c,BitVector(16,0))}
+    });
+    def->addInstance("unop","cgralib.PE",{{"op_kind",Const::make(c,"alu")}},dataPEArgs);
     
-      def->connect("self.in","binop.data.in.0");
-      def->connect("self.out","binop.data.out");
-      mod->setDef(def);
-    }
+    def->connect("self.in","unop.data.in.1");
+    def->connect("self.out","unop.data.out");
+    mod->setDef(def);
   }
   {
     //binary op (width,width)->width
