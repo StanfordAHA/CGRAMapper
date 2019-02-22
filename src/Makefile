@@ -5,7 +5,7 @@ INCS = -I$(HOME)/include -I.
 SRC=$(wildcard [^_]*.cpp)
 OBJ=$(patsubst %.cpp, build/%.o, $(SRC))
 
-LIBS= -lcoreir-commonlib -lcoreir -lcoreir-cgralib
+LIBS= -lcoreir-commonlib -lcoreir -lcoreir-cgralib -lcoreirsim
 
 all: build/mapper
 
