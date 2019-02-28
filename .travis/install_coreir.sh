@@ -8,8 +8,8 @@ if [ "$TRAVIS_BRANCH" != "master" ]; then
     echo $TRAVIS_BRANCH;
     git clone -b dev https://github.com/rdaly525/coreir.git;
     cd coreir;
-    make -j
-    sudo make -j install
+    make -j4
+    sudo make -j4 install
     cd ..
     pip install git+git://github.com/leonardt/pycoreir.git@dev;
 else
