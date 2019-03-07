@@ -1,6 +1,7 @@
 HOME = ../..
+COREIR = $(HOME)/../coreir
 LPATH = -L$(HOME)/lib
-INCS = -I$(HOME)/include -I.
+INCS = -I$(HOME)/include -I. -I$(COREIR)/include
 SRCFILES = $(wildcard [^_]*.cpp)
 OBJS = $(patsubst %.cpp,build/%.o,$(SRCFILES))
 
