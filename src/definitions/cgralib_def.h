@@ -254,8 +254,8 @@ void load_cgramapping(Context* c) {
   {
     //comp op (width,width)->bit
     std::vector<std::tuple<string,string,string,uint>> compops({
-      std::make_tuple("eq","sub","eq",0),
-      std::make_tuple("neq","sub","ne",0),
+      std::make_tuple("eq","eq","eq",0),
+      std::make_tuple("neq","neq","ne",0),
       std::make_tuple("sge","gte_max","pe",1),
       std::make_tuple("uge","gte_max","pe",0),
       std::make_tuple("sle","lte_min","pe",1),
