@@ -99,6 +99,14 @@ void load_opsubstitution(Context* c) {
     def->connect("sub.out","self.out");
   });
 
+  c->getGenerator("coreir.not")->setGeneratorDefFromFun([](Context* c, Values args, ModuleDef* def) {
+    def->addInstance("xor","coreir.xor");
+    def->addInstance("cffff","coreir.const",Values(),{{"value",Const::make(c,16,0xffff)}});
+    def->connect("self.in","xor.in1");
+    def->connect("cffff.out","xor.in0");
+    def->connect("xor.out","self.out");
+  });
+
   //coreir operators that have 1 bit width should be swapped with their corebit counterparts
   for (string op : {"and", "or", "xor"}) {
 
@@ -175,11 +183,11 @@ void load_cgramapping(Context* c) {
     def->connect("lut.bit.out","self.out");
     mod->setDef(def);
   }
-  {
+  /*{
     //TODO not specified in the PE spec
-    //unary op width)->width
+    //unary op (width)->width
     std::vector<std::tuple<string,string,uint>> unops = {
-        std::make_tuple("not","inv",0),
+      //std::make_tuple("not","inv",0),
     };
     for (auto op : unops) {
       string opstr = std::get<0>(op);
@@ -196,7 +204,7 @@ void load_cgramapping(Context* c) {
       def->connect("self.out","binop.data.out");
       mod->setDef(def);
     }
-  }
+    }*/
   {
     //binary op (width,width)->width
     std::vector<std::tuple<string,string,uint>> binops({
